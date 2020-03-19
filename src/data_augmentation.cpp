@@ -21,7 +21,7 @@ DataAugmentation::~DataAugmentation(){
 // FUNCTIONS -----------------------------------------------------------------
 void DataAugmentation::Read(const std::string &path){
   //Read image from path
-  in_ = cv::imread( "../../imgs/lena.png", 1 );
+  in_ = cv::imread( path, 1 );
   if (! in_.data ) 
     {
         std::cout << "Could not open or find the image.\n";
@@ -34,6 +34,7 @@ void DataAugmentation::Read(const std::string &path){
 void DataAugmentation::AverageFilter(const int &kernel){
   out_ = in_.clone();
   cv::blur( in_, out_, cv::Size( kernel, kernel ), cv::Point(-1,-1) );
-  cv::namedWindow("Median Filter",CV_WINDOW_NORMAL); 
-  cv::imshow("Median Filter",out_);
+  cv::namedWindow("Average Filter",CV_WINDOW_NORMAL); 
+  cv::imshow("Average Filter",out_);
+  cv::imwrite("../../imgs/average.png",out_);
 }
