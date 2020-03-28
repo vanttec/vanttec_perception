@@ -32,6 +32,11 @@ public:
   // @param kernel[in]: Saze of kernel to be applied.
   void AverageFilter(const int &kernel);
 
+  // Applies a rotation to the image
+  //
+  // @param angle[in]: Angle to rotate the image
+  void Rotation(const double angle);
+
 private:
   // MEMBERS -------------------------------------------------------------------
   //Input image Matrix

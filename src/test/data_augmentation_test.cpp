@@ -21,6 +21,8 @@ int main( int argc, char** argv )
    data.Read("../../imgs/lena.png");
    //Apply average filter
    data.AverageFilter(kernel_size);
+   //Rotate -45 degrees
+   data.Rotation(-45);
    //wait for any key to abort
    cv::waitKey(0);
    return 0;
