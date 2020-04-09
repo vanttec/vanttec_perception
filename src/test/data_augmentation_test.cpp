@@ -23,6 +23,8 @@ int main( int argc, char** argv )
    data.AverageFilter(kernel_size);
    //Rotate -45 degrees
    data.Rotation(-45);
+   //Change hue from 90 to 120 in steps of 5
+   data.Hue(90,120,5);
    //wait for any key to abort
    cv::waitKey(0);
    return 0;

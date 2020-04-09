@@ -37,6 +37,13 @@ public:
   // @param angle[in]: Angle to rotate the image
   void Rotation(const double angle);
 
+  // Applies changes to the hue value
+  //
+  // @param min_hue[in]: lower hue value
+  // @param max_hue[in]: upper hue value
+  // @param step[in]: increments in hue
+  void Hue(const unsigned char min_hue, const unsigned char max_hue, const int step);
+
 private:
   // MEMBERS -------------------------------------------------------------------
   //Input image Matrix
