@@ -21,8 +21,6 @@ int main( int argc, char** argv )
    data.Read("../../imgs/lena.png");
    //Apply average filter
    data.AverageFilter(kernel_size);
-   //Rotate -45 degrees
-   data.Rotation(-45);
    //Change hue from 90 to 120 in steps of 5
    data.Hue(90,120,5);
    //wait for any key to abort
