@@ -35,6 +35,44 @@ void DataAugmentation::AverageFilter(const int &kernel){
   out_ = in_.clone();
   cv::blur( in_, out_, cv::Size( kernel, kernel ), cv::Point(-1,-1) );
   cv::namedWindow("Average Filter",CV_WINDOW_NORMAL); 
-  cv::imshow("Average Filter",out_);
+  cv::imshow("Average Filter",out_); 
   cv::imwrite("../../imgs/average.png",out_);
+}
+
+void DataAugmentation::Scaling_ROI(const float ratio){
+  if(ratio < 1){
+    cv::Mat image_ = in_.clone();
+    cv::Size size;
+    cv::Point offset;
+    // Width and  height of ROI
+    int w_ = std::round(ratio*in_.cols);
+    int h_ = std::round(ratio*in_.rows);
+    for(int i=0; i<=2; i++){
+      // Get offset of the 3 ROI's based on the original image
+      offset.x = std::round(in_.cols*(1-ratio)/2);
+      offset.y = std::round(in_.rows*(1-ratio)/2*i);
+      size.height = h_;
+      size.width = w_;
+      //Crop the ROI from original image
+      cv::Rect ROI(offset, size);
+      cv::Mat croppedImage_ = image_(ROI);  
+      //Resize ROI back to the original image
+      cv::resize(croppedImage_, croppedImage_, cv::Size(in_.rows, in_.cols), 
+                                                    0, 0, CV_INTER_LINEAR);
+      cv::namedWindow("Cropped image",CV_WINDOW_NORMAL); 
+      cv::imshow("Cropped image",croppedImage_);
+      if(i == 0){
+      cv::imwrite("../../imgs/Scale_UPPER_x_"+std::to_string(ratio)+".png",
+                                                            croppedImage_);
+      }
+      if(i == 1){
+      cv::imwrite("../../imgs/Scale_MIDDLE_x_"+std::to_string(ratio)+".png",
+                                                            croppedImage_);
+      }
+      if(i == 2){
+      cv::imwrite("../../imgs/Scale_LOWER_x_"+std::to_string(ratio)+".png",
+                                                            croppedImage_);
+      }
+    }
+  }
 }

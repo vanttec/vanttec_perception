@@ -32,6 +32,11 @@ public:
   // @param kernel[in]: Saze of kernel to be applied.
   void AverageFilter(const int &kernel);
 
+  // Crops, resizes and saves 3 images of lower, middle and upper ROI's
+  //
+  // @param  ratio[in]: reduction of original image. MUST BE < 1
+  void Scaling_ROI(const float ratio);
+
 private:
   // MEMBERS -------------------------------------------------------------------
   //Input image Matrix
