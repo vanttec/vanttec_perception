@@ -21,6 +21,8 @@ int main( int argc, char** argv )
    data.Read("../../imgs/lena.png");
    //Apply average filter
    data.AverageFilter(kernel_size);
+   //Add salt and pepper noise
+   data.SaltPepper(0.2);
    //wait for any key to abort
    cv::waitKey(0);
    return 0;

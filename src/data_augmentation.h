@@ -32,6 +32,11 @@ public:
   // @param kernel[in]: Saze of kernel to be applied.
   void AverageFilter(const int &kernel);
 
+  // Applies Salt and pepper noise to image
+  // 
+  // @param percentage[in]: percentage of the image to be covered
+  void SaltPepper(const float percentage);
+
 private:
   // MEMBERS -------------------------------------------------------------------
   //Input image Matrix

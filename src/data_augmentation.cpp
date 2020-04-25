@@ -38,3 +38,30 @@ void DataAugmentation::AverageFilter(const int &kernel){
   cv::imshow("Average Filter",out_);
   cv::imwrite("../../imgs/average.png",out_);
 }
+
+void DataAugmentation::SaltPepper(const float percentage){
+  cv::Mat pepperized_ = in_.clone();
+  int total = percentage * pepperized_.cols * pepperized_.rows;
+    for(int i = 0; i<total; i++){
+
+      //Choose a randome pixel between 0 - (im.cols-1)
+      //and 0 - (im.rows-1)
+      int a =rand()%pepperized_.cols;
+      int b =rand()%pepperized_.rows;
+
+      //TO DO: randomly change color to black or white
+
+      //Change random pixel to white
+      if(pepperized_.channels() == 1){
+          pepperized_.at<uchar>(b,a) = 255;
+      }
+      else if(pepperized_.channels() == 3){
+          pepperized_.at<cv::Vec3b>(b,a)[0] = 255;
+          pepperized_.at<cv::Vec3b>(b,a)[1] = 255;
+          pepperized_.at<cv::Vec3b>(b,a)[2] = 255;
+      }
+    }
+  cv::namedWindow("Salt_and_Pepper",CV_WINDOW_KEEPRATIO);
+  cv::imshow("Salt_and_Pepper",pepperized_);
+  cv::imwrite("../../imgs/salt_pepper.png",pepperized_);
+}
