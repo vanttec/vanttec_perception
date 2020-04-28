@@ -21,8 +21,8 @@ int main( int argc, char** argv )
    data.Read("../../imgs/lena.png");
    //Apply average filter
    data.AverageFilter(kernel_size);
-   //Change hue from 90 to 120 in steps of 5
-   data.Hue(90,120,5);
+   //Change hue from 0 to 105 in steps of 5
+   data.Hue(0,105,5);
    //wait for any key to abort
    cv::waitKey(0);
    return 0;
