@@ -19,8 +19,8 @@ int main( int argc, char** argv )
 
    //Read input image
    data.Read("../../imgs/lena.png");
-   //Apply average filter
-   data.AverageFilter(kernel_size);
+   //Apply Gaussian Blur filter
+   data.GaussianBlur(kernel_size);
    //wait for any key to abort
    cv::waitKey(0);
    return 0;

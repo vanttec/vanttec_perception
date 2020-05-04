@@ -27,10 +27,10 @@ public:
   // @param path[in]: Path to the input image.
   void Read(const std::string &path);
 
-  // Applies Average Filter to image
+  // Applies GaussianBlur Filter to image
   // 
-  // @param kernel[in]: Saze of kernel to be applied.
-  void AverageFilter(const int &kernel);
+  // @param kernel[in]: Size of kernel to be applied.
+  void GaussianBlur(const int &kernel);
 
 private:
   // MEMBERS -------------------------------------------------------------------
