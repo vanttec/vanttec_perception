@@ -2,7 +2,8 @@
 // @file: data_augmentation.h
 // @created on: March 18th, 2019
 // @author: Ivana Collado
-//
+// @co-author: Sebastian Martínez
+// @mail: sebas.martp@gmail.com
 // @brief: This file contains the definition for the Data Augmentation class. 
 //------------------------------------------------------------------------------
 

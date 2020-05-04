@@ -2,7 +2,8 @@
 // @file: data_augmentation_test.cpp
 // @created on: March 18th, 2019
 // @author: Ivana Collado
-//
+// @co-author: Sebastian Martínez
+// @mail: sebas.martp@gmail.com
 // @brief: Use case of data augmentation and tests that it works properly. 
 //------------------------------------------------------------------------------
 

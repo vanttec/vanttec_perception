@@ -2,7 +2,8 @@
 // @file: data_augmentation.cpp
 // @created on: March 18th, 2019
 // @author: Ivana Collado
-//
+// @co-author: Sebastian Martínez
+// @mail: sebas.martp@gmail.com
 // @brief:Contains the implementations for the Data Augmentation class.
 //------------------------------------------------------------------------------
 
@@ -35,6 +36,6 @@ void DataAugmentation::GaussianBlur(const int &kernel){
   out_ = in_.clone();
   cv::GaussianBlur( in_, out_, cv::Size( kernel, kernel ), 0, 0 );
   cv::namedWindow("Gaussian Blur Filter",CV_WINDOW_NORMAL); 
-  cv::imshow("Gaussian blur Filter",out_);
+  cv::imshow("Gaussian Blur Filter",out_);
   cv::imwrite("../../imgs/gaussian.png",out_);
 }
