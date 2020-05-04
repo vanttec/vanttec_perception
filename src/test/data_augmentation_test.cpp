@@ -22,6 +22,8 @@ int main( int argc, char** argv )
    data.Read("../../imgs/lena.png");
    //Apply Gaussian Blur filter
    data.GaussianBlur(kernel_size);
+   // Change brightness to 80
+   data.Brightness(80);
    //wait for any key to abort
    cv::waitKey(0);
    return 0;

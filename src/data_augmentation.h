@@ -33,6 +33,11 @@ public:
   // @param kernel[in]: Size of kernel to be applied.
   void GaussianBlur(const int &kernel);
 
+  // Change brightness of the image
+  //
+  // @param value[in]: how bright the image will be (-100,100)
+  void Brightness(const int brightness);
+
 private:
   // MEMBERS -------------------------------------------------------------------
   //Input image Matrix
