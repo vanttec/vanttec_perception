@@ -34,7 +34,7 @@ public:
 
   // Crops, resizes and saves 3 images of lower, middle and upper ROI's
   //
-  // @param  ratio[in]: reduction of original image. MUST BE < 1
+  // @param  ratio[in]: reduction of the original image. MUST BE < 1
   void Scaling_ROI(const float ratio);
 
 private:

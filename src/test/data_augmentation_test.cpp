@@ -15,6 +15,7 @@ int main( int argc, char** argv )
    cv::Mat in; 
    cv::Mat out;
    int kernel_size=5;
+   float ratio=0.5;
    DataAugmentation data;
 
    //Read input image
@@ -22,7 +23,7 @@ int main( int argc, char** argv )
    //Apply average filter
    data.AverageFilter(kernel_size);
    //Apply scaling
-   data.Scaling_ROI(1); 
+   data.Scaling_ROI(ratio); 
    //wait for any key to abort
    cv::waitKey(0);
    return 0;

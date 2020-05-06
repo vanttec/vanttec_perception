@@ -41,37 +41,41 @@ void DataAugmentation::AverageFilter(const int &kernel){
 
 void DataAugmentation::Scaling_ROI(const float ratio){
   if(ratio < 1){
-    cv::Mat image_ = in_.clone();
+    cv::Mat temp = in_.clone();
     cv::Size size;
     cv::Point offset;
     // Width and  height of ROI
-    int w_ = std::round(ratio*in_.cols);
-    int h_ = std::round(ratio*in_.rows);
+    int width = std::round(ratio*in_.cols);
+    int height = std::round(ratio*in_.rows);
     for(int i=0; i<=2; i++){
       // Get offset of the 3 ROI's based on the original image
       offset.x = std::round(in_.cols*(1-ratio)/2);
       offset.y = std::round(in_.rows*(1-ratio)/2*i);
-      size.height = h_;
-      size.width = w_;
+      size.height = height;
+      size.width = width;
       //Crop the ROI from original image
       cv::Rect ROI(offset, size);
-      cv::Mat croppedImage_ = image_(ROI);  
+      out_ = temp(ROI);  
       //Resize ROI back to the original image
-      cv::resize(croppedImage_, croppedImage_, cv::Size(in_.rows, in_.cols), 
+      cv::resize(out_, out_, cv::Size(in_.rows, in_.cols), 
                                                     0, 0, CV_INTER_LINEAR);
       cv::namedWindow("Cropped image",CV_WINDOW_NORMAL); 
-      cv::imshow("Cropped image",croppedImage_);
-      if(i == 0){
-      cv::imwrite("../../imgs/Scale_UPPER_x_"+std::to_string(ratio)+".png",
-                                                            croppedImage_);
-      }
-      if(i == 1){
-      cv::imwrite("../../imgs/Scale_MIDDLE_x_"+std::to_string(ratio)+".png",
-                                                            croppedImage_);
-      }
-      if(i == 2){
-      cv::imwrite("../../imgs/Scale_LOWER_x_"+std::to_string(ratio)+".png",
-                                                            croppedImage_);
+      cv::imshow("Cropped image",out_);
+      switch (i){
+      case 0:
+        cv::imwrite("../../imgs/scale_upper_x_"+std::to_string(ratio)+".png",
+                                                                        out_);
+        break;
+      case 1:
+      cv::imwrite("../../imgs/scale_middle_x_"+std::to_string(ratio)+".png",
+                                                                       out_);
+        break;
+      case 2:
+      cv::imwrite("../../imgs/scale_lower_x_"+std::to_string(ratio)+".png",
+                                                                      out_);
+        break;
+      default:
+        break;
       }
     }
   }
