@@ -40,26 +40,27 @@ void DataAugmentation::AverageFilter(const int &kernel){
 }
 
 void DataAugmentation::SaltPepper(const float percentage){
-  cv::Mat pepperized_ = in_.clone();
-  int total = percentage * pepperized_.cols * pepperized_.rows;
+  out_ = in_.clone();
+  int total = percentage * out_.cols * out_.rows;
+  int column_pixel, row_pixel, color;
   for(int i = 0; i<total; i++){
-    //Choose a random pixel between 0 - (im.cols-1)
-    //and 0 - (im.rows-1)
-    int a =rand()%pepperized_.cols;
-    int b =rand()%pepperized_.rows;
+    //Choose a random pixel between 0 and (out_.cols-1)
+    //and 0 and (out_.rows-1)
+    column_pixel = rand()%out_.cols;
+    row_pixel = rand()%out_.rows;
     //Randomly change pixel color to black or white
-    int color = rand()%2 ? 255:0;
+    color = rand()%2 ? 255:0;
     //Apply color
-    if(pepperized_.channels() == 1){
-        pepperized_.at<uchar>(b,a) = color;
+    if(out_.channels() == 1){
+        out_.at<uchar>(row_pixel,column_pixel) = color;
     }
-    else if(pepperized_.channels() == 3){
-        pepperized_.at<cv::Vec3b>(b,a)[0] = color;
-        pepperized_.at<cv::Vec3b>(b,a)[1] = color;
-        pepperized_.at<cv::Vec3b>(b,a)[2] = color;
+    else if(out_.channels() == 3){
+        out_.at<cv::Vec3b>(row_pixel,column_pixel)[0] = color;
+        out_.at<cv::Vec3b>(row_pixel,column_pixel)[1] = color;
+        out_.at<cv::Vec3b>(row_pixel,column_pixel)[2] = color;
     }
   }
   cv::namedWindow("Salt_and_Pepper",CV_WINDOW_KEEPRATIO);
-  cv::imshow("Salt_and_Pepper",pepperized_);
-  cv::imwrite("../../imgs/salt_pepper.png",pepperized_);
+  cv::imshow("Salt_and_Pepper",out_);
+  cv::imwrite("../../imgs/salt_pepper.png",out_);
 }

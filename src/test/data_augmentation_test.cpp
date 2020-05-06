@@ -15,6 +15,7 @@ int main( int argc, char** argv )
    cv::Mat in; 
    cv::Mat out;
    int kernel_size=5;
+   float noise_percentage=0.2;
    DataAugmentation data;
 
    //Read input image
@@ -22,7 +23,7 @@ int main( int argc, char** argv )
    //Apply average filter
    data.AverageFilter(kernel_size);
    //Add salt and pepper noise
-   data.SaltPepper(0.2);
+   data.SaltPepper(noise_percentage);
    //wait for any key to abort
    cv::waitKey(0);
    return 0;

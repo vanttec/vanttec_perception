@@ -34,7 +34,7 @@ public:
 
   // Applies Salt and pepper noise to image
   // 
-  // @param percentage[in]: percentage of the image to be covered
+  // @param percentage[in]: percentage of the image to be covered with noise
   void SaltPepper(const float percentage);
 
 private:
