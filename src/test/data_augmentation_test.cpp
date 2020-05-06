@@ -16,14 +16,16 @@ int main( int argc, char** argv )
    cv::Mat in; 
    cv::Mat out;
    int kernel_size=5;
+   double alpha=1.0;
+   int beta=80;
    DataAugmentation data;
 
    //Read input image
    data.Read("../../imgs/lena.png");
    //Apply Gaussian Blur filter
    data.GaussianBlur(kernel_size);
-   // Change brightness to 80
-   data.Brightness(80);
+   // Set contrast to 1 and brightness to 80
+   data.ContrastBrightness(alpha,beta);
    //wait for any key to abort
    cv::waitKey(0);
    return 0;

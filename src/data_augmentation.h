@@ -35,8 +35,9 @@ public:
 
   // Change brightness of the image
   //
-  // @param value[in]: how bright the image will be (-100,100)
-  void Brightness(const int brightness);
+  // @param alpha[in]: contrast control
+  // @param beta[in]: brightness control (-100,100) recommended
+  void ContrastBrightness(const double alpha, const int beta);
 
 private:
   // MEMBERS -------------------------------------------------------------------
