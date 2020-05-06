@@ -36,8 +36,8 @@ public:
   //
   // @param min_hue[in]: lower hue value
   // @param max_hue[in]: upper hue value
-  // @param step[in]: increments in hue
-  void Hue(const unsigned char min_hue, const unsigned char max_hue, const int step);
+  // @param step[in]: increments in hue range
+  void Hue(const u_char min_hue, const u_char max_hue, const u_char step);
 
 private:
   // MEMBERS -------------------------------------------------------------------

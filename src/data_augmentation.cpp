@@ -39,21 +39,22 @@ void DataAugmentation::AverageFilter(const int &kernel){
   cv::imwrite("../../imgs/average.png",out_);
 }
 
-void DataAugmentation::Hue(const unsigned char min_hue, const unsigned char max_hue, const int step){
-  cv::Mat dst_, Hsv2Bgr;
-  cv::cvtColor(in_, dst_, CV_BGR2HSV);
+void DataAugmentation::Hue(const u_char min_hue, const u_char max_hue, u_char step){
+  out_ = in_.clone();
+  cv::Mat HSV;
+  cv::cvtColor(in_, HSV, CV_BGR2HSV);
   int i,j;
   // Apply Hue changes
-  for(int hue_ = min_hue; hue_ <= max_hue; hue_ += step){
-    for(j=0; j < dst_.rows; j++){
-      for(i=0; i < dst_.cols; i++){
+  for(int hue = min_hue; hue <= max_hue; hue += step){
+    for(j=0; j < HSV.rows; j++){
+      for(i=0; i < HSV.cols; i++){
         // cv::Vec3b --> Vec<uchar,3> Uchar type vector of 3 elements
         // uchar --> typedef unsigned char (an unsigned 1 byte integer)
-        dst_.at<cv::Vec3b>(j,i)[0] = hue_;
+        HSV.at<cv::Vec3b>(j,i)[0] = hue;
       }
     }
-    cv::cvtColor(dst_, Hsv2Bgr, CV_HSV2BGR);
-    cv::imshow("BGR_hue: "+std::to_string(hue_), Hsv2Bgr);
-    cv::imwrite("../../imgs/BGR_hue:"+ std::to_string(hue_)+".png", Hsv2Bgr);
+    cv::cvtColor(HSV, out_, CV_HSV2BGR);
+    cv::imshow("BGR_hue: "+std::to_string(hue), out_);
+    cv::imwrite("../../imgs/BGR_hue:"+ std::to_string(hue)+".png", out_);
   }
 }
