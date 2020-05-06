@@ -15,9 +15,10 @@ int main( int argc, char** argv )
 {
    cv::Mat in; 
    cv::Mat out;
-   int kernel_size=5;
-   double alpha=1.0;
-   int beta=80;
+   int kernel_size = 5;
+   //ContrastBrightness params 
+   double contrast = 1.0;
+   int brightness = 80;
    DataAugmentation data;
 
    //Read input image
@@ -25,7 +26,7 @@ int main( int argc, char** argv )
    //Apply Gaussian Blur filter
    data.GaussianBlur(kernel_size);
    // Set contrast to 1 and brightness to 80
-   data.ContrastBrightness(alpha,beta);
+   data.ContrastBrightness(contrast,brightness);
    //wait for any key to abort
    cv::waitKey(0);
    return 0;
