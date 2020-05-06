@@ -40,7 +40,7 @@ void DataAugmentation::GaussianBlur(const int &kernel){
   cv::imwrite("../../imgs/gaussian.png",out_);
 }
 
-void DataAugmentation::ContrastBrightness(const double alpha, const int beta){
+void DataAugmentation::ContrastBrightness(const double contrast, const int brightness){
   // Full explanation can be found in: 
   // https://docs.opencv.org/3.4/d3/dc1/tutorial_basic_linear_transform.html
   int i,j,c;
@@ -49,11 +49,11 @@ void DataAugmentation::ContrastBrightness(const double alpha, const int beta){
       for(i = 0; i < in_.cols; i++ ) {
           for(c = 0; c < in_.channels(); c++ ) {
               out_.at<cv::Vec3b>(j,i)[c] =
-              cv::saturate_cast<uchar>( alpha*in_.at<cv::Vec3b>(j,i)[c] + beta);
+              cv::saturate_cast<uchar>( contrast*in_.at<cv::Vec3b>(j,i)[c] + brightness);
           }
       }
   }
-  cv::namedWindow("Brightness_value: "+std::to_string(beta),CV_WINDOW_NORMAL); 
-  cv::imshow("Brightness_value: "+std::to_string(beta), out_);
-  cv::imwrite("../../imgs/brightness:"+ std::to_string(beta)+".png", out_);
+  cv::namedWindow("Brightness_value: "+std::to_string(brightness),CV_WINDOW_NORMAL); 
+  cv::imshow("Brightness_value: "+std::to_string(brightness), out_);
+  cv::imwrite("../../imgs/brightness:"+ std::to_string(brightness)+".png", out_);
 }
