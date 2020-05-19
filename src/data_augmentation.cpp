@@ -1,9 +1,12 @@
 //------------------------------------------------------------------------------
 // @file: data_augmentation.cpp
-// @created on: March 18th, 2019
+// @created on: March 18th, 2020
+// @modified: May 18th, 2020
 // @author: Ivana Collado
-//
-// @brief:Contains the implementations for the Data Augmentation class.
+// @mail: 
+// @co-author: Sebastian Martínez
+// @mail: sebas.martp@gmail.com
+// @brief: Contains the implementations for the Data Augmentation class.
 //------------------------------------------------------------------------------
 
 // INCLUDES --------------------------------------------------------------------
