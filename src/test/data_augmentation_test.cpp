@@ -17,8 +17,11 @@ int main( int argc, char** argv )
 {
    cv::Mat in; 
    cv::Mat out;
+
    //Blurr param
    int kernel_size = 5;
+   //Scaling_ROI params
+   float ratio = 0.5;
    //ContrastBrightness params 
    double contrast = 1.0;
    int brightness = 80;
@@ -28,8 +31,10 @@ int main( int argc, char** argv )
    data.Read("../../imgs/lena.png");
    //Apply Gaussian Blur filter
    data.GaussianBlur(kernel_size);
+   //Apply scaling
+   data.Scaling_ROI(ratio); 
    // Set contrast to 1 and brightness to 80
-   data.ContrastBrightness(contrast,brightness);
+   data.ContrastBrightness(contrast, brightness);
    //wait for any key to abort
    cv::waitKey(0);
    return 0;

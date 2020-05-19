@@ -42,6 +42,46 @@ void DataAugmentation::GaussianBlur(const int &kernel){
   cv::imwrite("../../imgs/gaussian.png",out_);
 }
 
+void DataAugmentation::Scaling_ROI(const float ratio){
+  if(ratio < 1){
+    cv::Mat temp = in_.clone();
+    cv::Size size;
+    cv::Point offset;
+    // Width and  height of ROI
+    int width = std::round(ratio*in_.cols);
+    int height = std::round(ratio*in_.rows);
+    for(int i=0; i<=2; i++){
+      // Get offset of the 3 ROI's based on the original image
+      offset.x = std::round(in_.cols*(1-ratio)/2);
+      offset.y = std::round(in_.rows*(1-ratio)/2*i);
+      size.height = height;
+      size.width = width;
+      //Crop the ROI from original image
+      cv::Rect ROI(offset, size);
+      out_ = temp(ROI);  
+      //Resize ROI back to the original image
+      cv::resize(out_, out_, cv::Size(in_.rows, in_.cols), 
+                                                    0, 0, CV_INTER_LINEAR);
+      cv::namedWindow("Cropped image",CV_WINDOW_NORMAL); 
+      cv::imshow("Cropped image",out_);
+      switch (i){
+      case 0:
+        cv::imwrite("../../imgs/scale_upper_x_"+std::to_string(ratio)+".png",
+                                                                        out_);
+        break;
+      case 1:
+      cv::imwrite("../../imgs/scale_middle_x_"+std::to_string(ratio)+".png",
+                                                                       out_);
+        break;
+      case 2:
+      cv::imwrite("../../imgs/scale_lower_x_"+std::to_string(ratio)+".png",
+                                                                      out_);
+        break;
+      default:
+        break;
+      }
+    }
+  }
 void DataAugmentation::ContrastBrightness(const double contrast, const int brightness){
   // Full explanation can be found in: 
   // https://docs.opencv.org/3.4/d3/dc1/tutorial_basic_linear_transform.html

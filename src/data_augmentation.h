@@ -35,6 +35,10 @@ public:
   // @param kernel[in]: Size of kernel to be applied.
   void GaussianBlur(const int &kernel);
 
+  // Crops, resizes and saves 3 images of lower, middle and upper ROI's
+  //
+  // @param  ratio[in]: reduction of the original image. MUST BE < 1
+  void Scaling_ROI(const float ratio);
   // Change brightness of the image
   //
   // @param contrast[in]: contrast control (0,2] recommended, 1 doesn't present
