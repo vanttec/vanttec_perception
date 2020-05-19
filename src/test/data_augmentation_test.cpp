@@ -19,7 +19,7 @@ int main( int argc, char** argv )
    cv::Mat out;
    //Blurr param
    int kernel_size=5;
-   // Hue params
+   //Hue params
    u_char min_hue = 0;
    u_char max_hue = 105;
    u_char step = 5;
@@ -27,8 +27,8 @@ int main( int argc, char** argv )
 
    //Read input image
    data.Read("../../imgs/lena.png");
-   //Apply average filter
-   data.AverageFilter(kernel_size);
+   //Apply Gaussian Blur filter
+   data.GaussianBlur(kernel_size);
    //Change hue from min_hue to max_hue in steps
    data.Hue(min_hue, max_hue, step);
    //wait for any key to abort
