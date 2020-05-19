@@ -3,7 +3,7 @@
 // @created on: March 18th, 2020
 // @modified: May 18th, 2020
 // @author: Ivana Collado
-// @mail: 
+// @mail: ivanacollado@gmail.com
 // @co-author: Sebastian Martínez
 // @mail: sebas.martp@gmail.com
 // @brief: Use case of data augmentation and tests that it works properly. 
