@@ -17,10 +17,17 @@ int main( int argc, char** argv )
 {
    cv::Mat in; 
    cv::Mat out;
-   //Blurr params
-   int kernel_size=5;
+
+   //Blurr param
+   int kernel_size = 5;
    //Salt and pepper param
-   float noise_percentage=0.2;
+   float noise_percentage = 0.2;
+   //Scaling_ROI param
+   float ratio = 0.5;
+   //ContrastBrightness params 
+   double contrast = 1.0;
+   int brightness = 80;
+   
    DataAugmentation data;
 
    //Read input image
@@ -29,6 +36,10 @@ int main( int argc, char** argv )
    data.GaussianBlur(kernel_size);
    //Add salt and pepper noise
    data.SaltPepper(noise_percentage);
+   //Apply scaling
+   data.Scaling_ROI(ratio); 
+   // Set contrast to 1 and brightness to 80
+   data.ContrastBrightness(contrast, brightness);
    //wait for any key to abort
    cv::waitKey(0);
    return 0;
