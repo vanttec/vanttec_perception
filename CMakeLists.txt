@@ -16,10 +16,10 @@ set(CMAKE_CXX_STANDARD_REQUIRED True)
 
 # Set path to binaries
 set(EXECUTABLE_OUTPUT_PATH "${PROJECT_BINARY_DIR}/bin")
-message("----- XLAB: Binaries path: " ${EXECUTABLE_OUTPUT_PATH})
+message("----- VANTTEC: Binaries path: " ${EXECUTABLE_OUTPUT_PATH})
 
 # Enable test / app compilation
-set(XLAB_TEST True)
+set(VANTTEC_TEST True)
 
 # Add subdirectories
 add_subdirectory(src)
