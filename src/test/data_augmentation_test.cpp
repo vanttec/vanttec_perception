@@ -15,23 +15,38 @@
 // MAIN PROGRAM ----------------------------------------------------------------
 int main( int argc, char** argv )
 {
-   cv::Mat in; 
-   cv::Mat out;
-   //Blurr param
-   int kernel_size=5;
-   //Hue params
-   u_char min_hue = 0;
-   u_char max_hue = 105;
-   u_char step = 5;
-   DataAugmentation data;
+    cv::Mat in; 
+    cv::Mat out;
 
-   //Read input image
-   data.Read("../../imgs/lena.png");
-   //Apply Gaussian Blur filter
-   data.GaussianBlur(kernel_size);
-   //Change hue from min_hue to max_hue in steps
-   data.Hue(min_hue, max_hue, step);
-   //wait for any key to abort
-   cv::waitKey(0);
-   return 0;
+    //Blurr param
+    int kernel_size = 5;
+    //Hue params
+    u_char min_hue = 0;
+    u_char max_hue = 105;
+    u_char step = 5;
+    //Salt and pepper param
+    float noise_percentage = 0.2;
+    //Scaling_ROI param
+    float ratio = 0.5;
+    //ContrastBrightness params 
+    double contrast = 1.0;
+    int brightness = 80;
+   // Class object 
+    DataAugmentation data;
+
+    //Read input image
+    data.Read("../../imgs/lena.png");
+    //Apply Gaussian Blur filter
+    data.GaussianBlur(kernel_size);
+    //Change hue from min_hue to max_hue in steps
+    data.Hue(min_hue, max_hue, step);
+    //Add salt and pepper noise
+    data.SaltPepper(noise_percentage);
+    //Apply scaling
+    data.Scaling_ROI(ratio); 
+    // Set contrast to 1 and brightness to 80
+    data.ContrastBrightness(contrast, brightness);
+    //wait for any key to abort
+    cv::waitKey(0);
+    return 0;
  }

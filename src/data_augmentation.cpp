@@ -61,3 +61,89 @@ void DataAugmentation::Hue(const u_char min_hue, const u_char max_hue, u_char st
     cv::imwrite("../../imgs/BGR_hue:"+ std::to_string(hue)+".png", out_);
   }
 }
+
+void DataAugmentation::SaltPepper(const float percentage){
+  out_ = in_.clone();
+  int total = percentage * out_.cols * out_.rows;
+  int column_pixel, row_pixel, color;
+  for(int i = 0; i<total; i++){
+    //Choose a random pixel between 0 and (out_.cols-1)
+    //and 0 and (out_.rows-1)
+    column_pixel = rand()%out_.cols;
+    row_pixel = rand()%out_.rows;
+    //Randomly change pixel color to black or white
+    color = rand()%2 ? 255:0;
+    //Apply color
+    if(out_.channels() == 1){
+        out_.at<uchar>(row_pixel,column_pixel) = color;
+    }
+    else if(out_.channels() == 3){
+        out_.at<cv::Vec3b>(row_pixel,column_pixel)[0] = color;
+        out_.at<cv::Vec3b>(row_pixel,column_pixel)[1] = color;
+        out_.at<cv::Vec3b>(row_pixel,column_pixel)[2] = color;
+    }
+  }
+  cv::namedWindow("Salt_and_Pepper",CV_WINDOW_KEEPRATIO);
+  cv::imshow("Salt_and_Pepper",out_);
+  cv::imwrite("../../imgs/salt_pepper.png",out_);
+}
+
+void DataAugmentation::Scaling_ROI(const float ratio){
+  if(ratio < 1){
+    cv::Mat temp = in_.clone();
+    cv::Size size;
+    cv::Point offset;
+    // Width and  height of ROI
+    int width = std::round(ratio*in_.cols);
+    int height = std::round(ratio*in_.rows);
+    for(int i=0; i<=2; i++){
+      // Get offset of the 3 ROI's based on the original image
+      offset.x = std::round(in_.cols*(1-ratio)/2);
+      offset.y = std::round(in_.rows*(1-ratio)/2*i);
+      size.height = height;
+      size.width = width;
+      //Crop the ROI from original image
+      cv::Rect ROI(offset, size);
+      out_ = temp(ROI);  
+      //Resize ROI back to the original image
+      cv::resize(out_, out_, cv::Size(in_.rows, in_.cols), 
+                                                    0, 0, CV_INTER_LINEAR);
+      cv::namedWindow("Cropped image",CV_WINDOW_NORMAL); 
+      cv::imshow("Cropped image",out_);
+      switch (i){
+      case 0:
+        cv::imwrite("../../imgs/scale_upper_x_"+std::to_string(ratio)+".png",
+                                                                        out_);
+        break;
+      case 1:
+      cv::imwrite("../../imgs/scale_middle_x_"+std::to_string(ratio)+".png",
+                                                                       out_);
+        break;
+      case 2:
+      cv::imwrite("../../imgs/scale_lower_x_"+std::to_string(ratio)+".png",
+                                                                      out_);
+        break;
+      default:
+        break;
+      }
+    }
+  }
+}
+
+void DataAugmentation::ContrastBrightness(const double contrast, const int brightness){
+  // Full explanation can be found in: 
+  // https://docs.opencv.org/3.4/d3/dc1/tutorial_basic_linear_transform.html
+  int i,j,c;
+  out_ = cv::Mat::zeros( in_.size(), in_.type() );
+  for(j = 0; j < in_.rows; j++ ) {
+      for(i = 0; i < in_.cols; i++ ) {
+          for(c = 0; c < in_.channels(); c++ ) {
+              out_.at<cv::Vec3b>(j,i)[c] =
+              cv::saturate_cast<uchar>( contrast*in_.at<cv::Vec3b>(j,i)[c] + brightness);
+          }
+      }
+  }
+  cv::namedWindow("Brightness_value: "+std::to_string(brightness),CV_WINDOW_NORMAL); 
+  cv::imshow("Brightness_value: "+std::to_string(brightness), out_);
+  cv::imwrite("../../imgs/brightness:"+ std::to_string(brightness)+".png", out_);
+}
