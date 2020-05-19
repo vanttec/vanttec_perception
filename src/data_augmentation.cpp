@@ -34,12 +34,12 @@ void DataAugmentation::Read(const std::string &path){
   cv::imshow("Original",in_);
 }
 
-void DataAugmentation::AverageFilter(const int &kernel){
+void DataAugmentation::GaussianBlur(const int &kernel){
   out_ = in_.clone();
-  cv::blur( in_, out_, cv::Size( kernel, kernel ), cv::Point(-1,-1) );
-  cv::namedWindow("Average Filter",CV_WINDOW_NORMAL); 
-  cv::imshow("Average Filter",out_);
-  cv::imwrite("../../imgs/average.png",out_);
+  cv::GaussianBlur( in_, out_, cv::Size( kernel, kernel ), 0, 0 );
+  cv::namedWindow("Gaussian Blur Filter",CV_WINDOW_NORMAL); 
+  cv::imshow("Gaussian Blur Filter",out_);
+  cv::imwrite("../../imgs/gaussian.png",out_);
 }
 
 void DataAugmentation::SaltPepper(const float percentage){

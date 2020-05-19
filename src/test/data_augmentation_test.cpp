@@ -25,8 +25,8 @@ int main( int argc, char** argv )
 
    //Read input image
    data.Read("../../imgs/lena.png");
-   //Apply average filter
-   data.AverageFilter(kernel_size);
+   //Apply Gaussian Blur filter
+   data.GaussianBlur(kernel_size);
    //Add salt and pepper noise
    data.SaltPepper(noise_percentage);
    //wait for any key to abort
