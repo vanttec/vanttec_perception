@@ -39,6 +39,12 @@ public:
   //
   // @param  ratio[in]: reduction of the original image. MUST BE < 1
   void Scaling_ROI(const float ratio);
+  // Change brightness of the image
+  //
+  // @param contrast[in]: contrast control (0,2] recommended, 1 doesn't present
+  //                      a change
+  // @param brightness[in]: brightness control [-100,100] recommended
+  void ContrastBrightness(const double contrast, const int brightness);
 
 private:
   // MEMBERS -------------------------------------------------------------------
