@@ -42,6 +42,30 @@ void DataAugmentation::GaussianBlur(const int &kernel){
   cv::imwrite("../../imgs/gaussian.png",out_);
 }
 
+void DataAugmentation::SaltPepper(const float percentage){
+  out_ = in_.clone();
+  int total = percentage * out_.cols * out_.rows;
+  int column_pixel, row_pixel, color;
+  for(int i = 0; i<total; i++){
+    //Choose a random pixel between 0 and (out_.cols-1)
+    //and 0 and (out_.rows-1)
+    column_pixel = rand()%out_.cols;
+    row_pixel = rand()%out_.rows;
+    //Randomly change pixel color to black or white
+    color = rand()%2 ? 255:0;
+    //Apply color
+    if(out_.channels() == 1){
+        out_.at<uchar>(row_pixel,column_pixel) = color;
+    }
+    else if(out_.channels() == 3){
+        out_.at<cv::Vec3b>(row_pixel,column_pixel)[0] = color;
+        out_.at<cv::Vec3b>(row_pixel,column_pixel)[1] = color;
+        out_.at<cv::Vec3b>(row_pixel,column_pixel)[2] = color;
+    }
+  }
+  cv::namedWindow("Salt_and_Pepper",CV_WINDOW_KEEPRATIO);
+  cv::imshow("Salt_and_Pepper",out_);
+  cv::imwrite("../../imgs/salt_pepper.png",out_);
 void DataAugmentation::Scaling_ROI(const float ratio){
   if(ratio < 1){
     cv::Mat temp = in_.clone();

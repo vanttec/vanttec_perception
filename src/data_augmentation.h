@@ -35,6 +35,10 @@ public:
   // @param kernel[in]: Size of kernel to be applied.
   void GaussianBlur(const int &kernel);
 
+  // Applies Salt and pepper noise to image
+  // 
+  // @param percentage[in]: percentage of the image to be covered with noise
+  void SaltPepper(const float percentage);
   // Crops, resizes and saves 3 images of lower, middle and upper ROI's
   //
   // @param  ratio[in]: reduction of the original image. MUST BE < 1
