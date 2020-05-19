@@ -42,6 +42,26 @@ void DataAugmentation::GaussianBlur(const int &kernel){
   cv::imwrite("../../imgs/gaussian.png",out_);
 }
 
+void DataAugmentation::Hue(const u_char min_hue, const u_char max_hue, u_char step){
+  out_ = in_.clone();
+  cv::Mat HSV;
+  cv::cvtColor(in_, HSV, CV_BGR2HSV);
+  int i,j;
+  // Apply Hue changes
+  for(int hue = min_hue; hue <= max_hue; hue += step){
+    for(j=0; j < HSV.rows; j++){
+      for(i=0; i < HSV.cols; i++){
+        // cv::Vec3b --> Vec<uchar,3> Uchar type vector of 3 elements
+        // uchar --> typedef unsigned char (an unsigned 1 byte integer)
+        HSV.at<cv::Vec3b>(j,i)[0] = hue;
+      }
+    }
+    cv::cvtColor(HSV, out_, CV_HSV2BGR);
+    cv::imshow("BGR_hue: "+std::to_string(hue), out_);
+    cv::imwrite("../../imgs/BGR_hue:"+ std::to_string(hue)+".png", out_);
+  }
+}
+
 void DataAugmentation::SaltPepper(const float percentage){
   out_ = in_.clone();
   int total = percentage * out_.cols * out_.rows;
@@ -66,6 +86,8 @@ void DataAugmentation::SaltPepper(const float percentage){
   cv::namedWindow("Salt_and_Pepper",CV_WINDOW_KEEPRATIO);
   cv::imshow("Salt_and_Pepper",out_);
   cv::imwrite("../../imgs/salt_pepper.png",out_);
+}
+
 void DataAugmentation::Scaling_ROI(const float ratio){
   if(ratio < 1){
     cv::Mat temp = in_.clone();
@@ -106,6 +128,8 @@ void DataAugmentation::Scaling_ROI(const float ratio){
       }
     }
   }
+}
+
 void DataAugmentation::ContrastBrightness(const double contrast, const int brightness){
   // Full explanation can be found in: 
   // https://docs.opencv.org/3.4/d3/dc1/tutorial_basic_linear_transform.html

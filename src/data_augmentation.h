@@ -35,6 +35,12 @@ public:
   // @param kernel[in]: Size of kernel to be applied.
   void GaussianBlur(const int &kernel);
 
+  // Applies changes to the hue value
+  //
+  // @param min_hue[in]: lower hue value
+  // @param max_hue[in]: upper hue value
+  // @param step[in]: increments in hue range
+  void Hue(const u_char min_hue, const u_char max_hue, const u_char step);
   // Applies Salt and pepper noise to image
   // 
   // @param percentage[in]: percentage of the image to be covered with noise
