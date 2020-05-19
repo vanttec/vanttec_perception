@@ -24,11 +24,11 @@ include_directories(
 )
 
 set(VANTTEC_HEADERS 
-  ${PROJECT_SOURCE_DIR}/${PROJECT_NAME}.h
+  ${PROJECT_SOURCE_DIR}/include/${PROJECT_NAME}.h
 )
 
 set(VANTTEC_SOURCES 
-  ${PROJECT_SOURCE_DIR}/${PROJECT_NAME}.cpp
+  ${PROJECT_SOURCE_DIR}/include/${PROJECT_NAME}.cpp
 )
 
 set(VANTTEC_LIBRARIES
@@ -44,7 +44,6 @@ target_link_libraries( ${PROJECT_NAME}
 
 
 # Add tests here
-
 set(TEST_EXEC data_augmentation_test)
 set(TEST ${CMAKE_CURRENT_SOURCE_DIR}/test/${TEST_EXEC}.cpp)
 
