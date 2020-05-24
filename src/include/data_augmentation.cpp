@@ -147,3 +147,9 @@ void DataAugmentation::ContrastBrightness(const double contrast, const int brigh
   cv::imshow("Brightness_value: "+std::to_string(brightness), out_);
   cv::imwrite("../../imgs/brightness:"+ std::to_string(brightness)+".png", out_);
 }
+
+void DataAugmentation::CombiningFilters(){
+  std::string path;
+  std::cout << "Enter folder path:";
+  std::cin >> path;
+}

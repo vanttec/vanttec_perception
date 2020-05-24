@@ -55,6 +55,10 @@ public:
   //                      a change
   // @param brightness[in]: brightness control [-100,100] recommended
   void ContrastBrightness(const double contrast, const int brightness);
+  // Make combinations of filters
+  //
+  // No params
+  void CombiningFilters();
 
 private:
   // MEMBERS -------------------------------------------------------------------
