@@ -59,6 +59,7 @@ public:
   //
   // No params
   void CombiningFilters();
+  void read_directory(const std::string& name, std::vector<std::string>& v);
 
 private:
   // MEMBERS -------------------------------------------------------------------

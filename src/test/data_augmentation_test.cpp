@@ -31,6 +31,7 @@ int main( int argc, char** argv )
     //ContrastBrightness params 
     double contrast = 1.0;
     int brightness = 80;
+    std::vector<std::string> v;
    // Class object 
     DataAugmentation data;
 
@@ -46,6 +47,7 @@ int main( int argc, char** argv )
     data.Scaling_ROI(ratio); 
     // Set contrast to 1 and brightness to 80
     data.ContrastBrightness(contrast, brightness);
+    data.read_directory("/home/penelope/data_augmentation/imgs", v);
     //wait for any key to abort
     cv::waitKey(0);
     return 0;
