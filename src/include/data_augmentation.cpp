@@ -11,8 +11,7 @@
 
 // INCLUDES --------------------------------------------------------------------
 #include "data_augmentation.h"
-#include <sys/types.h>
-#include <dirent.h>
+
 
 // CLASS FUNCTION IMPLEMENTATION  ----------------------------------------------
 DataAugmentation::DataAugmentation(){
@@ -156,7 +155,7 @@ void DataAugmentation::CombiningFilters(){
   std::cin >> path;
 
 }
-void read_directory(const std::string& name, std::vector<std::string>& v)
+void DataAugmentation:: read_directory(const std::string& name, std::vector<std::string>& v)
 {
     DIR* dirp = opendir(name.c_str());
     struct dirent * dp;
