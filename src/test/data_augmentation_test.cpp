@@ -31,23 +31,26 @@ int main( int argc, char** argv )
     //ContrastBrightness params 
     double contrast = 1.0;
     int brightness = 80;
-    std::vector<std::string> v;
+    std::vector<std::string> images;
+    //Total number of unprocessed images
+    // int num_files;
    // Class object 
     DataAugmentation data;
 
     //Read input image
     data.Read("../../imgs/lena.png");
-    //Apply Gaussian Blur filter
-    data.GaussianBlur(kernel_size);
-    //Change hue from min_hue to max_hue in steps
-    data.Hue(min_hue, max_hue, step);
-    //Add salt and pepper noise
-    data.SaltPepper(noise_percentage);
-    //Apply scaling
-    data.Scaling_ROI(ratio); 
-    // Set contrast to 1 and brightness to 80
-    data.ContrastBrightness(contrast, brightness);
-    data.read_directory("/home/penelope/data_augmentation/imgs", v);
+    // Apply Gaussian Blur filter
+    // data.GaussianBlur(kernel_size);
+    // //Change hue from min_hue to max_hue in steps
+    // data.Hue(min_hue, max_hue, step);
+    // //Add salt and pepper noise
+    // data.SaltPepper(noise_percentage);
+    // //Apply scaling
+    // data.Scaling_ROI(ratio); 
+    // // Set contrast to 1 and brightness to 80
+    // data.ContrastBrightness(contrast, brightness);
+    // Read directory contents
+    data.read_directory("/../../data_augmentation/imgs", images);
     //wait for any key to abort
     cv::waitKey(0);
     return 0;

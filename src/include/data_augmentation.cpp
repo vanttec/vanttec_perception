@@ -31,16 +31,16 @@ void DataAugmentation::Read(const std::string &path){
         std::cout << "Could not open or find the image.\n";
         //return -1; // unsuccessful
     }
-  cv::namedWindow("Original",CV_WINDOW_NORMAL); 
-  cv::imshow("Original",in_);
+  // cv::namedWindow("Original",CV_WINDOW_NORMAL); 
+  // cv::imshow("Original",in_);
 }
 
 void DataAugmentation::GaussianBlur(const int &kernel){
   out_ = in_.clone();
   cv::GaussianBlur( in_, out_, cv::Size( kernel, kernel ), 0, 0 );
   cv::namedWindow("Gaussian Blur Filter",CV_WINDOW_NORMAL); 
-  cv::imshow("Gaussian Blur Filter",out_);
-  cv::imwrite("../../imgs/gaussian.png",out_);
+  // cv::imshow("Gaussian Blur Filter",out_);
+  // cv::imwrite("../../Filtered_imgs/gaussian.jpg",out_);
 }
 
 void DataAugmentation::Hue(const u_char min_hue, const u_char max_hue, u_char step){
@@ -57,9 +57,9 @@ void DataAugmentation::Hue(const u_char min_hue, const u_char max_hue, u_char st
         HSV.at<cv::Vec3b>(j,i)[0] = hue;
       }
     }
-    cv::cvtColor(HSV, out_, CV_HSV2BGR);
-    cv::imshow("BGR_hue: "+std::to_string(hue), out_);
-    cv::imwrite("../../imgs/BGR_hue:"+ std::to_string(hue)+".png", out_);
+    // cv::cvtColor(HSV, out_, CV_HSV2BGR);
+    // cv::imshow("BGR_hue: "+std::to_string(hue), out_);
+    // cv::imwrite("../../Filtered_imgs/BGR_hue:"+ std::to_string(hue)+".jpg", out_);
   }
 }
 
@@ -84,9 +84,9 @@ void DataAugmentation::SaltPepper(const float percentage){
         out_.at<cv::Vec3b>(row_pixel,column_pixel)[2] = color;
     }
   }
-  cv::namedWindow("Salt_and_Pepper",CV_WINDOW_KEEPRATIO);
-  cv::imshow("Salt_and_Pepper",out_);
-  cv::imwrite("../../imgs/salt_pepper.png",out_);
+  // cv::namedWindow("Salt_and_Pepper",CV_WINDOW_KEEPRATIO);
+  // cv::imshow("Salt_and_Pepper",out_);
+  // cv::imwrite("../../Filtered_imgs/salt_pepper.jpg",out_);
 }
 
 void DataAugmentation::Scaling_ROI(const float ratio){
@@ -109,20 +109,23 @@ void DataAugmentation::Scaling_ROI(const float ratio){
       //Resize ROI back to the original image
       cv::resize(out_, out_, cv::Size(in_.rows, in_.cols), 
                                                     0, 0, CV_INTER_LINEAR);
-      cv::namedWindow("Cropped image",CV_WINDOW_NORMAL); 
-      cv::imshow("Cropped image",out_);
+      // cv::namedWindow("Cropped image",CV_WINDOW_NORMAL); 
+      // cv::imshow("Cropped image",out_);
       switch (i){
       case 0:
-        cv::imwrite("../../imgs/scale_upper_x_"+std::to_string(ratio)+".png",
-                                                                        out_);
+      // cv::imwrite("../../Filtered_imgs/scale_upper_x_"+std::to_string(ratio)+".jpg",
+      //                                                                   out_);
+        out_v_.push_back(out_);
         break;
       case 1:
-      cv::imwrite("../../imgs/scale_middle_x_"+std::to_string(ratio)+".png",
-                                                                       out_);
+      // cv::imwrite("../../Filtered_imgs/scale_middle_x_"+std::to_string(ratio)+".jpg",
+      //                                                                  out_);
+        out_v_.push_back(out_);
         break;
       case 2:
-      cv::imwrite("../../imgs/scale_lower_x_"+std::to_string(ratio)+".png",
-                                                                      out_);
+      // cv::imwrite("../../Filtered_imgs/scale_lower_x_"+std::to_string(ratio)+".jpg",
+      //                                                                 out_);
+        out_v_.push_back(out_);
         break;
       default:
         break;
@@ -144,23 +147,63 @@ void DataAugmentation::ContrastBrightness(const double contrast, const int brigh
           }
       }
   }
-  cv::namedWindow("Brightness_value: "+std::to_string(brightness),CV_WINDOW_NORMAL); 
-  cv::imshow("Brightness_value: "+std::to_string(brightness), out_);
-  cv::imwrite("../../imgs/brightness:"+ std::to_string(brightness)+".png", out_);
+  // cv::namedWindow("Brightness_value: "+std::to_string(brightness),CV_WINDOW_NORMAL); 
+  // cv::imshow("Brightness_value: "+std::to_string(brightness), out_);
+  // cv::imwrite("../../Filtered_imgs/brightness:"+ std::to_string(brightness)+".jpg", out_);
 }
 
-void DataAugmentation::CombiningFilters(){
-  std::string path;
-  std::cout << "Enter folder path:";
-  std::cin >> path;
-
-}
-void DataAugmentation:: read_directory(const std::string& name, std::vector<std::string>& v)
+void DataAugmentation::read_directory(const std::string& path, std::vector<std::string>& images)
 {
-    DIR* dirp = opendir(name.c_str());
-    struct dirent * dp;
-    while ((dp = readdir(dirp)) != NULL) {
-        v.push_back(dp->d_name);
+  DIR* dirp = opendir(path.c_str());
+  struct dirent * dp;
+  std::string file;
+  std::size_t found;
+  // int num_files = 0;
+  while ((dp = readdir(dirp)) != NULL) {
+    file = dp->d_name;
+    found = file.find(".jpg");
+    if(found != std::string::npos){
+      images.push_back(dp->d_name);
+      std::cout<<"image"<<dp->d_name<<std::endl;
+      // num_files++;
     }
-    closedir(dirp);
+  }
+  closedir(dirp);
 }
+
+void DataAugmentation::CombiningFilters(std::vector<std::string>& images){
+  DataAugmentation data;
+  int combination = rand() % 7 + 1;
+  for(int i=0; i<images.size(); i++){
+    data.read("../../imgs" + images[i]);
+    switch (combination){
+      case '1':
+        // Noise + scaling
+        data.SaltPepper(asdasd);
+        in_ = out_;
+        break;
+      case '2':
+        // scaling + blur
+        break;
+      case '3':
+        // blur + hue
+        break;
+      case '4':
+        // brightness + hue
+        break;
+      case '5':
+        // brightness + noise
+        break;
+      case '6':
+        // scaling + hue
+        break;
+      case '7':
+        // brightness + hue + blur
+        break;
+      default:
+        break;
+    }
+  }
+}
+
+

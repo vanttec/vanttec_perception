@@ -59,10 +59,10 @@ target_link_libraries(${TEST_EXEC}
   ${OpenCV_LIBS}
 )
 
-add_executable(filter_combo filter_combo.cpp)
-target_link_libraries(
-  ${PROJECT_NAME} 
-  ${OpenCV_LIBS}
-)
+#add_executable(filter_combo filter_combo.cpp)
+#target_link_libraries(
+#  ${PROJECT_NAME} 
+#  ${OpenCV_LIBS}
+#)
 
 

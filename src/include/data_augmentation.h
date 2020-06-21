@@ -13,6 +13,8 @@
 #include "opencv2/imgproc/imgproc.hpp"
 #include "opencv2/highgui/highgui.hpp"
 #include <iostream>
+#include <sys/types.h>
+#include <dirent.h>
 
 // CLASS DECLARATION -----------------------------------------------------------
 class DataAugmentation {
@@ -59,7 +61,12 @@ public:
   //
   // No params
   void CombiningFilters();
-  void read_directory(const std::string& name, std::vector<std::string>& v);
+  // Read directory contents
+  //
+  // @param path[in]: directory path
+  // @param images[in]: jpg saved images
+  int read_directory(const std::string& path, std::vector<std::string>& images);
+
 
 private:
   // MEMBERS -------------------------------------------------------------------
@@ -67,4 +74,6 @@ private:
   cv::Mat in_;
   //Output image Matrix
   cv::Mat out_;
+  //Output vector Matrix for Scaling ROI method
+  std::vector< cv::Mat > out_v_;
 };
