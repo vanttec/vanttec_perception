@@ -11,11 +11,13 @@
 
 // INCLUDES --------------------------------------------------------------------
 #include "data_augmentation.h"
-
+#include <time.h>
+#include <typeinfo>
 
 // CLASS FUNCTION IMPLEMENTATION  ----------------------------------------------
 DataAugmentation::DataAugmentation(){
-  // Empty Body
+  // Random seed
+  srand(time(NULL));
 }
 
 DataAugmentation::~DataAugmentation(){
@@ -36,18 +38,17 @@ void DataAugmentation::Read(const std::string &path){
 }
 
 void DataAugmentation::GaussianBlur(const int &kernel){
-  out_ = in_.clone();
-  cv::GaussianBlur( in_, out_, cv::Size( kernel, kernel ), 0, 0 );
-  cv::namedWindow("Gaussian Blur Filter",CV_WINDOW_NORMAL); 
+  out_.push_back(in_.clone());
+  cv::GaussianBlur( in_, out_[0], cv::Size( kernel, kernel ), 0, 0 );
+  // cv::namedWindow("Gaussian Blur Filter",CV_WINDOW_NORMAL); 
   // cv::imshow("Gaussian Blur Filter",out_);
   // cv::imwrite("../../Filtered_imgs/gaussian.jpg",out_);
 }
 
 void DataAugmentation::Hue(const u_char min_hue, const u_char max_hue, u_char step){
-  out_ = in_.clone();
-  cv::Mat HSV;
+  cv::Mat HSV, BGR;
   cv::cvtColor(in_, HSV, CV_BGR2HSV);
-  int i,j;
+  int i,j,k=0;
   // Apply Hue changes
   for(int hue = min_hue; hue <= max_hue; hue += step){
     for(j=0; j < HSV.rows; j++){
@@ -57,41 +58,42 @@ void DataAugmentation::Hue(const u_char min_hue, const u_char max_hue, u_char st
         HSV.at<cv::Vec3b>(j,i)[0] = hue;
       }
     }
-    // cv::cvtColor(HSV, out_, CV_HSV2BGR);
-    // cv::imshow("BGR_hue: "+std::to_string(hue), out_);
+    out_.push_back(BGR);
+    cv::cvtColor(HSV, out_[k++], CV_HSV2BGR);
+    // cv::imshow("BGR_hue: "+std::to_string(hue), out_[k++]);
     // cv::imwrite("../../Filtered_imgs/BGR_hue:"+ std::to_string(hue)+".jpg", out_);
   }
 }
 
 void DataAugmentation::SaltPepper(const float percentage){
-  out_ = in_.clone();
-  int total = percentage * out_.cols * out_.rows;
+  out_.push_back(in_.clone());
+  int total = percentage * out_[0].cols * out_[0].rows;
   int column_pixel, row_pixel, color;
   for(int i = 0; i<total; i++){
     //Choose a random pixel between 0 and (out_.cols-1)
     //and 0 and (out_.rows-1)
-    column_pixel = rand()%out_.cols;
-    row_pixel = rand()%out_.rows;
+    column_pixel = rand()%out_[0].cols;
+    row_pixel = rand()%out_[0].rows;
     //Randomly change pixel color to black or white
     color = rand()%2 ? 255:0;
     //Apply color
-    if(out_.channels() == 1){
-        out_.at<uchar>(row_pixel,column_pixel) = color;
+    if(out_[0].channels() == 1){
+        out_[0].at<uchar>(row_pixel,column_pixel) = color;
     }
-    else if(out_.channels() == 3){
-        out_.at<cv::Vec3b>(row_pixel,column_pixel)[0] = color;
-        out_.at<cv::Vec3b>(row_pixel,column_pixel)[1] = color;
-        out_.at<cv::Vec3b>(row_pixel,column_pixel)[2] = color;
+    else if(out_[0].channels() == 3){
+        out_[0].at<cv::Vec3b>(row_pixel,column_pixel)[0] = color;
+        out_[0].at<cv::Vec3b>(row_pixel,column_pixel)[1] = color;
+        out_[0].at<cv::Vec3b>(row_pixel,column_pixel)[2] = color;
     }
   }
   // cv::namedWindow("Salt_and_Pepper",CV_WINDOW_KEEPRATIO);
-  // cv::imshow("Salt_and_Pepper",out_);
-  // cv::imwrite("../../Filtered_imgs/salt_pepper.jpg",out_);
+  // cv::imshow("Salt_and_Pepper",out_[0]);
+  // cv::imwrite("../../Filtered_imgs/salt_pepper.jpg",out_[0]);
 }
 
 void DataAugmentation::Scaling_ROI(const float ratio){
   if(ratio < 1){
-    cv::Mat temp = in_.clone();
+    cv::Mat temp = in_.clone(), img;
     cv::Size size;
     cv::Point offset;
     // Width and  height of ROI
@@ -105,9 +107,9 @@ void DataAugmentation::Scaling_ROI(const float ratio){
       size.width = width;
       //Crop the ROI from original image
       cv::Rect ROI(offset, size);
-      out_ = temp(ROI);  
+      img = temp(ROI);  
       //Resize ROI back to the original image
-      cv::resize(out_, out_, cv::Size(in_.rows, in_.cols), 
+      cv::resize(img, img, cv::Size(in_.rows, in_.cols), 
                                                     0, 0, CV_INTER_LINEAR);
       // cv::namedWindow("Cropped image",CV_WINDOW_NORMAL); 
       // cv::imshow("Cropped image",out_);
@@ -115,17 +117,17 @@ void DataAugmentation::Scaling_ROI(const float ratio){
       case 0:
       // cv::imwrite("../../Filtered_imgs/scale_upper_x_"+std::to_string(ratio)+".jpg",
       //                                                                   out_);
-        out_v_.push_back(out_);
+        out_.push_back(img);
         break;
       case 1:
       // cv::imwrite("../../Filtered_imgs/scale_middle_x_"+std::to_string(ratio)+".jpg",
       //                                                                  out_);
-        out_v_.push_back(out_);
+        out_.push_back(img);
         break;
       case 2:
       // cv::imwrite("../../Filtered_imgs/scale_lower_x_"+std::to_string(ratio)+".jpg",
       //                                                                 out_);
-        out_v_.push_back(out_);
+        out_.push_back(img);
         break;
       default:
         break;
@@ -138,11 +140,11 @@ void DataAugmentation::ContrastBrightness(const double contrast, const int brigh
   // Full explanation can be found in: 
   // https://docs.opencv.org/3.4/d3/dc1/tutorial_basic_linear_transform.html
   int i,j,c;
-  out_ = cv::Mat::zeros( in_.size(), in_.type() );
+  out_.push_back( cv::Mat::zeros( in_.size(), in_.type() ) );
   for(j = 0; j < in_.rows; j++ ) {
       for(i = 0; i < in_.cols; i++ ) {
           for(c = 0; c < in_.channels(); c++ ) {
-              out_.at<cv::Vec3b>(j,i)[c] =
+              out_[0].at<cv::Vec3b>(j,i)[c] =
               cv::saturate_cast<uchar>( contrast*in_.at<cv::Vec3b>(j,i)[c] + brightness);
           }
       }
@@ -152,58 +154,106 @@ void DataAugmentation::ContrastBrightness(const double contrast, const int brigh
   // cv::imwrite("../../Filtered_imgs/brightness:"+ std::to_string(brightness)+".jpg", out_);
 }
 
-void DataAugmentation::read_directory(const std::string& path, std::vector<std::string>& images)
-{
+void DataAugmentation::read_directory(const std::string path, std::vector<std::string>& images){
   DIR* dirp = opendir(path.c_str());
   struct dirent * dp;
   std::string file;
   std::size_t found;
-  // int num_files = 0;
+  int num_files = 0, i = 1;
   while ((dp = readdir(dirp)) != NULL) {
     file = dp->d_name;
-    found = file.find(".jpg");
+    found = file.find(".png");
     if(found != std::string::npos){
       images.push_back(dp->d_name);
-      std::cout<<"image"<<dp->d_name<<std::endl;
+      std::cout<<std::to_string(i++) + " image: "<<dp->d_name<<std::endl;
       // num_files++;
     }
   }
   closedir(dirp);
 }
 
-void DataAugmentation::CombiningFilters(std::vector<std::string>& images){
+void DataAugmentation::CombiningFilters(std::vector<std::string> images){
   DataAugmentation data;
-  int combination = rand() % 7 + 1;
+  int combination = 7 ; //rand()%7 + 1;
+  int kernel_size, brightness, j;
+  float noise_percentage, scaling_ratio;
+  double contrast; 
+  u_char min_hue, max_hue, step;
+
+  std::cout<<std::to_string(images.size())<<std::endl;
   for(int i=0; i<images.size(); i++){
-    data.read("../../imgs" + images[i]);
+    std::cout<<images[i]<<"\n"; 
+    data.Read("../../imgs/" + images[i]);
+    // Define parameters
+    contrast = 1.0;
+    brightness = (rand()%101) * (rand()%2 ? 1:-1);
+    min_hue = 0;
+    max_hue = 105;
+    step = 5;
+    noise_percentage = (float)(rand()%10 + 1)/10;
+    scaling_ratio = (float)(rand()%98 + 1)/100;
+    kernel_size = 2 * (rand()%5) + 1;
+
+    std::cout<< "Combinacion: " + std::to_string(combination)<<"\n";
+    std::cout<<" Contrast: "<<contrast<<" Brightness: "<<brightness<<"\n";
+    std::cout<<" min_hue: "<< std::to_string(min_hue) <<" max_hue: "<< std::to_string(max_hue) <<" step: "<< std::to_string(step) <<"\n";
+    std::cout<<" noise_percentage: "<<noise_percentage<<"\n";
+    std::cout<<" scaling_ratio (reduction): "<<1 - scaling_ratio<<"\n";
+    std::cout<<" kernel_size: "<<kernel_size<<"\n";
+
+
     switch (combination){
-      case '1':
+      case 1:
         // Noise + scaling
-        data.SaltPepper(asdasd);
-        in_ = out_;
+        data.SaltPepper(noise_percentage);
+        data.in_ = data.out_[0];
+        data.Scaling_ROI(scaling_ratio);
         break;
-      case '2':
-        // scaling + blur
+      case 2:
+        // Scaling + Gaussian blur
+        data.GaussianBlur(kernel_size);
+        data.in_ = data.out_[0];
+        data.Scaling_ROI(scaling_ratio);
         break;
-      case '3':
-        // blur + hue
+      case 3:
+        // Gaussian blur + hue
+        data.GaussianBlur(kernel_size);
+        data.in_ = data.out_[0];
+        data.out_.clear();
+        data.Hue(min_hue, max_hue, step);
         break;
-      case '4':
-        // brightness + hue
+      case 4:
+        // Brightness + hue
+        data.ContrastBrightness(contrast, brightness);
+        data.in_ = data.out_[0];
+        data.Hue(min_hue, max_hue, step);
         break;
-      case '5':
-        // brightness + noise
+      case 5:
+        // Brightness + noise
+        data.ContrastBrightness(contrast, brightness);
+        data.in_ = data.out_[0];
+        data.SaltPepper(noise_percentage);
         break;
-      case '6':
-        // scaling + hue
+      case 6:
+        // Scaling + hue
+        data.Scaling_ROI(scaling_ratio);
+        data.in_ = data.out_[0];
+        data.Hue(min_hue, max_hue, step);
         break;
-      case '7':
-        // brightness + hue + blur
+      case 7:
+        // Brightness + hue + blur
+        data.ContrastBrightness(contrast, brightness);
+        data.in_ = data.out_[0];
+        data.GaussianBlur(kernel_size);
+        data.in_ = data.out_[0];
+        data.Hue(min_hue, max_hue, step);
         break;
       default:
         break;
     }
+    for(j=0; j<data.out_.size(); j++){
+      cv::imwrite("../../Filtered_imgs/robosub2020"+std::to_string(i + j + 1)+".jpg", data.out_[j]);
+    }
+    data.out_.clear();
   }
 }
-
-

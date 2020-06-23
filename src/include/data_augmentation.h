@@ -12,9 +12,9 @@
 // INCLUDES --------------------------------------------------------------------
 #include "opencv2/imgproc/imgproc.hpp"
 #include "opencv2/highgui/highgui.hpp"
+#include <dirent.h>
 #include <iostream>
 #include <sys/types.h>
-#include <dirent.h>
 
 // CLASS DECLARATION -----------------------------------------------------------
 class DataAugmentation {
@@ -54,26 +54,23 @@ public:
   // Change brightness of the image
   //
   // @param contrast[in]: contrast control (0,2] recommended, 1 doesn't present
-  //                      a change
+  //                      any change
   // @param brightness[in]: brightness control [-100,100] recommended
   void ContrastBrightness(const double contrast, const int brightness);
-  // Make combinations of filters
-  //
-  // No params
-  void CombiningFilters();
   // Read directory contents
   //
   // @param path[in]: directory path
   // @param images[in]: jpg saved images
-  int read_directory(const std::string& path, std::vector<std::string>& images);
-
+  void read_directory(const std::string path, std::vector<std::string>& images);
+  // Make combinations of filters
+  //
+  // No params
+  void CombiningFilters(std::vector<std::string> images);
 
 private:
   // MEMBERS -------------------------------------------------------------------
   //Input image Matrix
   cv::Mat in_;
-  //Output image Matrix
-  cv::Mat out_;
-  //Output vector Matrix for Scaling ROI method
-  std::vector< cv::Mat > out_v_;
+  //Output Matrix vector
+  std::vector< cv::Mat > out_;
 };

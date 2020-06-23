@@ -38,7 +38,7 @@ int main( int argc, char** argv )
     DataAugmentation data;
 
     //Read input image
-    data.Read("../../imgs/lena.png");
+    // data.Read("../../imgs/lena.png");
     // Apply Gaussian Blur filter
     // data.GaussianBlur(kernel_size);
     // //Change hue from min_hue to max_hue in steps
@@ -50,8 +50,9 @@ int main( int argc, char** argv )
     // // Set contrast to 1 and brightness to 80
     // data.ContrastBrightness(contrast, brightness);
     // Read directory contents
-    data.read_directory("/../../data_augmentation/imgs", images);
+    data.read_directory("../../imgs", images);
+    data.CombiningFilters(images);
     //wait for any key to abort
-    cv::waitKey(0);
+    // cv::waitKey(0);
     return 0;
  }
