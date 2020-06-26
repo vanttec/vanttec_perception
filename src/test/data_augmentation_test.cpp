@@ -11,19 +11,22 @@
 
 // INCLUDES --------------------------------------------------------------------
 #include "../include/data_augmentation.h"
+// #include <time.h>
 
 // MAIN PROGRAM ----------------------------------------------------------------
-int main( int argc, char** argv )
-{
+int main( int argc, char** argv ){
+    srand(time(NULL));
     cv::Mat in; 
     cv::Mat out;
 
     //Blurr param
     int kernel_size = 5;
     //Hue params
-    u_char min_hue = 0;
-    u_char max_hue = 105;
-    u_char step = 5;
+    int min_hue = 0;
+    int max_hue = 105;
+    int step = 5;
+    //Hue param
+    int hue = rand()% (max_hue - min_hue + 1) + min_hue;
     //Salt and pepper param
     float noise_percentage = 0.2;
     //Scaling_ROI param
@@ -32,27 +35,24 @@ int main( int argc, char** argv )
     double contrast = 1.0;
     int brightness = 80;
     std::vector<std::string> images;
-    //Total number of unprocessed images
-    // int num_files;
    // Class object 
     DataAugmentation data;
 
     //Read input image
-    // data.Read("../../imgs/lena.png");
+    data.Read("../../imgs/lena.png");
     // Apply Gaussian Blur filter
-    // data.GaussianBlur(kernel_size);
-    // //Change hue from min_hue to max_hue in steps
-    // data.Hue(min_hue, max_hue, step);
-    // //Add salt and pepper noise
-    // data.SaltPepper(noise_percentage);
-    // //Apply scaling
-    // data.Scaling_ROI(ratio); 
-    // // Set contrast to 1 and brightness to 80
-    // data.ContrastBrightness(contrast, brightness);
-    // Read directory contents
-    data.read_directory("../../imgs", images);
-    data.CombiningFilters(images);
+    data.GaussianBlur(kernel_size);
+    //Change hue
+    data.Hue(hue);
+    //Add salt and pepper noise
+    data.SaltPepper(noise_percentage);
+    //Apply scaling
+    data.Scaling_ROI(ratio); 
+    // Set contrast to 1 and brightness to 80
+    data.ContrastBrightness(contrast, brightness);
+    // Save last method
+    data.Save("../../Filtered_imgs/");
     //wait for any key to abort
-    // cv::waitKey(0);
+    cv::waitKey(0);
     return 0;
- }
+}

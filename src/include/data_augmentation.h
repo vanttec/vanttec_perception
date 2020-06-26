@@ -27,22 +27,38 @@ public:
   ~DataAugmentation();
 
   // FUNCTIONS -----------------------------------------------------------------
+  // Get in_
+  //
+  // No params
+  cv::Mat getIN();
+  // Set in_
+  //
+  // Mat[in]: OpenCV Matrix
+  void setIN(cv::Mat);
+  // Get out_
+  //
+  // No params
+  std::vector<cv::Mat> getOUT();
+  // Set out_
+  //
+  // vec[in]: Vector of OpenCV Matrices
+  void setOUT(std::vector<cv::Mat>);
+  // Delete las element from out_
+  //
+  // no params
+  void PopBack();
   // Reads input Image.
   // 
   // @param path[in]: Path to the input image.
   void Read(const std::string &path);
-
   // Applies GaussianBlur Filter to image
   // 
   // @param kernel[in]: Size of kernel to be applied.
   void GaussianBlur(const int &kernel);
-
   // Applies changes to the hue value
   //
-  // @param min_hue[in]: lower hue value
-  // @param max_hue[in]: upper hue value
-  // @param step[in]: increments in hue range
-  void Hue(const u_char min_hue, const u_char max_hue, const u_char step);
+  // @param hue[in]: hue value
+  void Hue(const int hue);
   // Applies Salt and pepper noise to image
   // 
   // @param percentage[in]: percentage of the image to be covered with noise
@@ -61,16 +77,16 @@ public:
   //
   // @param path[in]: directory path
   // @param images[in]: jpg saved images
-  void read_directory(const std::string path, std::vector<std::string>& images);
-  // Make combinations of filters
+  void ReadDirectory(const std::string path, std::vector<std::string>& images);
+  // Save combination
   //
-  // No params
-  void CombiningFilters(std::vector<std::string> images);
+  // path[in]: location where the images will be saved
+  void Save(const std::string path);
 
 private:
   // MEMBERS -------------------------------------------------------------------
   //Input image Matrix
   cv::Mat in_;
   //Output Matrix vector
-  std::vector< cv::Mat > out_;
+  std::vector<cv::Mat> out_;
 };
