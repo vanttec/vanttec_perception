@@ -18,8 +18,5 @@ set(CMAKE_CXX_STANDARD_REQUIRED True)
 set(EXECUTABLE_OUTPUT_PATH "${PROJECT_BINARY_DIR}/bin")
 message("----- VANTTEC: Binaries path: " ${EXECUTABLE_OUTPUT_PATH})
 
-# Enable test / app compilation
-set(VANTTEC_TEST True)
-
 # Add subdirectories
 add_subdirectory(src)

@@ -17,52 +17,39 @@ else()
   message("ERROR -- Could not find OpenCV")
 endif()
 
+###########
+## Build ##
+###########
+
 # Internal required headers 
 include_directories( 
+	include
+	test
   ${OpenCV_INCLUDE_DIRS}
   ${BUILD_INCLUDE_OUTPUT_DIRECTORY}
 )
-
-set(VANTTEC_HEADERS 
-  ${PROJECT_SOURCE_DIR}/include/${PROJECT_NAME}.h
+## Declare a C++ library
+add_library(data_augmentation_lib
+  include/data_augmentation.cpp
+  include/data_augmentation.h
 )
-
-set(VANTTEC_SOURCES 
-  ${PROJECT_SOURCE_DIR}/include/${PROJECT_NAME}.cpp
-)
-
-set(VANTTEC_LIBRARIES
-  data_augmentation
-)
-
-add_library(${PROJECT_NAME} SHARED ${VANTTEC_SOURCES} ${VANTTEC_HEADERS})
-
-target_link_libraries( ${PROJECT_NAME}
+target_link_libraries(data_augmentation_lib
+  ${data_augmentation_lib} 
   ${OpenCV_LIBS}
-  ${XLAB_LIBRARIES}
 )
-
 
 # Add tests here
-set(TEST_EXEC data_augmentation_test)
-set(TEST ${CMAKE_CURRENT_SOURCE_DIR}/test/${TEST_EXEC}.cpp)
-
-# Unit tests
-include_directories(
-  ${OpenCV_INCLUDE_DIRS}
-  ${CMAKE_CURRENT_SOURCE_DIR}/test
-)
-
-add_executable(${TEST_EXEC} ${TEST})
-target_link_libraries(${TEST_EXEC}
-  ${PROJECT_NAME} 
+add_executable(data_augmentation_test test/data_augmentation_test.cpp)
+target_link_libraries(data_augmentation_test
+  ${data_augmentation_lib} 
   ${OpenCV_LIBS}
 )
 
-#add_executable(filter_combo filter_combo.cpp)
-#target_link_libraries(
-#  ${PROJECT_NAME} 
-#  ${OpenCV_LIBS}
-#)
+# Add excecutable
+add_executable(data_augmentation data_augmentation.cpp)
+target_link_libraries(data_augmentation
+  ${data_augmentation_lib}
+  ${OpenCV_LIBS}
+)
 
 
