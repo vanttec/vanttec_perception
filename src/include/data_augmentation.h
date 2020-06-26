@@ -9,12 +9,17 @@
 // @brief: This file contains the definition for the Data Augmentation class. 
 //------------------------------------------------------------------------------
 
+// IFNDEF ----------------------------------------------------------------------
+#ifndef DATA_AUGMENTATION_
+#define DATA_AUGMENTATION_
+
 // INCLUDES --------------------------------------------------------------------
 #include "opencv2/imgproc/imgproc.hpp"
 #include "opencv2/highgui/highgui.hpp"
 #include <dirent.h>
 #include <iostream>
 #include <sys/types.h>
+#include <time.h>
 
 // CLASS DECLARATION -----------------------------------------------------------
 class DataAugmentation {
@@ -27,25 +32,25 @@ public:
   ~DataAugmentation();
 
   // FUNCTIONS -----------------------------------------------------------------
-  // Get in_
+  // Get in_ (input raw image)
   //
   // No params
-  cv::Mat getIN();
-  // Set in_
+  cv::Mat GetIn();
+  // Set in_ (input raw image)
   //
   // Mat[in]: OpenCV Matrix
-  void setIN(cv::Mat);
-  // Get out_
+  void SetIn(cv::Mat);
+  // Get out_ (output processed image)
   //
   // No params
-  std::vector<cv::Mat> getOUT();
-  // Set out_
+  std::vector<cv::Mat> GetOut();
+  // Set out_ (output processed image)
   //
   // vec[in]: Vector of OpenCV Matrices
-  void setOUT(std::vector<cv::Mat>);
-  // Delete las element from out_
+  void SetOut(std::vector<cv::Mat>);
+  // Delete last element from out_
   //
-  // no params
+  // No params
   void PopBack();
   // Reads input Image.
   // 
@@ -66,17 +71,17 @@ public:
   // Crops, resizes and saves 3 images of lower, middle and upper ROI's
   //
   // @param  ratio[in]: reduction of the original image. MUST BE < 1
-  void Scaling_ROI(const float ratio);
+  void ScalingROI(const float ratio);
   // Change brightness of the image
   //
   // @param contrast[in]: contrast control (0,2] recommended, 1 doesn't present
   //                      any change
   // @param brightness[in]: brightness control [-100,100] recommended
-  void ContrastBrightness(const double contrast, const int brightness);
+  void ContrastBrightness(const float contrast, const int brightness);
   // Read directory contents
   //
   // @param path[in]: directory path
-  // @param images[in]: jpg saved images
+  // @param images[in]: saved images
   void ReadDirectory(const std::string path, std::vector<std::string>& images);
   // Save combination
   //
@@ -90,3 +95,4 @@ private:
   //Output Matrix vector
   std::vector<cv::Mat> out_;
 };
+#endif

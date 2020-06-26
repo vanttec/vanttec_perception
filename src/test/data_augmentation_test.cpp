@@ -11,15 +11,12 @@
 
 // INCLUDES --------------------------------------------------------------------
 #include "../include/data_augmentation.h"
-// #include <time.h>
 
 // MAIN PROGRAM ----------------------------------------------------------------
 int main( int argc, char** argv ){
-    srand(time(NULL));
-    cv::Mat in; 
-    cv::Mat out;
-
-    //Blurr param
+    // Class object 
+    DataAugmentation data;
+    //Blur param
     int kernel_size = 5;
     //Hue params
     int min_hue = 0;
@@ -32,14 +29,17 @@ int main( int argc, char** argv ){
     //Scaling_ROI param
     float ratio = 0.5;
     //ContrastBrightness params 
-    double contrast = 1.0;
+    float contrast = 1.0;
     int brightness = 80;
+    // Vector to store desired images
     std::vector<std::string> images;
-   // Class object 
-    DataAugmentation data;
+    // Input image path
+    std::string input_image = "../../imgs/lena.png";
+    // Processed image path
+    std::string filtered_images = "../../Filtered_imgs/";
 
     //Read input image
-    data.Read("../../imgs/lena.png");
+    data.Read(input_image);
     // Apply Gaussian Blur filter
     data.GaussianBlur(kernel_size);
     //Change hue
@@ -47,11 +47,11 @@ int main( int argc, char** argv ){
     //Add salt and pepper noise
     data.SaltPepper(noise_percentage);
     //Apply scaling
-    data.Scaling_ROI(ratio); 
+    data.ScalingROI(ratio); 
     // Set contrast to 1 and brightness to 80
     data.ContrastBrightness(contrast, brightness);
     // Save last method
-    data.Save("../../Filtered_imgs/");
+    data.Save(filtered_images);
     //wait for any key to abort
     cv::waitKey(0);
     return 0;
