@@ -1,7 +1,7 @@
 // INCLUDES --------------------------------------------------------------------
 #include <time.h>
 
-#include "./include/data_augmentation.h"
+#include "include/data_augmentation.h"
 
 // MAIN PROGRAM ----------------------------------------------------------------
 int main( int argc, char** argv ){

@@ -9,6 +9,10 @@
 // @brief: This file contains the definition for the Data Augmentation class. 
 //------------------------------------------------------------------------------
 
+// IFNDEF ----------------------------------------------------------------------
+#ifndef DATA_AUGMENTATION_
+#define DATA_AUGMENTATION_
+
 // INCLUDES --------------------------------------------------------------------
 #include "opencv2/imgproc/imgproc.hpp"
 #include "opencv2/highgui/highgui.hpp"
@@ -90,3 +94,4 @@ private:
   //Output Matrix vector
   std::vector<cv::Mat> out_;
 };
+#endif

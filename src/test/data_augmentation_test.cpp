@@ -35,9 +35,9 @@ int main( int argc, char** argv ){
     double contrast = 1.0;
     int brightness = 80;
     std::vector<std::string> images;
-   // Class object 
+    // Class object 
     DataAugmentation data;
-
+    
     //Read input image
     data.Read("../../imgs/lena.png");
     // Apply Gaussian Blur filter
