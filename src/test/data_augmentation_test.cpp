@@ -37,7 +37,7 @@ int main( int argc, char** argv ){
     std::string input_image = "../../imgs/lena.png";
     // Processed image path
     std::string filtered_images = "../../Filtered_imgs/";
-
+    
     //Read input image
     data.Read(input_image);
     // Apply Gaussian Blur filter

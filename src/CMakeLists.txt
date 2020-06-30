@@ -23,8 +23,6 @@ endif()
 
 # Internal required headers 
 include_directories( 
-	include
-	test
   ${OpenCV_INCLUDE_DIRS}
   ${BUILD_INCLUDE_OUTPUT_DIRECTORY}
 )
@@ -34,21 +32,22 @@ add_library(data_augmentation_lib
   include/data_augmentation.h
 )
 target_link_libraries(data_augmentation_lib
-  ${data_augmentation_lib} 
   ${OpenCV_LIBS}
 )
 
 # Add tests here
-add_executable(data_augmentation_test test/data_augmentation_test.cpp)
+add_executable(data_augmentation_test 
+  test/data_augmentation_test.cpp
+)
 target_link_libraries(data_augmentation_test
-  ${data_augmentation_lib} 
+  data_augmentation_lib 
   ${OpenCV_LIBS}
 )
 
 # Add excecutable
 add_executable(data_augmentation data_augmentation.cpp)
 target_link_libraries(data_augmentation
-  ${data_augmentation_lib}
+  data_augmentation_lib
   ${OpenCV_LIBS}
 )
 

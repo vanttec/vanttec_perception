@@ -22,9 +22,10 @@ int main( int argc, char** argv ){
     // For the ContrastBrightness filter
     int brightness = 0;
     // For the ContrastBrightness filter
-    double contrast = 1.0;
+    float contrast = 1.0;
     // Maximum acceptable value for the hue filter
     int max_hue = 105;
+
     // Minimum acceptable value for the hue filter
     int min_hue = 0;
     // Hue value in the min-max range
