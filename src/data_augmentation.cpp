@@ -1,33 +1,59 @@
-// INCLUDES --------------------------------------------------------------------
-#include <time.h>
+//------------------------------------------------------------------------------
+// @file: data_augmentation.cpp
+// @created on: June 25th, 2020
+// @modified: June 29th, 2020
+// @co-author: Sebastian Martínez
+// @mail: sebas.martp@gmail.com
+// @brief: Use case of data augmentation and final implementation. There are
+//         seven possible combinations for the input images.
+//------------------------------------------------------------------------------
 
+// INCLUDES --------------------------------------------------------------------
 #include "include/data_augmentation.h"
 
 // MAIN PROGRAM ----------------------------------------------------------------
 int main( int argc, char** argv ){
+    // Instance of DataAugmentation class
     DataAugmentation data;
-    int combination;
-    int kernel_size;
-    int brightness;
-    int min_hue;
-    int max_hue;
-    int hue;
-    int max_noise;
-    int min_noise;
-    float noise_percentage;
-    int max_scaling;
-    int min_scaling;
-    float scaling_ratio;
-    double contrast;
-    std::vector<std::string> images;
-    srand(time(NULL));
+    // Choose which filter combination will be applied
+    int combination = 0;
+    // For the Gaussian blur filter
+    int kernel_size = 0;
+    // For the ContrastBrightness filter
+    int brightness = 0;
+    // For the ContrastBrightness filter
+    double contrast = 0.0;
+    // Maximum acceptable value for the hue filter
+    int max_hue = 0;
+    // Minimum acceptable value for the hue filter
+    int min_hue = 0;
+    // Hue value in the min-max range
+    int hue = 0;
+    // Maximum acceptable noise value for the SaltPepper filter
+    int max_noise = 0;
+    // Minimum acceptable noise value for the SaltPepper filter
+    int min_noise = 0;
+    //Noise value for the SaltPepper filter
+    float noise_percentage = 0.0;
+    // Maximum acceptable scaling value for the Scaling_ROI filter  
+    int max_scaling = 0;
+    // Minimum acceptable scaling value for the Scaling_ROI filter
+    int min_scaling = 0;
+    // Scaling value for the Scaling_ROI filter
+    float scaling_ratio = 0.0;
+    // Vector to store desired images
+    std::vector<std::string> images = {};
+    // Images to process path
+    std::string imgs_path = "../../imgs/";
+    // Save processed images path
+    std::string save_path = "../../Filtered_imgs/robosub2020_ ";
 
     // Read directory contents (png images only)
-    data.ReadDirectory("../../imgs/",images);
+    data.ReadDirectory(imgs_path,images);
 
     for(int i=0; i<images.size(); i++){
         // Read a single image
-        data.Read("../../imgs/" + images[i]);
+        data.Read(imgs_path + images[i]);
         // Define parameters
         // Random between 1 and 7
         combination = rand()%7 + 1; 
@@ -50,13 +76,13 @@ int main( int argc, char** argv ){
         // Random odd number between 1 and 25
         kernel_size = 2 * (rand()%13) + 1;
 
-        // std::cout<<"Combinacion: " + std::to_string(combination)<<"\n";
+        // std::cout<<"Combination: "+std::to_string(combination)<<"\n";
         // std::cout<<"Contrast: "<<contrast<<" Brightness: "<<brightness<<"\n";
         // std::cout<<"min_hue: "<< min_hue 
         //         <<" max_hue: "<< max_hue
         //         <<" hue: "<< hue <<"\n";
         // std::cout<<"noise_percentage: "<<noise_percentage<<"\n";
-        // std::cout<<"scaling_ratio (reduction): "<<1 - scaling_ratio<<"\n";
+        // std::cout<<"scaling_ratio (reduction): "<<1-scaling_ratio<<"\n";
         // std::cout<<"kernel_size: "<<kernel_size<<"\n";
 
         switch (combination){
@@ -116,6 +142,6 @@ int main( int argc, char** argv ){
             break;
         }
     }
-    data.Save("../../Filtered_imgs/");
+    data.Save(save_path);
     return 0;
 }

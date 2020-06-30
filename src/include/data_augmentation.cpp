@@ -44,10 +44,9 @@ void DataAugmentation::PopBack(){
   out_.pop_back();
 }
 
-
 void DataAugmentation::Read(const std::string &path){
   //Read image from path
-  in_ = cv::imread(path, 1);
+  in_ = cv::imread(path, cv::IMREAD_COLOR);
   if (! in_.data ) 
     {
         std::cout << "Could not open or find the image.\n";
@@ -66,12 +65,12 @@ void DataAugmentation::GaussianBlur(const int &kernel){
 }
 
 void DataAugmentation::Hue(const int hue){
-  cv::Mat HSV, BGR;
+  cv::Mat HSV;
+  cv::Mat BGR;
   cv::cvtColor(in_, HSV, CV_BGR2HSV);
-  int i,j;
   // Apply Hue changes
-  for(j=0; j < HSV.rows; j++){
-    for(i=0; i < HSV.cols; i++){
+  for(int j=0; j < HSV.rows; j++){
+    for(int i=0; i < HSV.cols; i++){
       // cv::Vec3b --> Vec<uchar,3> Uchar type vector of 3 elements
       // uchar --> typedef unsigned char (an unsigned 1 byte integer)
       HSV.at<cv::Vec3b>(j,i)[0] = hue;
@@ -86,7 +85,9 @@ void DataAugmentation::Hue(const int hue){
 void DataAugmentation::SaltPepper(const float percentage){
   out_.push_back(in_.clone());
   int total = percentage * out_.back().cols * out_.back().rows;
-  int column_pixel, row_pixel, color;
+  int column_pixel;
+  int row_pixel;
+  int color;
   for(int i = 0; i<total; i++){
     //Choose a random pixel between 0 and (out_.cols-1)
     //and 0 and (out_.rows-1)
@@ -157,7 +158,9 @@ void DataAugmentation::Scaling_ROI(const float ratio){
 void DataAugmentation::ContrastBrightness(const double contrast, const int brightness){
   // Full explanation can be found in: 
   // https://docs.opencv.org/3.4/d3/dc1/tutorial_basic_linear_transform.html
-  int i,j,c;
+  int i;
+  int j;
+  int c;
   out_.push_back( cv::Mat::zeros( in_.size(), in_.type() ) );
   for(j = 0; j < in_.rows; j++ ) {
       for(i = 0; i < in_.cols; i++ ) {
@@ -191,5 +194,5 @@ void DataAugmentation::ReadDirectory(const std::string path, std::vector<std::st
 
 void DataAugmentation::Save(const std::string path){
   for(int j=0; j<out_.size(); j++)
-    cv::imwrite(path+"robosub2020_"+std::to_string(j + 1)+".jpg", out_[j]);
+    cv::imwrite(path+std::to_string(j + 1)+".jpg", out_[j]);
 }
