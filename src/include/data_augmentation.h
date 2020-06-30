@@ -81,8 +81,9 @@ public:
   // Read directory contents
   //
   // @param path[in]: directory path
+  // @param image_type[in]: image extension (.jpg, .png, etc.)
   // @param images[in]: saved images
-  void ReadDirectory(const std::string path, std::vector<std::string>& images);
+  void ReadDirectory(const std::string path, const std::string extension, std::vector<std::string>& images);
   // Save combination
   //
   // path[in]: location where the images will be saved

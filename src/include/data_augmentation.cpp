@@ -174,7 +174,7 @@ void DataAugmentation::ContrastBrightness(const float contrast, const int bright
   // cv::imwrite("../../Filtered_imgs/brightness:"+ std::to_string(brightness)+".jpg", out_);
 }
 
-void DataAugmentation::ReadDirectory(const std::string path, std::vector<std::string>& images){
+void DataAugmentation::ReadDirectory(const std::string path, const std::string extension, std::vector<std::string>& images){
   DIR* dirp = opendir(path.c_str());
   struct dirent * dp;
   std::string file;
@@ -182,7 +182,7 @@ void DataAugmentation::ReadDirectory(const std::string path, std::vector<std::st
   int i = 1;
   while ((dp = readdir(dirp)) != NULL) {
     file = dp->d_name;
-    found = file.find(".png");
+    found = file.find(extension);
     if(found != std::string::npos){
       images.push_back(dp->d_name);
       // std::cout<<std::to_string(i++) + " image: "<<dp->d_name<<std::endl;

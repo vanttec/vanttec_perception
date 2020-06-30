@@ -48,9 +48,10 @@ int main( int argc, char** argv ){
     std::string imgs_path = "../../imgs/";
     // Save processed images path
     std::string save_path = "../../Filtered_imgs/robosub2020_ ";
-
+    // Extension of images to process
+    std::string extension = ".jpg";
     // Read directory contents (png images only)
-    data.ReadDirectory(imgs_path,images);
+    data.ReadDirectory(imgs_path, extension, images);
 
     for(int i=0; i<images.size(); i++){
         // Read a single image
