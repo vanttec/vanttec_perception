@@ -1,7 +1,7 @@
 //------------------------------------------------------------------------------
 // @file: data_augmentation.h
 // @created on: March 18th, 2020
-// @modified: May 18th, 2020
+// @modified: July 3rd, 2020
 // @author: Ivana Collado
 // @mail: ivanacollado@gmail.com
 // @co-author: Sebastian Martínez
@@ -38,24 +38,46 @@ public:
   cv::Mat GetIn();
   // Set in_ (input raw image)
   //
-  // Mat[in]: OpenCV Matrix
-  void SetIn(cv::Mat);
+  // @param in[in]: OpenCV Matrix
+  void SetIn(cv::Mat in);
   // Get out_ (output processed image)
   //
   // No params
-  std::vector<cv::Mat> GetOut();
+  cv::Mat GetOut();
   // Set out_ (output processed image)
   //
-  // vec[in]: Vector of OpenCV Matrices
-  void SetOut(std::vector<cv::Mat>);
-  // Delete last element from out_
+  // @param out[in]: Vector of OpenCV Matrices
+  void SetOut(cv::Mat out);
+  // Get entry_ pointer
   //
   // No params
-  void PopBack();
-  // Reads input Image.
+  dirent* GetEntry();
+  // Get next entry_ of the directory
+  //
+  // No params
+  void GetNextEntry();
+  // Reads each entry looking for desired image.
   // 
-  // @param path[in]: Path to the input image.
-  void Read(const std::string &path);
+  // @param extension[in]: desired image extension (.jpg, .png, etc.).
+  void ReadEntry(const std::string extension);
+  // Set input image directory
+  //
+  // @param path[in]: input directory path
+  void SetDirectory(const std::string path);
+  // Save combination of filters
+  //
+  // @param path[in]: location where the images will be saved
+  // @param extension[in]: desired image extension
+  // @param img_number[in]: image number
+  void Save(const std::string path, const std::string extension, const int img_number);
+  // Show in_ image
+  //
+  // No params
+  void ShowIn();
+  // Show out_ image
+  //
+  // No params
+  void ShowOut();
   // Applies GaussianBlur Filter to image
   // 
   // @param kernel[in]: Size of kernel to be applied.
@@ -71,29 +93,26 @@ public:
   // Crops, resizes and saves 3 images of lower, middle and upper ROI's
   //
   // @param  ratio[in]: reduction of the original image. MUST BE < 1
-  void ScalingROI(const float ratio);
+  // @return std::vector<cv::Mat>[out]
+  std::vector<cv::Mat> ScalingROI(const float ratio);
   // Change brightness of the image
   //
   // @param contrast[in]: contrast control (0,2] recommended, 1 doesn't present
   //                      any change
   // @param brightness[in]: brightness control [-100,100] recommended
   void ContrastBrightness(const float contrast, const int brightness);
-  // Read directory contents
-  //
-  // @param path[in]: directory path
-  // @param image_type[in]: image extension (.jpg, .png, etc.)
-  // @param images[in]: saved images
-  void ReadDirectory(const std::string path, const std::string extension, std::vector<std::string>& images);
-  // Save combination
-  //
-  // path[in]: location where the images will be saved
-  void Save(const std::string path);
 
 private:
   // MEMBERS -------------------------------------------------------------------
-  //Input image Matrix
+  // Input image Matrix
   cv::Mat in_;
-  //Output Matrix vector
-  std::vector<cv::Mat> out_;
+  // Output image Matrix
+  cv::Mat out_;
+  // Directory stream pointer
+  DIR* dir_pointer_;
+  // Directory file pointer
+  dirent* entry_;
+  // Input directory path
+  std::string dir_path_;
 };
 #endif
