@@ -28,48 +28,51 @@ int main( int argc, char** argv ){
     int hue = rand()% (max_hue - min_hue + 1) + min_hue;
     //Salt and pepper param
     float noise_percentage = 0.2;
-    //Scaling_ROI param
-    float ratio = 0.5;
+    //Scaling_ROI params
+    float ratio = 0.7;
     //ContrastBrightness params 
     float contrast = 1.0;
     int brightness = 80;
-    // Vector to store ScalingROI filter images
-    std::vector<cv::Mat> images = {};
+    // Queue to store the name of input images
+    std::queue<std::string> images;
     // Input images path
     std::string input_images = "../../imgs/";
     // Processed image path
     std::string filtered_images = "../../Filtered_imgs/";
     // Desired images extension
-    std::string extension = ".jpg";
+    std::string extension = ".png";
 
     int i=0;
-    // Set input image directory
-    data.SetDirectory(input_images);
-    while(data.GetEntry() != NULL){
-        // Read entry from directory
-        data.ReadEntry(extension);
+    // Read input directory contents
+    data.ReadDirectory(input_images, extension, images);
+    
+    while(!images.empty()){
+        // Read each image
+        data.ReadImage(input_images+images.front());
         // Apply filters and save if in_ is not NULL
-        if(data.GetIn().data != NULL){
-            data.ShowIn();
-            // Apply Gaussian Blur filter
-            data.GaussianBlur(kernel_size);
-            //Change hue
-            data.Hue(hue);
-            //Add salt and pepper noise
-            data.SaltPepper(noise_percentage);
-            // Set contrast to 1 and brightness to 80
-            data.ContrastBrightness(contrast, brightness);
-            //Apply scaling
-            images = data.ScalingROI(ratio); 
-            for(int j=0; j<images.size(); j++){
-                data.SetOut(images[j]);
-                // Save last method
-                data.Save(filtered_images,extension,++i);
-            }
-            //wait for any key to abort
-            cv::waitKey(0);
-        }
-        data.GetNextEntry();
+        data.ShowIn();
+        // Apply Gaussian Blur filter
+        data.GaussianBlur(kernel_size);
+        //Change hue
+        data.Hue(hue);
+        //Add salt and pepper noise
+        data.SaltPepper(noise_percentage);
+        // Set contrast to 1 and brightness to 80
+        data.ContrastBrightness(contrast, brightness);
+        //Apply scaling
+        data.ScalingROI(ratio, 0);
+        data.Save(filtered_images,extension,++i);
+        data.ShowOut();
+        cv::waitKey(0);
+        data.ScalingROI(ratio, 1); 
+        data.Save(filtered_images,extension,++i);
+        data.ShowOut();
+        cv::waitKey(0);
+        data.ScalingROI(ratio, 2); 
+        data.ShowOut();
+        cv::waitKey(0);
+        data.Save(filtered_images,extension,++i);
+        images.pop();    
     }    
     return 0;
 }

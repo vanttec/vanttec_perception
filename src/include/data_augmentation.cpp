@@ -18,8 +18,7 @@ DataAugmentation::DataAugmentation(){
 }
 
 DataAugmentation::~DataAugmentation(){
-  // Close directory stream pointer
-  closedir(dir_pointer_);
+  // Empty
 }
 
 // FUNCTIONS -------------------------------------------------------------------
@@ -39,40 +38,34 @@ void DataAugmentation::SetOut(cv::Mat out){
   out_ = out;
 }
 
-dirent* DataAugmentation::GetEntry(){
-  return entry_;
-}
-
-void DataAugmentation::GetNextEntry(){
-  // Read next directory entry
-  entry_ = readdir(dir_pointer_);
-}
-
-void DataAugmentation::SetDirectory(const std::string path){
-  // Save input directory path
-  dir_path_ = path;
-  dir_pointer_ = opendir(path.c_str());
-  // Get first file in the directory
-  entry_ = readdir(dir_pointer_);
-}
-
-void DataAugmentation::ReadEntry(const std::string extension){
-  std::string filename;
+void DataAugmentation::ReadDirectory(const std::string dir_path, const std::string extension, std::queue<std::string>& images){
+  DIR* dir_pointer = opendir(dir_path.c_str());
+  dirent* entry;
+  std::string file;
   std::size_t found;
-  // Gey entry_ name
-  filename = entry_ -> d_name;
-  // std::cout<<filename<<"\n";
-  // Find filename extension
-  found = filename.find(extension);
-  // If the the file has the desired extension
-  if(found != std::string::npos){
-    //Read image from path
-    in_ = cv::imread(dir_path_+filename, cv::IMREAD_COLOR);
-  } else {
-      std::cout << "Could not open the image.\n";
-      // So we don't save thrash
-      in_.data = NULL;
+  // Read files until there are no more
+  while ((entry = readdir(dir_pointer)) != NULL) {
+    // Gey entry_ name
+    file = entry->d_name;
+    // Find filename extension
+    found = file.find(extension);
+    // If the the file has the desired extension...
+    if(found != std::string::npos){
+      images.push(entry->d_name);
+      // std::cout<<std::to_string(i++) + " image: "<<entry->d_name<<std::endl;
+    }
   }
+  closedir(dir_pointer);
+}
+
+void DataAugmentation::ReadImage(const std::string input_image){
+  //Read image from path
+  in_ = cv::imread(input_image, cv::IMREAD_COLOR);
+  if (!in_.data) 
+    {
+        std::cout << "Could not open or find the image.\n";
+        //return -1; // unsuccessful
+    }
 }
 
 void DataAugmentation::Save(const std::string path, const std::string extension, const int img_number){
@@ -137,8 +130,7 @@ void DataAugmentation::SaltPepper(const float percentage){
   }
 }
 
-std::vector<cv::Mat> DataAugmentation::ScalingROI(const float ratio){
-  std::vector<cv::Mat> img = {};
+void DataAugmentation::ScalingROI(const float ratio, const int ROI_number){
   if(ratio < 1){
     cv::Mat temp = in_.clone();
     cv::Size size;
@@ -146,21 +138,18 @@ std::vector<cv::Mat> DataAugmentation::ScalingROI(const float ratio){
     // Width and  height of ROI
     int width = std::round(ratio*in_.cols);
     int height = std::round(ratio*in_.rows);
-    for(int i=0; i<=2; i++){
-      // Get offset of the 3 ROI's based on the original image
-      offset.x = std::round(in_.cols*(1-ratio)/2);
-      offset.y = std::round(in_.rows*(1-ratio)/2*i);
-      size.height = height;
-      size.width = width;
-      //Crop the ROI from original image
-      cv::Rect ROI(offset, size);
-      img.push_back(temp(ROI));  
-      //Resize ROI back to the original image
-      cv::resize(img.back(), img.back(), cv::Size(in_.rows, in_.cols), 
-                                                    0, 0, CV_INTER_LINEAR);
-    }
+    // Get offset of the 3 ROI's based on the original image
+    offset.x = std::round(in_.cols*(1-ratio)/2);
+    offset.y = std::round(in_.rows*(1-ratio)/2*ROI_number);
+    size.height = height;
+    size.width = width;
+    //Crop the ROI from original image
+    cv::Rect ROI(offset, size);
+    out_ = temp(ROI);  
+    //Resize ROI back to the original image
+    cv::resize(out_, out_, cv::Size(in_.rows, in_.cols), 
+                                    0, 0, CV_INTER_LINEAR);
   }
-  return img;
 }
 
 void DataAugmentation::ContrastBrightness(const float contrast, const int brightness){

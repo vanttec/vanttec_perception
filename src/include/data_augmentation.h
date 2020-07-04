@@ -19,6 +19,7 @@
 #include <dirent.h>
 #include <iostream>
 #include <sys/types.h>
+#include <queue>
 #include <time.h>
 
 // CLASS DECLARATION -----------------------------------------------------------
@@ -48,22 +49,16 @@ public:
   //
   // @param out[in]: Vector of OpenCV Matrices
   void SetOut(cv::Mat out);
-  // Get entry_ pointer
+  // Read directory contents
   //
-  // No params
-  dirent* GetEntry();
-  // Get next entry_ of the directory
-  //
-  // No params
-  void GetNextEntry();
-  // Reads each entry looking for desired image.
+  // @param dir_path[in]: directory path
+  // @param extension[in]: image extension (.jpg, .png, etc.)
+  // @param images[in]: saved images
+  void ReadDirectory(const std::string dir_path, const std::string extension, std::queue<std::string>& images);
+  // Reads input Image.
   // 
-  // @param extension[in]: desired image extension (.jpg, .png, etc.).
-  void ReadEntry(const std::string extension);
-  // Set input image directory
-  //
-  // @param path[in]: input directory path
-  void SetDirectory(const std::string path);
+  // @param path[in]: Path to the input image.
+  void ReadImage(const std::string input_image);
   // Save combination of filters
   //
   // @param path[in]: location where the images will be saved
@@ -92,9 +87,10 @@ public:
   void SaltPepper(const float percentage);
   // Crops, resizes and saves 3 images of lower, middle and upper ROI's
   //
-  // @param  ratio[in]: reduction of the original image. MUST BE < 1
-  // @return std::vector<cv::Mat>[out]
-  std::vector<cv::Mat> ScalingROI(const float ratio);
+  // @param ratio[in]: reduction of the original image. MUST BE < 1
+  // @param ROI_number[in]: reference to which of the ROI's will be 
+  //                        generated. 0: UPPER, 1: MIDDLE, 2: LOWER
+  void ScalingROI(const float ratio, const int ROI_number);
   // Change brightness of the image
   //
   // @param contrast[in]: contrast control (0,2] recommended, 1 doesn't present
@@ -108,11 +104,5 @@ private:
   cv::Mat in_;
   // Output image Matrix
   cv::Mat out_;
-  // Directory stream pointer
-  DIR* dir_pointer_;
-  // Directory file pointer
-  dirent* entry_;
-  // Input directory path
-  std::string dir_path_;
 };
 #endif

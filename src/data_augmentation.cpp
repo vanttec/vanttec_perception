@@ -45,8 +45,8 @@ int main( int argc, char** argv ){
     float scaling_ratio = 0.0;
     // Image number
     int img_number = 0;
-    // Vector to store ScalingROI filter output images
-    std::vector<cv::Mat> images = {};
+    // Queue to store input image names
+    std::queue<std::string> images;
     // Images to process path
     std::string imgs_path = "../../imgs/";
     // Save processed images path
@@ -54,104 +54,107 @@ int main( int argc, char** argv ){
     // Extension of images to process
     std::string extension = ".jpg";
 
-    // Set input directory
-    data.SetDirectory(imgs_path);
+    // Read input directory contents
+    data.ReadDirectory(imgs_path, extension, images);
 
-    // While the end of the directory has not yet been reached...
-    while(data.GetEntry() != NULL){
-        // Read entry from directory
-        data.ReadEntry(extension);
-        // If in_ is not trash
-        if(data.GetIn().data != NULL){
-            // Random between 1 and 7
-            combination = rand()%7 + 1;
-            // Random between -100 and 100
-            brightness = (rand()%101) * (rand()%2 ? 1:-1); 
-            // Random between 0 and 105
-            hue = rand()% (max_hue - min_hue + 1) + min_hue; 
-            // Random between 0 and 0.3
-            noise_percentage = (float) (rand()% max_noise + min_noise)/10; 
-            // Random between 0.6 and 0.95
-            scaling_ratio = (float) ((rand()% (max_scaling - min_scaling + 1)) +
-                                                                min_scaling)/100;
-            // Random odd number between 1 and 25
-            kernel_size = 2 * (rand()%13) + 1;
+    while(!images.empty()){
+        // Read each image
+        data.ReadImage(imgs_path+images.front());
+        // Random between 1 and 7
+        combination = rand()%7 + 1;
+        // Random between -100 and 100
+        brightness = (rand()%101) * (rand()%2 ? 1:-1); 
+        // Random between 0 and 105
+        hue = rand()% (max_hue - min_hue + 1) + min_hue; 
+        // Random between 0 and 0.3
+        noise_percentage = (float) (rand()% max_noise + min_noise)/10; 
+        // Random between 0.6 and 0.95
+        scaling_ratio = (float) ((rand()% (max_scaling - min_scaling + 1)) +
+                                                            min_scaling)/100;
+        // Random odd number between 1 and 25
+        kernel_size = 2 * (rand()%13) + 1;
 
-            std::cout<<"Combination: "+std::to_string(combination)<<"\n";
-            // std::cout<<"Contrast: "<<contrast<<" Brightness: "<<brightness<<"\n";
-            // std::cout<<"min_hue: "<< min_hue 
-            //         <<" max_hue: "<< max_hue
-            //         <<" hue: "<< hue <<"\n";
-            // std::cout<<"noise_percentage: "<<noise_percentage<<"\n";
-            // std::cout<<"scaling_ratio (reduction): "<<1-scaling_ratio<<"\n";
-            // std::cout<<"kernel_size: "<<kernel_size<<"\n";
+        // std::cout<<"Combination: "+std::to_string(combination)<<"\n";
+        // std::cout<<"Contrast: "<<contrast<<" Brightness: "<<brightness<<"\n";
+        // std::cout<<"min_hue: "<< min_hue 
+        //         <<" max_hue: "<< max_hue
+        //         <<" hue: "<< hue <<"\n";
+        // std::cout<<"noise_percentage: "<<noise_percentage<<"\n";
+        // std::cout<<"scaling_ratio (reduction): "<<1-scaling_ratio<<"\n";
+        // std::cout<<"kernel_size: "<<kernel_size<<"\n";
 
-            switch (combination){
-                case 1:
-                    // Noise + scaling
-                    data.SaltPepper(noise_percentage);
-                    data.SetIn(data.GetOut());
-                    images = data.ScalingROI(scaling_ratio);
-                    break;
-                case 2:
-                    // Scaling + Gaussian blur
-                    data.GaussianBlur(kernel_size);
-                    data.SetIn(data.GetOut());
-                    images = data.ScalingROI(scaling_ratio);
-                    break;
-                case 3:
-                    // Gaussian blur + hue
-                    data.GaussianBlur(kernel_size);
-                    data.SetIn(data.GetOut());
-                    data.Hue(hue);
-                    break;
-                case 4:
-                    // Brightness + hue
-                    data.ContrastBrightness(contrast, brightness);
-                    data.SetIn(data.GetOut());
-                    data.Hue(hue);
-                    break;
-                case 5:
-                    // Brightness + noise
-                    data.ContrastBrightness(contrast, brightness);
-                    data.SetIn(data.GetOut());
-                    data.SaltPepper(noise_percentage);
-                    break;
-                case 6:
-                    // Scaling + hue
-                    data.Hue(hue);
-                    data.SetIn(data.GetOut());
-                    images = data.ScalingROI(scaling_ratio);
-                    break;
-                case 7:
-                    // Brightness + hue + blur
-                    data.ContrastBrightness(contrast, brightness);
-                    data.SetIn(data.GetOut());
-                    data.GaussianBlur(kernel_size);
-                    data.SetIn(data.GetOut());
-                    data.Hue(hue);
-                    break;
-                default:
-                    break;
-            }
-
-            // Save dependending on filter used
-            if(combination == 1 || combination == 2 || combination == 6){
-                // Save for ScalingROI filters
-                for(int i=0; i<images.size(); i++){
-                    data.SetOut(images[i]);
-                    data.Save(save_path, extension, ++img_number);
-                }
-                images.clear();
-            } else {
-                // Save on any other filter
-                data.Save(save_path, extension, ++img_number);
-            }
-            // data.ShowOut();
-            //wait for any key to abort
-            // cv::waitKey(0);
+        switch (combination){
+            case 1:
+                // Noise + scaling
+                data.SaltPepper(noise_percentage);
+                data.SetIn(data.GetOut());
+                data.ScalingROI(scaling_ratio, 0);
+                data.Save(save_path,extension,++img_number);
+                data.ScalingROI(scaling_ratio, 1); 
+                data.Save(save_path,extension,++img_number);
+                data.ScalingROI(scaling_ratio, 2);   
+                data.Save(save_path,extension,++img_number);              
+                break;
+            case 2:
+                // Scaling + Gaussian blur
+                data.GaussianBlur(kernel_size);
+                data.SetIn(data.GetOut());
+                data.ScalingROI(scaling_ratio, 0);
+                data.Save(save_path,extension,++img_number);
+                data.ScalingROI(scaling_ratio, 1); 
+                data.Save(save_path,extension,++img_number);
+                data.ScalingROI(scaling_ratio, 2);   
+                data.Save(save_path,extension,++img_number);
+                break;
+            case 3:
+                // Gaussian blur + hue
+                data.GaussianBlur(kernel_size);
+                data.SetIn(data.GetOut());
+                data.Hue(hue);
+                data.Save(save_path,extension,++img_number);  
+                break;
+            case 4:
+                // Brightness + hue
+                data.ContrastBrightness(contrast, brightness);
+                data.SetIn(data.GetOut());
+                data.Hue(hue);
+                data.Save(save_path,extension,++img_number);  
+                break;
+            case 5:
+                // Brightness + noise
+                data.ContrastBrightness(contrast, brightness);
+                data.SetIn(data.GetOut());
+                data.SaltPepper(noise_percentage);
+                data.Save(save_path,extension,++img_number);  
+                break;
+            case 6:
+                // Scaling + hue
+                data.Hue(hue);
+                data.SetIn(data.GetOut());
+                data.ScalingROI(scaling_ratio, 0);
+                data.Save(save_path,extension,++img_number);
+                data.ScalingROI(scaling_ratio, 1); 
+                data.Save(save_path,extension,++img_number);
+                data.ScalingROI(scaling_ratio, 2);   
+                data.Save(save_path,extension,++img_number);
+                break;
+            case 7:
+                // Brightness + hue + blur
+                data.ContrastBrightness(contrast, brightness);
+                data.SetIn(data.GetOut());
+                data.GaussianBlur(kernel_size);
+                data.SetIn(data.GetOut());
+                data.Hue(hue);
+                data.Save(save_path,extension,++img_number);  
+                break;
+            default:
+                break;
         }
-        data.GetNextEntry();
+        // data.ShowIn();
+        // data.ShowOut();
+        // //wait for any key to abort
+        // cv::waitKey(0);
+        images.pop();
     }
     return 0;
 }
