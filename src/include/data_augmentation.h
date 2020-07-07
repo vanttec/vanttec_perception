@@ -33,22 +33,10 @@ public:
   ~DataAugmentation();
 
   // FUNCTIONS -----------------------------------------------------------------
-  // Get in_ (input raw image)
+  // Set out_ to in_
   //
   // No params
-  cv::Mat GetIn();
-  // Set in_ (input raw image)
-  //
-  // @param in[in]: OpenCV Matrix
-  void SetIn(cv::Mat in);
-  // Get out_ (output processed image)
-  //
-  // No params
-  cv::Mat GetOut();
-  // Set out_ (output processed image)
-  //
-  // @param out[in]: Vector of OpenCV Matrices
-  void SetOut(cv::Mat out);
+  void SetOut2In();
   // Read directory contents
   //
   // @param dir_path[in]: directory path

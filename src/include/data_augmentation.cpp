@@ -22,20 +22,8 @@ DataAugmentation::~DataAugmentation(){
 }
 
 // FUNCTIONS -------------------------------------------------------------------
-cv::Mat DataAugmentation::GetIn(){
-  return in_;
-}
-
-void DataAugmentation::SetIn(cv::Mat in){
-  in_ = in;
-}
-
-cv::Mat DataAugmentation::GetOut(){
-  return out_;
-}
-
-void DataAugmentation::SetOut(cv::Mat out){
-  out_ = out;
+void DataAugmentation::SetOut2In(){
+  in_ = out_;
 }
 
 void DataAugmentation::ReadDirectory(const std::string &dir_path, const std::string &extension, std::queue<std::string> &images){

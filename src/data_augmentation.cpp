@@ -87,7 +87,7 @@ int main( int argc, char** argv ){
             case 1:
                 // Noise + scaling
                 data.SaltPepper(noise_percentage);
-                data.SetIn(data.GetOut());
+                data.SetOut2In();
                 data.ScalingROI(scaling_ratio, 0);
                 data.Save(save_path,extension,++img_number);
                 data.ScalingROI(scaling_ratio, 1); 
@@ -98,7 +98,7 @@ int main( int argc, char** argv ){
             case 2:
                 // Scaling + Gaussian blur
                 data.GaussianBlur(kernel_size);
-                data.SetIn(data.GetOut());
+                data.SetOut2In();
                 data.ScalingROI(scaling_ratio, 0);
                 data.Save(save_path,extension,++img_number);
                 data.ScalingROI(scaling_ratio, 1); 
@@ -109,28 +109,28 @@ int main( int argc, char** argv ){
             case 3:
                 // Gaussian blur + hue
                 data.GaussianBlur(kernel_size);
-                data.SetIn(data.GetOut());
+                data.SetOut2In();
                 data.Hue(hue);
                 data.Save(save_path,extension,++img_number);  
                 break;
             case 4:
                 // Brightness + hue
                 data.ContrastBrightness(contrast, brightness);
-                data.SetIn(data.GetOut());
+                data.SetOut2In();
                 data.Hue(hue);
                 data.Save(save_path,extension,++img_number);  
                 break;
             case 5:
                 // Brightness + noise
                 data.ContrastBrightness(contrast, brightness);
-                data.SetIn(data.GetOut());
+                data.SetOut2In();
                 data.SaltPepper(noise_percentage);
                 data.Save(save_path,extension,++img_number);  
                 break;
             case 6:
                 // Scaling + hue
                 data.Hue(hue);
-                data.SetIn(data.GetOut());
+                data.SetOut2In();
                 data.ScalingROI(scaling_ratio, 0);
                 data.Save(save_path,extension,++img_number);
                 data.ScalingROI(scaling_ratio, 1); 
@@ -141,9 +141,9 @@ int main( int argc, char** argv ){
             case 7:
                 // Brightness + hue + blur
                 data.ContrastBrightness(contrast, brightness);
-                data.SetIn(data.GetOut());
+                data.SetOut2In();
                 data.GaussianBlur(kernel_size);
-                data.SetIn(data.GetOut());
+                data.SetOut2In();
                 data.Hue(hue);
                 data.Save(save_path,extension,++img_number);  
                 break;
