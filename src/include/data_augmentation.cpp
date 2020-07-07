@@ -38,19 +38,19 @@ void DataAugmentation::SetOut(cv::Mat out){
   out_ = out;
 }
 
-void DataAugmentation::ReadDirectory(const std::string dir_path, const std::string extension, std::queue<std::string>& images){
+void DataAugmentation::ReadDirectory(const std::string &dir_path, const std::string &extension, std::queue<std::string> &images){
   DIR* dir_pointer = opendir(dir_path.c_str());
   dirent* entry;
   std::string file;
   std::size_t found;
   // Read files until there are no more
-  while ((entry = readdir(dir_pointer)) != NULL) {
+  while(NULL != (entry = readdir(dir_pointer))){
     // Gey entry_ name
     file = entry->d_name;
     // Find filename extension
     found = file.find(extension);
     // If the the file has the desired extension...
-    if(found != std::string::npos){
+    if(std::string::npos != found){
       images.push(entry->d_name);
       // std::cout<<std::to_string(i++) + " image: "<<entry->d_name<<std::endl;
     }
@@ -58,18 +58,17 @@ void DataAugmentation::ReadDirectory(const std::string dir_path, const std::stri
   closedir(dir_pointer);
 }
 
-void DataAugmentation::ReadImage(const std::string input_image){
+void DataAugmentation::ReadImage(const std::string &input_image){
   //Read image from path
   in_ = cv::imread(input_image, cv::IMREAD_COLOR);
-  if (!in_.data) 
-    {
+  if(!in_.data){
         std::cout << "Could not open or find the image.\n";
         //return -1; // unsuccessful
     }
 }
 
-void DataAugmentation::Save(const std::string path, const std::string extension, const int img_number){
-  if(out_.data != NULL){
+void DataAugmentation::Save(const std::string &path, const std::string &extension, const int &img_number){
+  if(NULL != out_.data){
     cv::imwrite(path+std::to_string(img_number)+extension, out_);
   }
 }
@@ -89,7 +88,7 @@ void DataAugmentation::GaussianBlur(const int &kernel){
   cv::GaussianBlur( in_, out_, cv::Size( kernel, kernel ), 0, 0 );
 }
 
-void DataAugmentation::Hue(const int hue){
+void DataAugmentation::Hue(const int &hue){
   cv::Mat HSV;
   cv::Mat BGR;
   out_ = in_.clone();
@@ -105,7 +104,7 @@ void DataAugmentation::Hue(const int hue){
   cv::cvtColor(HSV, out_, CV_HSV2BGR);
 }
 
-void DataAugmentation::SaltPepper(const float percentage){
+void DataAugmentation::SaltPepper(const float &percentage){
   out_ = in_.clone();
   int total = percentage * out_.cols * out_.rows;
   int column_pixel;
@@ -119,10 +118,10 @@ void DataAugmentation::SaltPepper(const float percentage){
     //Randomly change pixel color to black or white
     color = rand()%2 ? 255:0;
     //Apply color
-    if(out_.channels() == 1){
+    if(1 == out_.channels()){
         out_.at<uchar>(row_pixel,column_pixel) = color;
     }
-    else if(out_.channels() == 3){
+    else if(3 == out_.channels()){
         out_.at<cv::Vec3b>(row_pixel,column_pixel)[0] = color;
         out_.at<cv::Vec3b>(row_pixel,column_pixel)[1] = color;
         out_.at<cv::Vec3b>(row_pixel,column_pixel)[2] = color;
@@ -130,8 +129,8 @@ void DataAugmentation::SaltPepper(const float percentage){
   }
 }
 
-void DataAugmentation::ScalingROI(const float ratio, const int ROI_number){
-  if(ratio < 1){
+void DataAugmentation::ScalingROI(const float &ratio, const int &ROI_number){
+  if(1 > ratio){
     cv::Mat temp = in_.clone();
     cv::Size size;
     cv::Point offset;
@@ -152,7 +151,7 @@ void DataAugmentation::ScalingROI(const float ratio, const int ROI_number){
   }
 }
 
-void DataAugmentation::ContrastBrightness(const float contrast, const int brightness){
+void DataAugmentation::ContrastBrightness(const float &contrast, const int &brightness){
   // Full explanation can be found in: 
   // https://docs.opencv.org/3.4/d3/dc1/tutorial_basic_linear_transform.html
   int i;

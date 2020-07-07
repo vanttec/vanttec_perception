@@ -54,17 +54,17 @@ public:
   // @param dir_path[in]: directory path
   // @param extension[in]: image extension (.jpg, .png, etc.)
   // @param images[in]: saved images
-  void ReadDirectory(const std::string dir_path, const std::string extension, std::queue<std::string>& images);
+  void ReadDirectory(const std::string &dir_path, const std::string &extension, std::queue<std::string> &images);
   // Reads input Image.
   // 
   // @param path[in]: Path to the input image.
-  void ReadImage(const std::string input_image);
+  void ReadImage(const std::string &input_image);
   // Save combination of filters
   //
   // @param path[in]: location where the images will be saved
   // @param extension[in]: desired image extension
   // @param img_number[in]: image number
-  void Save(const std::string path, const std::string extension, const int img_number);
+  void Save(const std::string &path, const std::string &extension, const int &img_number);
   // Show in_ image
   //
   // No params
@@ -80,23 +80,23 @@ public:
   // Applies changes to the hue value
   //
   // @param hue[in]: hue value
-  void Hue(const int hue);
+  void Hue(const int &hue);
   // Applies Salt and pepper noise to image
   // 
   // @param percentage[in]: percentage of the image to be covered with noise
-  void SaltPepper(const float percentage);
+  void SaltPepper(const float &percentage);
   // Crops, resizes and saves 3 images of lower, middle and upper ROI's
   //
   // @param ratio[in]: reduction of the original image. MUST BE < 1
   // @param ROI_number[in]: reference to which of the ROI's will be 
   //                        generated. 0: UPPER, 1: MIDDLE, 2: LOWER
-  void ScalingROI(const float ratio, const int ROI_number);
+  void ScalingROI(const float &ratio, const int &ROI_number);
   // Change brightness of the image
   //
   // @param contrast[in]: contrast control (0,2] recommended, 1 doesn't present
   //                      any change
   // @param brightness[in]: brightness control [-100,100] recommended
-  void ContrastBrightness(const float contrast, const int brightness);
+  void ContrastBrightness(const float &contrast, const int &brightness);
 
 private:
   // MEMBERS -------------------------------------------------------------------
