@@ -1,7 +1,7 @@
 //------------------------------------------------------------------------------
 // @file: data_augmentation.cpp
 // @created on: March 18th, 2020
-// @modified: May 18th, 2020
+// @modified: July 3rd, 2020
 // @author: Ivana Collado
 // @mail: ivanacollado@gmail.com
 // @co-author: Sebastian Martínez
@@ -14,58 +14,72 @@
 
 // CLASS FUNCTION IMPLEMENTATION  ----------------------------------------------
 DataAugmentation::DataAugmentation(){
-  // Random seed
-  srand(time(NULL));
+  // Empty
 }
 
 DataAugmentation::~DataAugmentation(){
-  // Empty body
+  // Empty
 }
 
 // FUNCTIONS -------------------------------------------------------------------
-cv::Mat DataAugmentation::GetIn(){
-  return in_;
+void DataAugmentation::SetOut2In(){
+  in_ = out_;
 }
 
-void DataAugmentation::SetIn(cv::Mat in){
-  in_ = in;
+void DataAugmentation::ReadDirectory(const std::string &dir_path, const std::string &extension, std::queue<std::string> &images){
+  DIR* dir_pointer = opendir(dir_path.c_str());
+  dirent* entry;
+  std::string file;
+  std::size_t found;
+  // Read files until there are no more
+  while(NULL != (entry = readdir(dir_pointer))){
+    // Gey entry_ name
+    file = entry->d_name;
+    // Find filename extension
+    found = file.find(extension);
+    // If the the file has the desired extension...
+    if(std::string::npos != found){
+      images.push(entry->d_name);
+      // std::cout<<std::to_string(i++) + " image: "<<entry->d_name<<std::endl;
+    }
+  }
+  closedir(dir_pointer);
 }
 
-std::vector<cv::Mat> DataAugmentation::GetOut(){
-  return out_;
-}
-
-void DataAugmentation::SetOut(std::vector<cv::Mat> out){
-  out_ = out;
-}
-
-void DataAugmentation::PopBack(){
-  out_.pop_back();
-}
-
-void DataAugmentation::Read(const std::string &path){
+void DataAugmentation::ReadImage(const std::string &input_image){
   //Read image from path
-  in_ = cv::imread(path, cv::IMREAD_COLOR);
-  if (! in_.data ) 
-    {
+  in_ = cv::imread(input_image, cv::IMREAD_COLOR);
+  if(!in_.data){
         std::cout << "Could not open or find the image.\n";
         //return -1; // unsuccessful
     }
-  // cv::namedWindow("Original",CV_WINDOW_NORMAL); 
-  // cv::imshow("Original",in_);
+}
+
+void DataAugmentation::Save(const std::string &path, const std::string &extension, const int &img_number){
+  if(NULL != out_.data){
+    cv::imwrite(path+std::to_string(img_number)+extension, out_);
+  }
+}
+
+void DataAugmentation::ShowIn(){
+  cv::namedWindow("Input: ",CV_WINDOW_NORMAL); 
+  cv::imshow("Input: ", in_);
+}
+
+void DataAugmentation::ShowOut(){
+  cv::namedWindow("Output: ",CV_WINDOW_NORMAL); 
+  cv::imshow("Output: ", out_);
 }
 
 void DataAugmentation::GaussianBlur(const int &kernel){
-  out_.push_back(in_.clone());
-  cv::GaussianBlur( in_, out_.back(), cv::Size( kernel, kernel ), 0, 0 );
-  // cv::namedWindow("Gaussian Blur Filter",CV_WINDOW_NORMAL); 
-  // cv::imshow("Gaussian Blur Filter",out_);
-  // cv::imwrite("../../Filtered_imgs/gaussian.jpg",out_);
+  out_ = in_.clone();
+  cv::GaussianBlur( in_, out_, cv::Size( kernel, kernel ), 0, 0 );
 }
 
-void DataAugmentation::Hue(const int hue){
+void DataAugmentation::Hue(const int &hue){
   cv::Mat HSV;
   cv::Mat BGR;
+  out_ = in_.clone();
   cv::cvtColor(in_, HSV, CV_BGR2HSV);
   // Apply Hue changes
   for(int j=0; j < HSV.rows; j++){
@@ -75,123 +89,69 @@ void DataAugmentation::Hue(const int hue){
       HSV.at<cv::Vec3b>(j,i)[0] = hue;
     }
   }
-  out_.push_back(BGR);
-  cv::cvtColor(HSV, out_.back(), CV_HSV2BGR);
-  // cv::imshow("BGR_hue: "+std::to_string(hue), out_[k++]);
-  // cv::imwrite("../../Filtered_imgs/BGR_hue:"+ std::to_string(hue)+".jpg", out_);
+  cv::cvtColor(HSV, out_, CV_HSV2BGR);
 }
 
-void DataAugmentation::SaltPepper(const float percentage){
-  out_.push_back(in_.clone());
-  int total = percentage * out_.back().cols * out_.back().rows;
+void DataAugmentation::SaltPepper(const float &percentage){
+  out_ = in_.clone();
+  int total = percentage * out_.cols * out_.rows;
   int column_pixel;
   int row_pixel;
   int color;
   for(int i = 0; i<total; i++){
     //Choose a random pixel between 0 and (out_.cols-1)
     //and 0 and (out_.rows-1)
-    column_pixel = rand()%out_.back().cols;
-    row_pixel = rand()%out_.back().rows;
+    column_pixel = rand()%out_.cols;
+    row_pixel = rand()%out_.rows;
     //Randomly change pixel color to black or white
     color = rand()%2 ? 255:0;
     //Apply color
-    if(out_.back().channels() == 1){
-        out_.back().at<uchar>(row_pixel,column_pixel) = color;
+    if(1 == out_.channels()){
+        out_.at<uchar>(row_pixel,column_pixel) = color;
     }
-    else if(out_.back().channels() == 3){
-        out_.back().at<cv::Vec3b>(row_pixel,column_pixel)[0] = color;
-        out_.back().at<cv::Vec3b>(row_pixel,column_pixel)[1] = color;
-        out_.back().at<cv::Vec3b>(row_pixel,column_pixel)[2] = color;
+    else if(3 == out_.channels()){
+        out_.at<cv::Vec3b>(row_pixel,column_pixel)[0] = color;
+        out_.at<cv::Vec3b>(row_pixel,column_pixel)[1] = color;
+        out_.at<cv::Vec3b>(row_pixel,column_pixel)[2] = color;
     }
   }
-  // cv::namedWindow("Salt_and_Pepper",CV_WINDOW_KEEPRATIO);
-  // cv::imshow("Salt_and_Pepper",out_.back());
-  // cv::imwrite("../../Filtered_imgs/salt_pepper.jpg",out_.back());
 }
 
-void DataAugmentation::ScalingROI(const float ratio){
-  if(ratio < 1){
-    cv::Mat temp = in_.clone(), img;
+void DataAugmentation::ScalingROI(const float &ratio, const int &ROI_number){
+  if(1 > ratio){
+    cv::Mat temp = in_.clone();
     cv::Size size;
     cv::Point offset;
     // Width and  height of ROI
     int width = std::round(ratio*in_.cols);
     int height = std::round(ratio*in_.rows);
-    for(int i=0; i<=2; i++){
-      // Get offset of the 3 ROI's based on the original image
-      offset.x = std::round(in_.cols*(1-ratio)/2);
-      offset.y = std::round(in_.rows*(1-ratio)/2*i);
-      size.height = height;
-      size.width = width;
-      //Crop the ROI from original image
-      cv::Rect ROI(offset, size);
-      img = temp(ROI);  
-      //Resize ROI back to the original image
-      cv::resize(img, img, cv::Size(in_.rows, in_.cols), 
-                                                    0, 0, CV_INTER_LINEAR);
-      // cv::namedWindow("Cropped image",CV_WINDOW_NORMAL); 
-      // cv::imshow("Cropped image",out_);
-      switch (i){
-      case 0:
-      // cv::imwrite("../../Filtered_imgs/scale_upper_x_"+std::to_string(ratio)+".jpg",
-      //                                                                   out_);
-        out_.push_back(img);
-        break;
-      case 1:
-      // cv::imwrite("../../Filtered_imgs/scale_middle_x_"+std::to_string(ratio)+".jpg",
-      //                                                                  out_);
-        out_.push_back(img);
-        break;
-      case 2:
-      // cv::imwrite("../../Filtered_imgs/scale_lower_x_"+std::to_string(ratio)+".jpg",
-      //                                                                 out_);
-        out_.push_back(img);
-        break;
-      default:
-        break;
-      }
-    }
+    // Get offset of the 3 ROI's based on the original image
+    offset.x = std::round(in_.cols*(1-ratio)/2);
+    offset.y = std::round(in_.rows*(1-ratio)/2*ROI_number);
+    size.height = height;
+    size.width = width;
+    //Crop the ROI from original image
+    cv::Rect ROI(offset, size);
+    out_ = temp(ROI);  
+    //Resize ROI back to the original image
+    cv::resize(out_, out_, cv::Size(in_.rows, in_.cols), 
+                                    0, 0, CV_INTER_LINEAR);
   }
 }
 
-void DataAugmentation::ContrastBrightness(const float contrast, const int brightness){
+void DataAugmentation::ContrastBrightness(const float &contrast, const int &brightness){
   // Full explanation can be found in: 
   // https://docs.opencv.org/3.4/d3/dc1/tutorial_basic_linear_transform.html
   int i;
   int j;
   int c;
-  out_.push_back( cv::Mat::zeros( in_.size(), in_.type() ) );
+  out_ = cv::Mat::zeros( in_.size(), in_.type() ) ;
   for(j = 0; j < in_.rows; j++ ) {
       for(i = 0; i < in_.cols; i++ ) {
           for(c = 0; c < in_.channels(); c++ ) {
-              out_.back().at<cv::Vec3b>(j,i)[c] =
+              out_.at<cv::Vec3b>(j,i)[c] =
               cv::saturate_cast<uchar>( contrast*in_.at<cv::Vec3b>(j,i)[c] + brightness);
           }
       }
   }
-  // cv::namedWindow("Brightness_value: "+std::to_string(brightness),CV_WINDOW_NORMAL); 
-  // cv::imshow("Brightness_value: "+std::to_string(brightness), out_);
-  // cv::imwrite("../../Filtered_imgs/brightness:"+ std::to_string(brightness)+".jpg", out_);
-}
-
-void DataAugmentation::ReadDirectory(const std::string path, const std::string extension, std::vector<std::string>& images){
-  DIR* dirp = opendir(path.c_str());
-  struct dirent * dp;
-  std::string file;
-  std::size_t found;
-  int i = 1;
-  while ((dp = readdir(dirp)) != NULL) {
-    file = dp->d_name;
-    found = file.find(extension);
-    if(found != std::string::npos){
-      images.push_back(dp->d_name);
-      // std::cout<<std::to_string(i++) + " image: "<<dp->d_name<<std::endl;
-    }
-  }
-  closedir(dirp);
-}
-
-void DataAugmentation::Save(const std::string path){
-  for(int j=0; j<out_.size(); j++)
-    cv::imwrite(path+std::to_string(j + 1)+".jpg", out_[j]);
 }
