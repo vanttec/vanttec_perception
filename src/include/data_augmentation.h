@@ -51,8 +51,7 @@ public:
   //
   // @param path[in]: location where the images will be saved
   // @param extension[in]: desired image extension
-  // @param img_number[in]: image number
-  void Save(const std::string &path, const std::string &extension, const int &img_number);
+  void Save(const std::string &path, const std::string &extension);
   // Show in_ image
   //
   // No params

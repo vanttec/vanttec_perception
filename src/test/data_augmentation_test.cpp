@@ -42,41 +42,40 @@ int main( int argc, char** argv ){
     // Desired images extension
     std::string extension = ".png";
     int i = 0;
-    
     // Read each image
     data.ReadImage(input_image);
     data.ShowIn();
     // Apply Gaussian Blur filter
     data.GaussianBlur(kernel_size);
-    data.Save(filtered_images,extension,++i); // Save output image
+    data.Save(filtered_images+std::to_string(++i),extension); // Save output image
     data.ShowOut(); // Show output image
     cv::waitKey(0);
     //Change hue
     data.Hue(hue);
-    data.Save(filtered_images,extension,++i); // Save output image
+    data.Save(filtered_images+std::to_string(++i),extension); // Save output image
     data.ShowOut(); // Show output image
     cv::waitKey(0);
     //Add salt and pepper noise
     data.SaltPepper(noise_percentage);
-    data.Save(filtered_images,extension,++i); // Save output image
+    data.Save(filtered_images+std::to_string(++i),extension); // Save output image
     data.ShowOut(); // Show output image
     cv::waitKey(0);
     // Set contrast to 1 and brightness to 80
     data.ContrastBrightness(contrast, brightness);
-    data.Save(filtered_images,extension,++i); // Save output image
+    data.Save(filtered_images+std::to_string(++i),extension); // Save output image
     data.ShowOut(); // Show output image
     cv::waitKey(0);
     //Apply scaling
     data.ScalingROI(ratio, 0); // Upper image
-    data.Save(filtered_images,extension,++i); // Save output image
+    data.Save(filtered_images+std::to_string(++i),extension); // Save output image
     data.ShowOut(); // Show output image
     cv::waitKey(0);
     data.ScalingROI(ratio, 1); // Middle image
-    data.Save(filtered_images,extension,++i); // Save output image
+    data.Save(filtered_images+std::to_string(++i),extension); // Save output image
     data.ShowOut(); // Show output image
     cv::waitKey(0);
     data.ScalingROI(ratio, 2); // Lower image
-    data.Save(filtered_images,extension,++i); // Save output image
+    data.Save(filtered_images+std::to_string(++i),extension); // Save output image
     data.ShowOut(); // Show output image
     cv::waitKey(0);
     return 0;

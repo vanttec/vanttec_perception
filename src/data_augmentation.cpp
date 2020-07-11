@@ -90,54 +90,54 @@ int main( int argc, char** argv ){
                 data.SaltPepper(noise_percentage);
                 data.SetOut2In();
                 data.ScalingROI(scaling_ratio, 0);
-                data.Save(save_path,extension,++img_number);
+                data.Save(save_path+std::to_string(++img_number),extension);
                 data.ScalingROI(scaling_ratio, 1); 
-                data.Save(save_path,extension,++img_number);
+                data.Save(save_path+std::to_string(++img_number),extension);
                 data.ScalingROI(scaling_ratio, 2);   
-                data.Save(save_path,extension,++img_number);              
+                data.Save(save_path+std::to_string(++img_number),extension);              
                 break;
             case 2:
                 // Scaling + Gaussian blur
                 data.GaussianBlur(kernel_size);
                 data.SetOut2In();
                 data.ScalingROI(scaling_ratio, 0);
-                data.Save(save_path,extension,++img_number);
+                data.Save(save_path+std::to_string(++img_number),extension);
                 data.ScalingROI(scaling_ratio, 1); 
-                data.Save(save_path,extension,++img_number);
+                data.Save(save_path+std::to_string(++img_number),extension);
                 data.ScalingROI(scaling_ratio, 2);   
-                data.Save(save_path,extension,++img_number);
+                data.Save(save_path+std::to_string(++img_number),extension);
                 break;
             case 3:
                 // Gaussian blur + hue
                 data.GaussianBlur(kernel_size);
                 data.SetOut2In();
                 data.Hue(hue);
-                data.Save(save_path,extension,++img_number);  
+                data.Save(save_path+std::to_string(++img_number),extension);  
                 break;
             case 4:
                 // Brightness + hue
                 data.ContrastBrightness(contrast, brightness);
                 data.SetOut2In();
                 data.Hue(hue);
-                data.Save(save_path,extension,++img_number);  
+                data.Save(save_path+std::to_string(++img_number),extension);  
                 break;
             case 5:
                 // Brightness + noise
                 data.ContrastBrightness(contrast, brightness);
                 data.SetOut2In();
                 data.SaltPepper(noise_percentage);
-                data.Save(save_path,extension,++img_number);  
+                data.Save(save_path+std::to_string(++img_number),extension);  
                 break;
             case 6:
                 // Scaling + hue
                 data.Hue(hue);
                 data.SetOut2In();
                 data.ScalingROI(scaling_ratio, 0);
-                data.Save(save_path,extension,++img_number);
+                data.Save(save_path+std::to_string(++img_number),extension);
                 data.ScalingROI(scaling_ratio, 1); 
-                data.Save(save_path,extension,++img_number);
+                data.Save(save_path+std::to_string(++img_number),extension);
                 data.ScalingROI(scaling_ratio, 2);   
-                data.Save(save_path,extension,++img_number);
+                data.Save(save_path+std::to_string(++img_number),extension);
                 break;
             case 7:
                 // Brightness + hue + blur
@@ -146,7 +146,7 @@ int main( int argc, char** argv ){
                 data.GaussianBlur(kernel_size);
                 data.SetOut2In();
                 data.Hue(hue);
-                data.Save(save_path,extension,++img_number);  
+                data.Save(save_path+std::to_string(++img_number),extension);  
                 break;
             default:
                 break;
