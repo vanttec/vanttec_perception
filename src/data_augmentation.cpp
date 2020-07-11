@@ -59,7 +59,8 @@ int main( int argc, char** argv ){
 
     while(!images.empty()){
         // Read each image
-        data.ReadImage(imgs_path+images.front());
+        data.ReadImage(imgs_path+images.front()); // .front() method gets element
+                                                  // at the front of the queue
         // Random between 1 and 7
         combination = rand()%7 + 1;
         // Random between -100 and 100
@@ -154,7 +155,7 @@ int main( int argc, char** argv ){
         // data.ShowOut();
         // //wait for any key to abort
         // cv::waitKey(0);
-        images.pop();
+        images.pop(); // Delete element at the front of the queue
     }
     return 0;
 }
