@@ -32,7 +32,7 @@ int main( int argc, char** argv ){
     // Hue value in the min-max range
     int hue = 0;
     // Maximum acceptable noise value for the SaltPepper filter
-    int max_noise = 3;
+    int max_noise = 30;
     // Minimum acceptable noise value for the SaltPepper filter
     int min_noise = 1;
     //Noise value for the SaltPepper filter
@@ -63,12 +63,12 @@ int main( int argc, char** argv ){
                                                   // at the front of the queue
         // Random between 1 and 7
         combination = rand()%7 + 1;
-        // Random between -100 and 100
-        brightness = (rand()%101) * (rand()%2 ? 1:-1); 
+        // Random between -80 and 80
+        brightness = (rand()%81) * (rand()%2 ? 1:-1); 
         // Random between 0 and 105
         hue = rand()% (max_hue - min_hue + 1) + min_hue; 
         // Random between 0 and 0.3
-        noise_percentage = (float) (rand()% max_noise + min_noise)/10; 
+        noise_percentage = (float) (rand()% max_noise + min_noise)/100; 
         // Random between 0.6 and 0.95
         scaling_ratio = (float) ((rand()% (max_scaling - min_scaling + 1)) +
                                                             min_scaling)/100;

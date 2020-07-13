@@ -41,7 +41,6 @@ int main( int argc, char** argv ){
     std::string filtered_images = "../../Filtered_imgs/";
     // Desired images extension
     std::string extension = ".png";
-    int i = 0;
     // Read each image
     data.ReadImage(input_image);
     data.ShowIn();

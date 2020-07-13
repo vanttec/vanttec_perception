@@ -82,7 +82,7 @@ public:
   //
   // @param contrast[in]: contrast control (0,2] recommended, 1 doesn't present
   //                      any change
-  // @param brightness[in]: brightness control [-100,100] recommended
+  // @param brightness[in]: brightness control [-80,80] recommended
   void ContrastBrightness(const float &contrast, const int &brightness);
 
 private:
