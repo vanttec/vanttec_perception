@@ -55,9 +55,9 @@ void DataAugmentation::ReadImage(const std::string &input_image){
     }
 }
 
-void DataAugmentation::Save(const std::string &path, const std::string &extension, const int &img_number){
+void DataAugmentation::Save(const std::string &path, const std::string &extension){
   if(NULL != out_.data){
-    cv::imwrite(path+std::to_string(img_number)+extension, out_);
+    cv::imwrite(path+extension, out_);
   }
 }
 
