@@ -50,7 +50,7 @@ int main( int argc, char** argv ){
     // Images to process path
     std::string imgs_path = "../../imgs/";
     // Save processed images path
-    std::string save_path = "../../Filtered_imgs/robosub2020_ ";
+    std::string save_path = "../../Filtered_imgs/robosub2020_";
     // Extension of images to process
     std::string extension = ".jpg";
 
