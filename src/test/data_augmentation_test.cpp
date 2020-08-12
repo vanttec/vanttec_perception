@@ -29,7 +29,7 @@ int main( int argc, char** argv ){
     //Salt and pepper param
     float noise_percentage = 0.2;
     //Scaling_ROI params
-    float ratio = 0.7;
+    float ratio = 0.3;
     //ContrastBrightness params 
     float contrast = 1.0;
     int brightness = 80;
@@ -40,7 +40,7 @@ int main( int argc, char** argv ){
     // Processed image path
     std::string filtered_images = "../../Filtered_imgs/";
     // Desired images extension
-    std::string extension = ".png";
+    std::string extension = ".jpg";
     // Read each image
     data.ReadImage(input_image);
     data.ShowIn();
