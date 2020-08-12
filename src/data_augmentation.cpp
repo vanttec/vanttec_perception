@@ -38,9 +38,9 @@ int main( int argc, char** argv ){
     //Noise value for the SaltPepper filter
     float noise_percentage = 0.0;
     // Maximum acceptable scaling value for the ScalingROI filter  
-    int max_scaling = 95;
+    int max_scaling = 40;
     // Minimum acceptable scaling value for the ScalingROI filter
-    int min_scaling = 60;
+    int min_scaling = 5;
     // Scaling value for the ScalingROI filter
     float scaling_ratio = 0.0;
     // Image number
@@ -52,7 +52,7 @@ int main( int argc, char** argv ){
     // Save processed images path
     std::string save_path = "../../Filtered_imgs/robosub2020_ ";
     // Extension of images to process
-    std::string extension = ".jpg";
+    std::string extension = ".png";
 
     // Read input directory contents
     data.ReadDirectory(imgs_path, extension, images);
@@ -69,7 +69,7 @@ int main( int argc, char** argv ){
         hue = rand()% (max_hue - min_hue + 1) + min_hue; 
         // Random between 0 and 0.3
         noise_percentage = (float) (rand()% max_noise + min_noise)/100; 
-        // Random between 0.6 and 0.95
+        // Random between 0.05 and 0.40
         scaling_ratio = (float) ((rand()% (max_scaling - min_scaling + 1)) +
                                                             min_scaling)/100;
         // Random odd number between 1 and 25
@@ -81,7 +81,7 @@ int main( int argc, char** argv ){
         //         <<" max_hue: "<< max_hue
         //         <<" hue: "<< hue <<"\n";
         // std::cout<<"noise_percentage: "<<noise_percentage<<"\n";
-        // std::cout<<"scaling_ratio (reduction): "<<1-scaling_ratio<<"\n";
+        // std::cout<<"scaling_ratio (reduction): "<<scaling_ratio<<"\n";
         // std::cout<<"kernel_size: "<<kernel_size<<"\n";
 
         switch (combination){

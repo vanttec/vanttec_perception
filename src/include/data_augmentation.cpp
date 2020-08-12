@@ -123,18 +123,18 @@ void DataAugmentation::ScalingROI(const float &ratio, const int &ROI_number){
     cv::Size size;
     cv::Point offset;
     // Width and  height of ROI
-    int width = std::round(ratio*in_.cols);
-    int height = std::round(ratio*in_.rows);
+    int width = std::round((1.0-ratio)*in_.cols); //
+    int height = std::round((1.0-ratio)*in_.rows);
     // Get offset of the 3 ROI's based on the original image
-    offset.x = std::round(in_.cols*(1-ratio)/2);
-    offset.y = std::round(in_.rows*(1-ratio)/2*ROI_number);
+    offset.x = std::round(in_.cols*(ratio)/2);
+    offset.y = std::round(in_.rows*(ratio)/2*ROI_number);
     size.height = height;
     size.width = width;
     //Crop the ROI from original image
     cv::Rect ROI(offset, size);
     out_ = temp(ROI);  
     //Resize ROI back to the original image
-    cv::resize(out_, out_, cv::Size(in_.rows, in_.cols), 
+    cv::resize(out_, out_, cv::Size(in_.cols, in_.rows), 
                                     0, 0, CV_INTER_LINEAR);
   }
 }
