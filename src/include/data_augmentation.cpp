@@ -26,6 +26,10 @@ void DataAugmentation::SetOut2In(){
   in_ = out_;
 }
 
+void DataAugmentation::SetIn2Out(){
+  out_ = in_;
+}
+
 void DataAugmentation::ReadDirectory(const std::string &dir_path, const std::string &extension, std::queue<std::string> &images){
   DIR* dir_pointer = opendir(dir_path.c_str());
   dirent* entry;
