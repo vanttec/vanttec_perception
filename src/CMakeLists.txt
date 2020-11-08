@@ -3,10 +3,10 @@
 # @created on: March 18th, 2019
 # @author: Ivana Collado
 #
-# @brief: CMake file for data_augmentation lib.
+# @brief: CMake file for vanttec_classic_vision.
 #-------------------------------------------------------------------------------
 # Project name 
-project(data_augmentation)
+project(vanttec_classic_vision)
 message(STATUS "VANTTEC: Building ${PROJECT_NAME} Library")
 
 # External required packages 
@@ -25,13 +25,22 @@ endif()
 include_directories( 
   ${OpenCV_INCLUDE_DIRS}
   ${BUILD_INCLUDE_OUTPUT_DIRECTORY}
+	include
 )
 ## Declare a C++ library
 add_library(data_augmentation_lib
-  include/data_augmentation.cpp
-  include/data_augmentation.h
+  include/data_augmentation/data_augmentation.cpp
+  include/data_augmentation/data_augmentation.h
 )
 target_link_libraries(data_augmentation_lib
+  ${OpenCV_LIBS}
+)
+
+add_library(shape_detection_lib
+  include/shape_detection/shape_detection.cpp
+  include/shape_detection/shape_detection.h
+)
+target_link_libraries(shape_detection_lib
   ${OpenCV_LIBS}
 )
 
@@ -41,6 +50,14 @@ add_executable(data_augmentation_test
 )
 target_link_libraries(data_augmentation_test
   data_augmentation_lib 
+  ${OpenCV_LIBS}
+)
+
+add_executable(shape_detection_test 
+  test/shape_detection_test.cpp
+)
+target_link_libraries(shape_detection_test
+  shape_detection_lib 
   ${OpenCV_LIBS}
 )
 
