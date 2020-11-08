@@ -24,7 +24,7 @@ int main( int argc, char** argv ){
     // Desired extension
     std::string extension = ".jpg";
     // Class
-    std::string img_class = "badge_";
+    std::string img_class = "gun_";
     // Save name
     std::string save_name = "robosub2020_"+img_class;
     // Image number
