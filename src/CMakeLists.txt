@@ -68,4 +68,9 @@ target_link_libraries(data_augmentation
   ${OpenCV_LIBS}
 )
 
-
+# Add executable
+add_executable(rename_images rename_augmented_images.cpp)
+target_link_libraries(rename_images
+  data_augmentation_lib
+  ${OpenCV_LIBS}
+)

@@ -37,6 +37,10 @@ public:
   //
   // No params
   void SetOut2In();
+  // Set in_ to out_
+  //
+  // No params
+  void SetIn2Out();
   // Read directory contents
   //
   // @param dir_path[in]: directory path
