@@ -15,8 +15,6 @@
 
 // MAIN PROGRAM ----------------------------------------------------------------
 int main( int argc, char** argv ){
-    // DataAugmentation object
-    DataAugmentation data;
     // Class path
     std::string class_path = "../../imgs/";
     // File within directory
