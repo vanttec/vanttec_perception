@@ -11,6 +11,29 @@
 // INCLUDES --------------------------------------------------------------------
 #include "include/data_augmentation/data_augmentation.h"
 
+//Trasnfering Labeling from source path to destination path in .txt format
+#include <iostream>
+#include <fstream>
+#include <string>
+void label(std::string spath, std::string dpath){
+    //std::string spath = "a";
+    //std::string dpath = "b";
+    //strcpy(spath, sourcePath);
+    //strcpy(dpath, destinationPath);
+    spath = spath + ".txt";
+    dpath = dpath + ".txt";
+    std::ifstream source(spath, std::ios::binary);
+    std::ofstream dest(dpath, std::ios::binary);
+    dest << source.rdbuf();
+    source.close();
+    dest.close();
+}
+std::string removeExt(std::string file, std::string extension){
+    std::size_t found = file.find(extension);
+    file.replace(found, extension.length(), "");
+    return file;
+}
+
 // MAIN PROGRAM ----------------------------------------------------------------
 int main( int argc, char** argv ){
     // Set random seed
@@ -48,9 +71,9 @@ int main( int argc, char** argv ){
     // Queue to store input image names
     std::queue<std::string> images;
     // Images to process path
-    std::string imgs_path = "../../imgs/";
+    std::string imgs_path = "../../../source/path_marker2/";
     // Save processed images path
-    std::string save_path = "../../Filtered_imgs/robosub2020_";
+    std::string save_path = "../../../dest/path_marker2/";
     // Extension of images to process
     std::string extension = ".png";
 
@@ -75,6 +98,8 @@ int main( int argc, char** argv ){
         // Random odd number between 1 and 25
         kernel_size = 2 * (rand()%13) + 1;
 
+        //name without extension
+        std::string file_name = removeExt(images.front(), extension);
         // std::cout<<"Combination: "+std::to_string(combination)<<"\n";
         // std::cout<<"Contrast: "<<contrast<<" Brightness: "<<brightness<<"\n";
         // std::cout<<"min_hue: "<< min_hue 
@@ -89,55 +114,46 @@ int main( int argc, char** argv ){
                 // Noise + scaling
                 data.SaltPepper(noise_percentage);
                 data.SetOut2In();
-                data.ScalingROI(scaling_ratio, 0);
-                data.Save(save_path+std::to_string(++img_number),extension);
-                data.ScalingROI(scaling_ratio, 1); 
-                data.Save(save_path+std::to_string(++img_number),extension);
-                data.ScalingROI(scaling_ratio, 2);   
-                data.Save(save_path+std::to_string(++img_number),extension);              
+                data.Save(save_path+file_name+"(2)",extension);
+                label(imgs_path+file_name, save_path+file_name+"(2)");           
                 break;
             case 2:
                 // Scaling + Gaussian blur
                 data.GaussianBlur(kernel_size);
                 data.SetOut2In();
-                data.ScalingROI(scaling_ratio, 0);
-                data.Save(save_path+std::to_string(++img_number),extension);
-                data.ScalingROI(scaling_ratio, 1); 
-                data.Save(save_path+std::to_string(++img_number),extension);
-                data.ScalingROI(scaling_ratio, 2);   
-                data.Save(save_path+std::to_string(++img_number),extension);
+                data.Save(save_path+file_name+"(2)",extension);
+                label(imgs_path+file_name, save_path+file_name+"(2)"); 
                 break;
             case 3:
                 // Gaussian blur + hue
                 data.GaussianBlur(kernel_size);
                 data.SetOut2In();
                 data.Hue(hue);
-                data.Save(save_path+std::to_string(++img_number),extension);  
+                data.Save(save_path+file_name+"(2)",extension);
+                label(imgs_path+file_name, save_path+file_name+"(2)");   
                 break;
             case 4:
                 // Brightness + hue
                 data.ContrastBrightness(contrast, brightness);
                 data.SetOut2In();
                 data.Hue(hue);
-                data.Save(save_path+std::to_string(++img_number),extension);  
+                data.Save(save_path+file_name+"(2)",extension);
+                label(imgs_path+file_name, save_path+file_name+"(2)");   
                 break;
             case 5:
                 // Brightness + noise
                 data.ContrastBrightness(contrast, brightness);
                 data.SetOut2In();
                 data.SaltPepper(noise_percentage);
-                data.Save(save_path+std::to_string(++img_number),extension);  
+                data.Save(save_path+file_name+"(2)",extension);
+                label(imgs_path+file_name, save_path+file_name+"(2)");   
                 break;
             case 6:
                 // Scaling + hue
                 data.Hue(hue);
                 data.SetOut2In();
-                data.ScalingROI(scaling_ratio, 0);
-                data.Save(save_path+std::to_string(++img_number),extension);
-                data.ScalingROI(scaling_ratio, 1); 
-                data.Save(save_path+std::to_string(++img_number),extension);
-                data.ScalingROI(scaling_ratio, 2);   
-                data.Save(save_path+std::to_string(++img_number),extension);
+                data.Save(save_path+file_name+"(2)",extension);
+                label(imgs_path+file_name, save_path+file_name+"(2)"); 
                 break;
             case 7:
                 // Brightness + hue + blur
@@ -146,7 +162,8 @@ int main( int argc, char** argv ){
                 data.GaussianBlur(kernel_size);
                 data.SetOut2In();
                 data.Hue(hue);
-                data.Save(save_path+std::to_string(++img_number),extension);  
+                data.Save(save_path+file_name+"(2)",extension);
+                label(imgs_path+file_name, save_path+file_name+"(2)");   
                 break;
             default:
                 break;
