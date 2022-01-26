@@ -1,0 +1,1106 @@
+Namespace(batch_size=32, decay_rate=0.5, decay_step=800000, gpu=0, learning_rate=0.001, log_dir='train/log_v1', max_epoch=201, model='frustum_pointnets_v1', momentum=0.9, no_intensity=False, num_point=1024, optimizer='adam', restore_model_path=None)
+pid: 14474
+**** EPOCH 000 ****
+2021-07-18 10:45:25.215258
+2021-07-18 10:45:59.709888
+---- EPOCH 000 EVALUATION ----
+eval mean loss: 61.939541
+eval segmentation accuracy: 0.718781
+eval segmentation avg class acc: 0.500000
+eval box IoU (ground/3D): 0.204329 / 0.118947
+eval box estimation accuracy (IoU=0.7): 0.000000
+Model saved in file: train/log_v1/model.ckpt
+**** EPOCH 001 ****
+2021-07-18 10:46:01.844393
+2021-07-18 10:46:15.904432
+---- EPOCH 001 EVALUATION ----
+eval mean loss: 55.160767
+eval segmentation accuracy: 0.713409
+eval segmentation avg class acc: 0.500000
+eval box IoU (ground/3D): 0.242216 / 0.188260
+eval box estimation accuracy (IoU=0.7): 0.000000
+**** EPOCH 002 ****
+2021-07-18 10:46:16.450317
+2021-07-18 10:46:30.503115
+---- EPOCH 002 EVALUATION ----
+eval mean loss: 49.991325
+eval segmentation accuracy: 0.717407
+eval segmentation avg class acc: 0.500000
+eval box IoU (ground/3D): 0.324995 / 0.240255
+eval box estimation accuracy (IoU=0.7): 0.000000
+**** EPOCH 003 ****
+2021-07-18 10:46:31.071951
+2021-07-18 10:46:45.143945
+---- EPOCH 003 EVALUATION ----
+eval mean loss: 43.291100
+eval segmentation accuracy: 0.718445
+eval segmentation avg class acc: 0.500000
+eval box IoU (ground/3D): 0.389368 / 0.320030
+eval box estimation accuracy (IoU=0.7): 0.031250
+**** EPOCH 004 ****
+2021-07-18 10:46:45.711925
+2021-07-18 10:46:59.790335
+---- EPOCH 004 EVALUATION ----
+eval mean loss: 43.183022
+eval segmentation accuracy: 0.717499
+eval segmentation avg class acc: 0.500000
+eval box IoU (ground/3D): 0.446531 / 0.351202
+eval box estimation accuracy (IoU=0.7): 0.031250
+**** EPOCH 005 ****
+2021-07-18 10:47:00.363661
+2021-07-18 10:47:14.416521
+---- EPOCH 005 EVALUATION ----
+eval mean loss: 40.514450
+eval segmentation accuracy: 0.717346
+eval segmentation avg class acc: 0.500000
+eval box IoU (ground/3D): 0.419878 / 0.311568
+eval box estimation accuracy (IoU=0.7): 0.000000
+**** EPOCH 006 ****
+2021-07-18 10:47:14.966271
+2021-07-18 10:47:29.107425
+---- EPOCH 006 EVALUATION ----
+eval mean loss: 36.197433
+eval segmentation accuracy: 0.718201
+eval segmentation avg class acc: 0.500000
+eval box IoU (ground/3D): 0.415360 / 0.333960
+eval box estimation accuracy (IoU=0.7): 0.031250
+**** EPOCH 007 ****
+2021-07-18 10:47:29.659043
+2021-07-18 10:47:43.730423
+---- EPOCH 007 EVALUATION ----
+eval mean loss: 34.929966
+eval segmentation accuracy: 0.715729
+eval segmentation avg class acc: 0.500000
+eval box IoU (ground/3D): 0.329569 / 0.275830
+eval box estimation accuracy (IoU=0.7): 0.000000
+**** EPOCH 008 ****
+2021-07-18 10:47:44.299247
+2021-07-18 10:47:58.364499
+---- EPOCH 008 EVALUATION ----
+eval mean loss: 31.488604
+eval segmentation accuracy: 0.717865
+eval segmentation avg class acc: 0.500000
+eval box IoU (ground/3D): 0.444057 / 0.350022
+eval box estimation accuracy (IoU=0.7): 0.031250
+**** EPOCH 009 ****
+2021-07-18 10:47:58.925781
+2021-07-18 10:48:12.980166
+---- EPOCH 009 EVALUATION ----
+eval mean loss: 19.093079
+eval segmentation accuracy: 0.717987
+eval segmentation avg class acc: 0.500000
+eval box IoU (ground/3D): 0.423126 / 0.343797
+eval box estimation accuracy (IoU=0.7): 0.062500
+**** EPOCH 010 ****
+2021-07-18 10:48:13.530542
+2021-07-18 10:48:27.612353
+---- EPOCH 010 EVALUATION ----
+eval mean loss: 31.980852
+eval segmentation accuracy: 0.719513
+eval segmentation avg class acc: 0.500000
+eval box IoU (ground/3D): 0.366290 / 0.277133
+eval box estimation accuracy (IoU=0.7): 0.000000
+Model saved in file: train/log_v1/model.ckpt
+**** EPOCH 011 ****
+2021-07-18 10:48:28.485283
+2021-07-18 10:48:42.570195
+---- EPOCH 011 EVALUATION ----
+eval mean loss: 23.395447
+eval segmentation accuracy: 0.715759
+eval segmentation avg class acc: 0.500000
+eval box IoU (ground/3D): 0.442992 / 0.353862
+eval box estimation accuracy (IoU=0.7): 0.000000
+**** EPOCH 012 ****
+2021-07-18 10:48:43.127736
+2021-07-18 10:48:57.202679
+---- EPOCH 012 EVALUATION ----
+eval mean loss: 16.002413
+eval segmentation accuracy: 0.719116
+eval segmentation avg class acc: 0.500000
+eval box IoU (ground/3D): 0.442774 / 0.347438
+eval box estimation accuracy (IoU=0.7): 0.000000
+**** EPOCH 013 ****
+2021-07-18 10:48:57.760034
+2021-07-18 10:49:11.844712
+---- EPOCH 013 EVALUATION ----
+eval mean loss: 17.923075
+eval segmentation accuracy: 0.716278
+eval segmentation avg class acc: 0.500000
+eval box IoU (ground/3D): 0.402306 / 0.310077
+eval box estimation accuracy (IoU=0.7): 0.031250
+**** EPOCH 014 ****
+2021-07-18 10:49:12.390140
+2021-07-18 10:49:26.470855
+---- EPOCH 014 EVALUATION ----
+eval mean loss: 24.690155
+eval segmentation accuracy: 0.714508
+eval segmentation avg class acc: 0.500000
+eval box IoU (ground/3D): 0.446697 / 0.346441
+eval box estimation accuracy (IoU=0.7): 0.093750
+**** EPOCH 015 ****
+2021-07-18 10:49:27.023379
+2021-07-18 10:49:44.047310
+---- EPOCH 015 EVALUATION ----
+eval mean loss: 12.836610
+eval segmentation accuracy: 0.716003
+eval segmentation avg class acc: 0.500000
+eval box IoU (ground/3D): 0.352931 / 0.284494
+eval box estimation accuracy (IoU=0.7): 0.000000
+**** EPOCH 016 ****
+2021-07-18 10:49:44.561852
+2021-07-18 10:49:59.193168
+---- EPOCH 016 EVALUATION ----
+eval mean loss: 19.412592
+eval segmentation accuracy: 0.715637
+eval segmentation avg class acc: 0.500000
+eval box IoU (ground/3D): 0.195129 / 0.154068
+eval box estimation accuracy (IoU=0.7): 0.000000
+**** EPOCH 017 ****
+2021-07-18 10:49:59.755311
+2021-07-18 10:50:13.766398
+---- EPOCH 017 EVALUATION ----
+eval mean loss: 22.419369
+eval segmentation accuracy: 0.717316
+eval segmentation avg class acc: 0.500000
+eval box IoU (ground/3D): 0.441826 / 0.340811
+eval box estimation accuracy (IoU=0.7): 0.000000
+**** EPOCH 018 ****
+2021-07-18 10:50:14.315482
+2021-07-18 10:50:28.370379
+---- EPOCH 018 EVALUATION ----
+eval mean loss: 23.447565
+eval segmentation accuracy: 0.715515
+eval segmentation avg class acc: 0.500000
+eval box IoU (ground/3D): 0.321892 / 0.262513
+eval box estimation accuracy (IoU=0.7): 0.000000
+**** EPOCH 019 ****
+2021-07-18 10:50:28.930892
+2021-07-18 10:50:42.969571
+---- EPOCH 019 EVALUATION ----
+eval mean loss: 18.280802
+eval segmentation accuracy: 0.716736
+eval segmentation avg class acc: 0.500000
+eval box IoU (ground/3D): 0.353590 / 0.280611
+eval box estimation accuracy (IoU=0.7): 0.000000
+**** EPOCH 020 ****
+2021-07-18 10:50:43.535155
+2021-07-18 10:50:57.596443
+---- EPOCH 020 EVALUATION ----
+eval mean loss: 24.740118
+eval segmentation accuracy: 0.717682
+eval segmentation avg class acc: 0.500000
+eval box IoU (ground/3D): 0.405948 / 0.324311
+eval box estimation accuracy (IoU=0.7): 0.000000
+Model saved in file: train/log_v1/model.ckpt
+**** EPOCH 021 ****
+2021-07-18 10:50:58.487959
+2021-07-18 10:51:12.563259
+---- EPOCH 021 EVALUATION ----
+eval mean loss: 23.406540
+eval segmentation accuracy: 0.718628
+eval segmentation avg class acc: 0.500000
+eval box IoU (ground/3D): 0.437057 / 0.345895
+eval box estimation accuracy (IoU=0.7): 0.000000
+**** EPOCH 022 ****
+2021-07-18 10:51:13.113802
+2021-07-18 10:51:27.181042
+---- EPOCH 022 EVALUATION ----
+eval mean loss: 16.127768
+eval segmentation accuracy: 0.715637
+eval segmentation avg class acc: 0.500000
+eval box IoU (ground/3D): 0.311638 / 0.261917
+eval box estimation accuracy (IoU=0.7): 0.000000
+**** EPOCH 023 ****
+2021-07-18 10:51:27.746791
+2021-07-18 10:51:41.824031
+---- EPOCH 023 EVALUATION ----
+eval mean loss: 20.319923
+eval segmentation accuracy: 0.718689
+eval segmentation avg class acc: 0.500000
+eval box IoU (ground/3D): 0.203315 / 0.172663
+eval box estimation accuracy (IoU=0.7): 0.000000
+**** EPOCH 024 ****
+2021-07-18 10:51:42.384449
+2021-07-18 10:51:56.453420
+---- EPOCH 024 EVALUATION ----
+eval mean loss: 21.172531
+eval segmentation accuracy: 0.717468
+eval segmentation avg class acc: 0.500000
+eval box IoU (ground/3D): 0.445243 / 0.380665
+eval box estimation accuracy (IoU=0.7): 0.031250
+**** EPOCH 025 ****
+2021-07-18 10:51:56.994852
+2021-07-18 10:52:11.066911
+---- EPOCH 025 EVALUATION ----
+eval mean loss: 28.470152
+eval segmentation accuracy: 0.717957
+eval segmentation avg class acc: 0.500000
+eval box IoU (ground/3D): 0.391830 / 0.323081
+eval box estimation accuracy (IoU=0.7): 0.000000
+**** EPOCH 026 ****
+2021-07-18 10:52:11.627648
+2021-07-18 10:52:25.663077
+---- EPOCH 026 EVALUATION ----
+eval mean loss: 27.069815
+eval segmentation accuracy: 0.721252
+eval segmentation avg class acc: 0.500000
+eval box IoU (ground/3D): 0.417494 / 0.330993
+eval box estimation accuracy (IoU=0.7): 0.000000
+**** EPOCH 027 ****
+2021-07-18 10:52:26.223543
+2021-07-18 10:52:40.290414
+---- EPOCH 027 EVALUATION ----
+eval mean loss: 21.932558
+eval segmentation accuracy: 0.715546
+eval segmentation avg class acc: 0.500000
+eval box IoU (ground/3D): 0.135339 / 0.112916
+eval box estimation accuracy (IoU=0.7): 0.000000
+**** EPOCH 028 ****
+2021-07-18 10:52:40.843793
+2021-07-18 10:52:54.889258
+---- EPOCH 028 EVALUATION ----
+eval mean loss: 22.952263
+eval segmentation accuracy: 0.718872
+eval segmentation avg class acc: 0.500000
+eval box IoU (ground/3D): 0.440981 / 0.375694
+eval box estimation accuracy (IoU=0.7): 0.000000
+**** EPOCH 029 ****
+2021-07-18 10:52:55.443797
+2021-07-18 10:53:09.517580
+---- EPOCH 029 EVALUATION ----
+eval mean loss: 19.576986
+eval segmentation accuracy: 0.716583
+eval segmentation avg class acc: 0.500000
+eval box IoU (ground/3D): 0.391796 / 0.324445
+eval box estimation accuracy (IoU=0.7): 0.062500
+**** EPOCH 030 ****
+2021-07-18 10:53:10.075033
+2021-07-18 10:53:24.147267
+---- EPOCH 030 EVALUATION ----
+eval mean loss: 18.921431
+eval segmentation accuracy: 0.713745
+eval segmentation avg class acc: 0.500000
+eval box IoU (ground/3D): 0.463919 / 0.372265
+eval box estimation accuracy (IoU=0.7): 0.000000
+Model saved in file: train/log_v1/model.ckpt
+**** EPOCH 031 ****
+2021-07-18 10:53:25.026878
+2021-07-18 10:53:39.089527
+---- EPOCH 031 EVALUATION ----
+eval mean loss: 15.535821
+eval segmentation accuracy: 0.717316
+eval segmentation avg class acc: 0.500000
+eval box IoU (ground/3D): 0.414638 / 0.344498
+eval box estimation accuracy (IoU=0.7): 0.031250
+**** EPOCH 032 ****
+2021-07-18 10:53:39.648892
+2021-07-18 10:53:53.712500
+---- EPOCH 032 EVALUATION ----
+eval mean loss: 18.026453
+eval segmentation accuracy: 0.716064
+eval segmentation avg class acc: 0.500000
+eval box IoU (ground/3D): 0.436370 / 0.362061
+eval box estimation accuracy (IoU=0.7): 0.031250
+**** EPOCH 033 ****
+2021-07-18 10:53:54.262070
+2021-07-18 10:54:08.332718
+---- EPOCH 033 EVALUATION ----
+eval mean loss: 23.682343
+eval segmentation accuracy: 0.716034
+eval segmentation avg class acc: 0.500000
+eval box IoU (ground/3D): 0.453856 / 0.373598
+eval box estimation accuracy (IoU=0.7): 0.031250
+**** EPOCH 034 ****
+2021-07-18 10:54:08.898057
+2021-07-18 10:54:22.940018
+---- EPOCH 034 EVALUATION ----
+eval mean loss: 24.653772
+eval segmentation accuracy: 0.718903
+eval segmentation avg class acc: 0.500000
+eval box IoU (ground/3D): 0.344293 / 0.279556
+eval box estimation accuracy (IoU=0.7): 0.000000
+**** EPOCH 035 ****
+2021-07-18 10:54:23.496443
+2021-07-18 10:54:37.565132
+---- EPOCH 035 EVALUATION ----
+eval mean loss: 19.227549
+eval segmentation accuracy: 0.719299
+eval segmentation avg class acc: 0.500000
+eval box IoU (ground/3D): 0.404201 / 0.322014
+eval box estimation accuracy (IoU=0.7): 0.000000
+**** EPOCH 036 ****
+2021-07-18 10:54:38.117177
+2021-07-18 10:54:52.193570
+---- EPOCH 036 EVALUATION ----
+eval mean loss: 36.321598
+eval segmentation accuracy: 0.716980
+eval segmentation avg class acc: 0.500000
+eval box IoU (ground/3D): 0.294087 / 0.240640
+eval box estimation accuracy (IoU=0.7): 0.000000
+**** EPOCH 037 ****
+2021-07-18 10:54:52.727744
+2021-07-18 10:55:07.834946
+---- EPOCH 037 EVALUATION ----
+eval mean loss: 20.190870
+eval segmentation accuracy: 0.718170
+eval segmentation avg class acc: 0.500000
+eval box IoU (ground/3D): 0.459751 / 0.378547
+eval box estimation accuracy (IoU=0.7): 0.031250
+**** EPOCH 038 ****
+2021-07-18 10:55:08.386735
+2021-07-18 10:55:22.458673
+---- EPOCH 038 EVALUATION ----
+eval mean loss: 15.607925
+eval segmentation accuracy: 0.718842
+eval segmentation avg class acc: 0.500000
+eval box IoU (ground/3D): 0.376360 / 0.304859
+eval box estimation accuracy (IoU=0.7): 0.031250
+**** EPOCH 039 ****
+2021-07-18 10:55:23.012907
+2021-07-18 10:55:37.054180
+---- EPOCH 039 EVALUATION ----
+eval mean loss: 26.149027
+eval segmentation accuracy: 0.715546
+eval segmentation avg class acc: 0.500000
+eval box IoU (ground/3D): 0.327554 / 0.279838
+eval box estimation accuracy (IoU=0.7): 0.000000
+**** EPOCH 040 ****
+2021-07-18 10:55:37.615429
+2021-07-18 10:55:51.658725
+---- EPOCH 040 EVALUATION ----
+eval mean loss: 13.472141
+eval segmentation accuracy: 0.719330
+eval segmentation avg class acc: 0.500000
+eval box IoU (ground/3D): 0.402956 / 0.333707
+eval box estimation accuracy (IoU=0.7): 0.031250
+Model saved in file: train/log_v1/model.ckpt
+**** EPOCH 041 ****
+2021-07-18 10:55:52.549822
+2021-07-18 10:56:06.605063
+---- EPOCH 041 EVALUATION ----
+eval mean loss: 19.958271
+eval segmentation accuracy: 0.715118
+eval segmentation avg class acc: 0.500000
+eval box IoU (ground/3D): 0.398164 / 0.317594
+eval box estimation accuracy (IoU=0.7): 0.000000
+**** EPOCH 042 ****
+2021-07-18 10:56:07.163450
+2021-07-18 10:56:21.231370
+---- EPOCH 042 EVALUATION ----
+eval mean loss: 98.354942
+eval segmentation accuracy: 0.716827
+eval segmentation avg class acc: 0.500000
+eval box IoU (ground/3D): 0.125183 / 0.100005
+eval box estimation accuracy (IoU=0.7): 0.000000
+**** EPOCH 043 ****
+2021-07-18 10:56:21.794843
+2021-07-18 10:56:35.844235
+---- EPOCH 043 EVALUATION ----
+eval mean loss: 14.331367
+eval segmentation accuracy: 0.713043
+eval segmentation avg class acc: 0.500000
+eval box IoU (ground/3D): 0.364652 / 0.305780
+eval box estimation accuracy (IoU=0.7): 0.000000
+**** EPOCH 044 ****
+2021-07-18 10:56:36.402549
+2021-07-18 10:56:50.479456
+---- EPOCH 044 EVALUATION ----
+eval mean loss: 14.360325
+eval segmentation accuracy: 0.720245
+eval segmentation avg class acc: 0.500000
+eval box IoU (ground/3D): 0.452637 / 0.385199
+eval box estimation accuracy (IoU=0.7): 0.062500
+**** EPOCH 045 ****
+2021-07-18 10:56:51.038985
+2021-07-18 10:57:05.137943
+---- EPOCH 045 EVALUATION ----
+eval mean loss: 25.984018
+eval segmentation accuracy: 0.716644
+eval segmentation avg class acc: 0.500000
+eval box IoU (ground/3D): 0.368486 / 0.286163
+eval box estimation accuracy (IoU=0.7): 0.000000
+**** EPOCH 046 ****
+2021-07-18 10:57:05.699368
+2021-07-18 10:57:19.754550
+---- EPOCH 046 EVALUATION ----
+eval mean loss: 24.368620
+eval segmentation accuracy: 0.717438
+eval segmentation avg class acc: 0.500000
+eval box IoU (ground/3D): 0.334581 / 0.290293
+eval box estimation accuracy (IoU=0.7): 0.000000
+**** EPOCH 047 ****
+2021-07-18 10:57:20.308381
+2021-07-18 10:57:34.353770
+---- EPOCH 047 EVALUATION ----
+eval mean loss: 30.883190
+eval segmentation accuracy: 0.718353
+eval segmentation avg class acc: 0.500000
+eval box IoU (ground/3D): 0.299922 / 0.240656
+eval box estimation accuracy (IoU=0.7): 0.000000
+**** EPOCH 048 ****
+2021-07-18 10:57:34.910976
+2021-07-18 10:57:48.983440
+---- EPOCH 048 EVALUATION ----
+eval mean loss: 24.610178
+eval segmentation accuracy: 0.719727
+eval segmentation avg class acc: 0.500000
+eval box IoU (ground/3D): 0.457444 / 0.378371
+eval box estimation accuracy (IoU=0.7): 0.031250
+**** EPOCH 049 ****
+2021-07-18 10:57:49.542933
+2021-07-18 10:58:03.631835
+---- EPOCH 049 EVALUATION ----
+eval mean loss: 26.444649
+eval segmentation accuracy: 0.717804
+eval segmentation avg class acc: 0.500000
+eval box IoU (ground/3D): 0.459342 / 0.351633
+eval box estimation accuracy (IoU=0.7): 0.000000
+**** EPOCH 050 ****
+2021-07-18 10:58:04.194888
+2021-07-18 10:58:18.244390
+---- EPOCH 050 EVALUATION ----
+eval mean loss: 32.694107
+eval segmentation accuracy: 0.716644
+eval segmentation avg class acc: 0.500000
+eval box IoU (ground/3D): 0.314171 / 0.270598
+eval box estimation accuracy (IoU=0.7): 0.000000
+Model saved in file: train/log_v1/model.ckpt
+**** EPOCH 051 ****
+2021-07-18 10:58:19.128434
+2021-07-18 10:58:33.201917
+---- EPOCH 051 EVALUATION ----
+eval mean loss: 20.627739
+eval segmentation accuracy: 0.716553
+eval segmentation avg class acc: 0.500000
+eval box IoU (ground/3D): 0.326036 / 0.275739
+eval box estimation accuracy (IoU=0.7): 0.000000
+**** EPOCH 052 ****
+2021-07-18 10:58:33.753648
+2021-07-18 10:58:47.833030
+---- EPOCH 052 EVALUATION ----
+eval mean loss: 27.572481
+eval segmentation accuracy: 0.715637
+eval segmentation avg class acc: 0.500000
+eval box IoU (ground/3D): 0.381061 / 0.304181
+eval box estimation accuracy (IoU=0.7): 0.000000
+**** EPOCH 053 ****
+2021-07-18 10:58:48.388660
+2021-07-18 10:59:02.460440
+---- EPOCH 053 EVALUATION ----
+eval mean loss: 17.263113
+eval segmentation accuracy: 0.718384
+eval segmentation avg class acc: 0.500000
+eval box IoU (ground/3D): 0.393604 / 0.294743
+eval box estimation accuracy (IoU=0.7): 0.000000
+**** EPOCH 054 ****
+2021-07-18 10:59:03.015047
+2021-07-18 10:59:17.078688
+---- EPOCH 054 EVALUATION ----
+eval mean loss: 29.390379
+eval segmentation accuracy: 0.717926
+eval segmentation avg class acc: 0.500000
+eval box IoU (ground/3D): 0.421700 / 0.301337
+eval box estimation accuracy (IoU=0.7): 0.000000
+**** EPOCH 055 ****
+2021-07-18 10:59:17.614165
+2021-07-18 10:59:31.674410
+---- EPOCH 055 EVALUATION ----
+eval mean loss: 13.957673
+eval segmentation accuracy: 0.718475
+eval segmentation avg class acc: 0.500000
+eval box IoU (ground/3D): 0.177050 / 0.153790
+eval box estimation accuracy (IoU=0.7): 0.000000
+**** EPOCH 056 ****
+2021-07-18 10:59:32.228582
+2021-07-18 10:59:46.304050
+---- EPOCH 056 EVALUATION ----
+eval mean loss: 23.373259
+eval segmentation accuracy: 0.717926
+eval segmentation avg class acc: 0.500000
+eval box IoU (ground/3D): 0.404347 / 0.336069
+eval box estimation accuracy (IoU=0.7): 0.000000
+**** EPOCH 057 ****
+2021-07-18 10:59:46.856368
+2021-07-18 11:00:01.793320
+---- EPOCH 057 EVALUATION ----
+eval mean loss: 13.975602
+eval segmentation accuracy: 0.720062
+eval segmentation avg class acc: 0.500000
+eval box IoU (ground/3D): 0.425394 / 0.347458
+eval box estimation accuracy (IoU=0.7): 0.000000
+**** EPOCH 058 ****
+2021-07-18 11:00:02.352501
+2021-07-18 11:00:16.510132
+---- EPOCH 058 EVALUATION ----
+eval mean loss: 29.249569
+eval segmentation accuracy: 0.715942
+eval segmentation avg class acc: 0.500000
+eval box IoU (ground/3D): 0.436323 / 0.354531
+eval box estimation accuracy (IoU=0.7): 0.000000
+**** EPOCH 059 ****
+2021-07-18 11:00:17.070500
+2021-07-18 11:00:31.119333
+---- EPOCH 059 EVALUATION ----
+eval mean loss: 25.352827
+eval segmentation accuracy: 0.719360
+eval segmentation avg class acc: 0.500000
+eval box IoU (ground/3D): 0.431067 / 0.347765
+eval box estimation accuracy (IoU=0.7): 0.062500
+**** EPOCH 060 ****
+2021-07-18 11:00:31.682648
+2021-07-18 11:00:45.736567
+---- EPOCH 060 EVALUATION ----
+eval mean loss: 14.791508
+eval segmentation accuracy: 0.718323
+eval segmentation avg class acc: 0.500000
+eval box IoU (ground/3D): 0.432064 / 0.364071
+eval box estimation accuracy (IoU=0.7): 0.000000
+Model saved in file: train/log_v1/model.ckpt
+**** EPOCH 061 ****
+2021-07-18 11:00:46.607663
+2021-07-18 11:01:02.635635
+---- EPOCH 061 EVALUATION ----
+eval mean loss: 35.210526
+eval segmentation accuracy: 0.717560
+eval segmentation avg class acc: 0.500000
+eval box IoU (ground/3D): 0.313586 / 0.254671
+eval box estimation accuracy (IoU=0.7): 0.000000
+**** EPOCH 062 ****
+2021-07-18 11:01:03.187814
+2021-07-18 11:01:17.247805
+---- EPOCH 062 EVALUATION ----
+eval mean loss: 16.547377
+eval segmentation accuracy: 0.718048
+eval segmentation avg class acc: 0.500000
+eval box IoU (ground/3D): 0.055388 / 0.046617
+eval box estimation accuracy (IoU=0.7): 0.000000
+**** EPOCH 063 ****
+2021-07-18 11:01:17.796105
+2021-07-18 11:01:31.854714
+---- EPOCH 063 EVALUATION ----
+eval mean loss: 23.816528
+eval segmentation accuracy: 0.718994
+eval segmentation avg class acc: 0.500000
+eval box IoU (ground/3D): 0.346446 / 0.270653
+eval box estimation accuracy (IoU=0.7): 0.000000
+**** EPOCH 064 ****
+2021-07-18 11:01:32.413856
+2021-07-18 11:01:46.490437
+---- EPOCH 064 EVALUATION ----
+eval mean loss: 14.810392
+eval segmentation accuracy: 0.716858
+eval segmentation avg class acc: 0.500000
+eval box IoU (ground/3D): 0.481157 / 0.393816
+eval box estimation accuracy (IoU=0.7): 0.031250
+**** EPOCH 065 ****
+2021-07-18 11:01:47.041451
+2021-07-18 11:02:01.099792
+---- EPOCH 065 EVALUATION ----
+eval mean loss: 12.689804
+eval segmentation accuracy: 0.715424
+eval segmentation avg class acc: 0.500000
+eval box IoU (ground/3D): 0.395614 / 0.321360
+eval box estimation accuracy (IoU=0.7): 0.031250
+**** EPOCH 066 ****
+2021-07-18 11:02:01.654753
+2021-07-18 11:02:15.724645
+---- EPOCH 066 EVALUATION ----
+eval mean loss: 27.991091
+eval segmentation accuracy: 0.712952
+eval segmentation avg class acc: 0.500000
+eval box IoU (ground/3D): 0.442884 / 0.352922
+eval box estimation accuracy (IoU=0.7): 0.031250
+**** EPOCH 067 ****
+2021-07-18 11:02:16.282593
+2021-07-18 11:02:30.398734
+---- EPOCH 067 EVALUATION ----
+eval mean loss: 24.616873
+eval segmentation accuracy: 0.716949
+eval segmentation avg class acc: 0.500000
+eval box IoU (ground/3D): 0.341641 / 0.298821
+eval box estimation accuracy (IoU=0.7): 0.000000
+**** EPOCH 068 ****
+2021-07-18 11:02:30.951745
+2021-07-18 11:02:45.162052
+---- EPOCH 068 EVALUATION ----
+eval mean loss: 26.934032
+eval segmentation accuracy: 0.714264
+eval segmentation avg class acc: 0.500000
+eval box IoU (ground/3D): 0.408787 / 0.335297
+eval box estimation accuracy (IoU=0.7): 0.062500
+**** EPOCH 069 ****
+2021-07-18 11:02:45.700119
+2021-07-18 11:02:59.841475
+---- EPOCH 069 EVALUATION ----
+eval mean loss: 17.684271
+eval segmentation accuracy: 0.715973
+eval segmentation avg class acc: 0.500000
+eval box IoU (ground/3D): 0.323488 / 0.261410
+eval box estimation accuracy (IoU=0.7): 0.000000
+**** EPOCH 070 ****
+2021-07-18 11:03:00.411931
+2021-07-18 11:03:14.777366
+---- EPOCH 070 EVALUATION ----
+eval mean loss: 19.137466
+eval segmentation accuracy: 0.716187
+eval segmentation avg class acc: 0.500000
+eval box IoU (ground/3D): 0.435403 / 0.340813
+eval box estimation accuracy (IoU=0.7): 0.000000
+Model saved in file: train/log_v1/model.ckpt
+**** EPOCH 071 ****
+2021-07-18 11:03:15.649069
+2021-07-18 11:03:29.855162
+---- EPOCH 071 EVALUATION ----
+eval mean loss: 24.143915
+eval segmentation accuracy: 0.717560
+eval segmentation avg class acc: 0.500000
+eval box IoU (ground/3D): 0.453571 / 0.349463
+eval box estimation accuracy (IoU=0.7): 0.000000
+**** EPOCH 072 ****
+2021-07-18 11:03:30.405418
+2021-07-18 11:03:44.550768
+---- EPOCH 072 EVALUATION ----
+eval mean loss: 25.345810
+eval segmentation accuracy: 0.717133
+eval segmentation avg class acc: 0.500000
+eval box IoU (ground/3D): 0.429330 / 0.325827
+eval box estimation accuracy (IoU=0.7): 0.000000
+**** EPOCH 073 ****
+2021-07-18 11:03:45.114937
+2021-07-18 11:04:02.008421
+---- EPOCH 073 EVALUATION ----
+eval mean loss: 15.349924
+eval segmentation accuracy: 0.718140
+eval segmentation avg class acc: 0.500000
+eval box IoU (ground/3D): 0.337926 / 0.271143
+eval box estimation accuracy (IoU=0.7): 0.000000
+**** EPOCH 074 ****
+2021-07-18 11:04:02.575560
+2021-07-18 11:04:17.114303
+---- EPOCH 074 EVALUATION ----
+eval mean loss: 10.880955
+eval segmentation accuracy: 0.717377
+eval segmentation avg class acc: 0.500000
+eval box IoU (ground/3D): 0.482765 / 0.398815
+eval box estimation accuracy (IoU=0.7): 0.093750
+**** EPOCH 075 ****
+2021-07-18 11:04:17.640100
+2021-07-18 11:04:32.314597
+---- EPOCH 075 EVALUATION ----
+eval mean loss: 22.733845
+eval segmentation accuracy: 0.715179
+eval segmentation avg class acc: 0.500000
+eval box IoU (ground/3D): 0.427958 / 0.326984
+eval box estimation accuracy (IoU=0.7): 0.062500
+**** EPOCH 076 ****
+2021-07-18 11:04:32.833938
+2021-07-18 11:04:49.755728
+---- EPOCH 076 EVALUATION ----
+eval mean loss: 14.997650
+eval segmentation accuracy: 0.720795
+eval segmentation avg class acc: 0.500000
+eval box IoU (ground/3D): 0.320634 / 0.271656
+eval box estimation accuracy (IoU=0.7): 0.000000
+**** EPOCH 077 ****
+2021-07-18 11:04:50.293034
+2021-07-18 11:05:05.020594
+---- EPOCH 077 EVALUATION ----
+eval mean loss: 15.963743
+eval segmentation accuracy: 0.718689
+eval segmentation avg class acc: 0.500000
+eval box IoU (ground/3D): 0.413704 / 0.343431
+eval box estimation accuracy (IoU=0.7): 0.000000
+**** EPOCH 078 ****
+2021-07-18 11:05:05.570767
+2021-07-18 11:05:22.250143
+---- EPOCH 078 EVALUATION ----
+eval mean loss: 14.884048
+eval segmentation accuracy: 0.719666
+eval segmentation avg class acc: 0.500000
+eval box IoU (ground/3D): 0.419996 / 0.347645
+eval box estimation accuracy (IoU=0.7): 0.000000
+**** EPOCH 079 ****
+2021-07-18 11:05:22.813645
+2021-07-18 11:05:37.244447
+---- EPOCH 079 EVALUATION ----
+eval mean loss: 15.513581
+eval segmentation accuracy: 0.719849
+eval segmentation avg class acc: 0.500000
+eval box IoU (ground/3D): 0.444823 / 0.364548
+eval box estimation accuracy (IoU=0.7): 0.031250
+**** EPOCH 080 ****
+2021-07-18 11:05:37.768650
+2021-07-18 11:05:54.603404
+---- EPOCH 080 EVALUATION ----
+eval mean loss: 30.052235
+eval segmentation accuracy: 0.714905
+eval segmentation avg class acc: 0.500000
+eval box IoU (ground/3D): 0.401598 / 0.330317
+eval box estimation accuracy (IoU=0.7): 0.000000
+Model saved in file: train/log_v1/model.ckpt
+**** EPOCH 081 ****
+2021-07-18 11:05:55.612345
+2021-07-18 11:06:10.106355
+---- EPOCH 081 EVALUATION ----
+eval mean loss: 27.533478
+eval segmentation accuracy: 0.716095
+eval segmentation avg class acc: 0.500000
+eval box IoU (ground/3D): 0.452234 / 0.368624
+eval box estimation accuracy (IoU=0.7): 0.093750
+**** EPOCH 082 ****
+2021-07-18 11:06:10.680906
+2021-07-18 11:06:25.075728
+---- EPOCH 082 EVALUATION ----
+eval mean loss: 19.635340
+eval segmentation accuracy: 0.717224
+eval segmentation avg class acc: 0.500000
+eval box IoU (ground/3D): 0.432383 / 0.349454
+eval box estimation accuracy (IoU=0.7): 0.031250
+**** EPOCH 083 ****
+2021-07-18 11:06:25.601932
+2021-07-18 11:06:40.471154
+---- EPOCH 083 EVALUATION ----
+eval mean loss: 21.344280
+eval segmentation accuracy: 0.715546
+eval segmentation avg class acc: 0.500000
+eval box IoU (ground/3D): 0.232221 / 0.189191
+eval box estimation accuracy (IoU=0.7): 0.031250
+**** EPOCH 084 ****
+2021-07-18 11:06:41.022358
+2021-07-18 11:06:55.204401
+---- EPOCH 084 EVALUATION ----
+eval mean loss: 18.022949
+eval segmentation accuracy: 0.716064
+eval segmentation avg class acc: 0.500000
+eval box IoU (ground/3D): 0.396888 / 0.315907
+eval box estimation accuracy (IoU=0.7): 0.031250
+**** EPOCH 085 ****
+2021-07-18 11:06:55.745857
+2021-07-18 11:07:09.796937
+---- EPOCH 085 EVALUATION ----
+eval mean loss: 70.747353
+eval segmentation accuracy: 0.718475
+eval segmentation avg class acc: 0.500000
+eval box IoU (ground/3D): 0.285055 / 0.215752
+eval box estimation accuracy (IoU=0.7): 0.000000
+**** EPOCH 086 ****
+2021-07-18 11:07:10.327699
+2021-07-18 11:07:24.493184
+---- EPOCH 086 EVALUATION ----
+eval mean loss: 27.692751
+eval segmentation accuracy: 0.715454
+eval segmentation avg class acc: 0.500000
+eval box IoU (ground/3D): 0.380265 / 0.303349
+eval box estimation accuracy (IoU=0.7): 0.000000
+**** EPOCH 087 ****
+2021-07-18 11:07:25.049685
+2021-07-18 11:07:39.262520
+---- EPOCH 087 EVALUATION ----
+eval mean loss: 11.215973
+eval segmentation accuracy: 0.715210
+eval segmentation avg class acc: 0.500000
+eval box IoU (ground/3D): 0.473742 / 0.369424
+eval box estimation accuracy (IoU=0.7): 0.062500
+**** EPOCH 088 ****
+2021-07-18 11:07:39.816239
+2021-07-18 11:07:54.012798
+---- EPOCH 088 EVALUATION ----
+eval mean loss: 31.636070
+eval segmentation accuracy: 0.717194
+eval segmentation avg class acc: 0.500000
+eval box IoU (ground/3D): 0.031880 / 0.027405
+eval box estimation accuracy (IoU=0.7): 0.000000
+**** EPOCH 089 ****
+2021-07-18 11:07:54.560963
+2021-07-18 11:08:10.787228
+---- EPOCH 089 EVALUATION ----
+eval mean loss: 13.997924
+eval segmentation accuracy: 0.718201
+eval segmentation avg class acc: 0.500000
+eval box IoU (ground/3D): 0.381646 / 0.295435
+eval box estimation accuracy (IoU=0.7): 0.000000
+**** EPOCH 090 ****
+2021-07-18 11:08:11.342331
+2021-07-18 11:08:25.488804
+---- EPOCH 090 EVALUATION ----
+eval mean loss: 15.250390
+eval segmentation accuracy: 0.716492
+eval segmentation avg class acc: 0.500000
+eval box IoU (ground/3D): 0.394637 / 0.320151
+eval box estimation accuracy (IoU=0.7): 0.000000
+Model saved in file: train/log_v1/model.ckpt
+**** EPOCH 091 ****
+2021-07-18 11:08:26.345532
+2021-07-18 11:08:40.449642
+---- EPOCH 091 EVALUATION ----
+eval mean loss: 15.301107
+eval segmentation accuracy: 0.719727
+eval segmentation avg class acc: 0.500000
+eval box IoU (ground/3D): 0.436985 / 0.316834
+eval box estimation accuracy (IoU=0.7): 0.031250
+**** EPOCH 092 ****
+2021-07-18 11:08:40.985837
+2021-07-18 11:08:55.162819
+---- EPOCH 092 EVALUATION ----
+eval mean loss: 33.091747
+eval segmentation accuracy: 0.717773
+eval segmentation avg class acc: 0.500000
+eval box IoU (ground/3D): 0.156938 / 0.137864
+eval box estimation accuracy (IoU=0.7): 0.000000
+**** EPOCH 093 ****
+2021-07-18 11:08:55.710013
+2021-07-18 11:09:10.014457
+---- EPOCH 093 EVALUATION ----
+eval mean loss: 16.855967
+eval segmentation accuracy: 0.715179
+eval segmentation avg class acc: 0.500000
+eval box IoU (ground/3D): 0.429851 / 0.315268
+eval box estimation accuracy (IoU=0.7): 0.000000
+**** EPOCH 094 ****
+2021-07-18 11:09:10.560065
+2021-07-18 11:09:27.311870
+---- EPOCH 094 EVALUATION ----
+eval mean loss: 19.434584
+eval segmentation accuracy: 0.720154
+eval segmentation avg class acc: 0.500000
+eval box IoU (ground/3D): 0.316607 / 0.258481
+eval box estimation accuracy (IoU=0.7): 0.000000
+**** EPOCH 095 ****
+2021-07-18 11:09:27.881818
+2021-07-18 11:09:42.653784
+---- EPOCH 095 EVALUATION ----
+eval mean loss: 19.607939
+eval segmentation accuracy: 0.717773
+eval segmentation avg class acc: 0.500000
+eval box IoU (ground/3D): 0.344768 / 0.276494
+eval box estimation accuracy (IoU=0.7): 0.031250
+**** EPOCH 096 ****
+2021-07-18 11:09:43.196911
+2021-07-18 11:09:57.284858
+---- EPOCH 096 EVALUATION ----
+eval mean loss: 43.823456
+eval segmentation accuracy: 0.715027
+eval segmentation avg class acc: 0.500000
+eval box IoU (ground/3D): 0.029628 / 0.027650
+eval box estimation accuracy (IoU=0.7): 0.000000
+**** EPOCH 097 ****
+2021-07-18 11:09:57.842659
+2021-07-18 11:10:11.993852
+---- EPOCH 097 EVALUATION ----
+eval mean loss: 20.218004
+eval segmentation accuracy: 0.718262
+eval segmentation avg class acc: 0.500000
+eval box IoU (ground/3D): 0.413778 / 0.327905
+eval box estimation accuracy (IoU=0.7): 0.000000
+**** EPOCH 098 ****
+2021-07-18 11:10:12.557310
+2021-07-18 11:10:26.825058
+---- EPOCH 098 EVALUATION ----
+eval mean loss: 28.856384
+eval segmentation accuracy: 0.717072
+eval segmentation avg class acc: 0.500000
+eval box IoU (ground/3D): 0.165017 / 0.147140
+eval box estimation accuracy (IoU=0.7): 0.000000
+**** EPOCH 099 ****
+2021-07-18 11:10:27.396799
+2021-07-18 11:10:41.688809
+---- EPOCH 099 EVALUATION ----
+eval mean loss: 34.549305
+eval segmentation accuracy: 0.715363
+eval segmentation avg class acc: 0.500000
+eval box IoU (ground/3D): 0.067833 / 0.058329
+eval box estimation accuracy (IoU=0.7): 0.000000
+**** EPOCH 100 ****
+2021-07-18 11:10:42.213143
+2021-07-18 11:10:56.451101
+---- EPOCH 100 EVALUATION ----
+eval mean loss: 22.219818
+eval segmentation accuracy: 0.715851
+eval segmentation avg class acc: 0.500000
+eval box IoU (ground/3D): 0.335324 / 0.269653
+eval box estimation accuracy (IoU=0.7): 0.000000
+Model saved in file: train/log_v1/model.ckpt
+**** EPOCH 101 ****
+2021-07-18 11:10:57.326248
+2021-07-18 11:11:11.868478
+---- EPOCH 101 EVALUATION ----
+eval mean loss: 17.680332
+eval segmentation accuracy: 0.717102
+eval segmentation avg class acc: 0.500000
+eval box IoU (ground/3D): 0.465352 / 0.374513
+eval box estimation accuracy (IoU=0.7): 0.062500
+**** EPOCH 102 ****
+2021-07-18 11:11:12.405484
+2021-07-18 11:11:27.162399
+---- EPOCH 102 EVALUATION ----
+eval mean loss: 16.452534
+eval segmentation accuracy: 0.716766
+eval segmentation avg class acc: 0.500000
+eval box IoU (ground/3D): 0.097789 / 0.075760
+eval box estimation accuracy (IoU=0.7): 0.000000
+**** EPOCH 103 ****
+2021-07-18 11:11:27.685709
+2021-07-18 11:11:42.521455
+---- EPOCH 103 EVALUATION ----
+eval mean loss: 15.686571
+eval segmentation accuracy: 0.719849
+eval segmentation avg class acc: 0.500000
+eval box IoU (ground/3D): 0.461419 / 0.362032
+eval box estimation accuracy (IoU=0.7): 0.031250
+**** EPOCH 104 ****
+2021-07-18 11:11:43.080062
+2021-07-18 11:11:57.212774
+---- EPOCH 104 EVALUATION ----
+eval mean loss: 12.650414
+eval segmentation accuracy: 0.717773
+eval segmentation avg class acc: 0.500000
+eval box IoU (ground/3D): 0.313676 / 0.225813
+eval box estimation accuracy (IoU=0.7): 0.031250
+**** EPOCH 105 ****
+2021-07-18 11:11:57.744197
+2021-07-18 11:12:14.159721
+---- EPOCH 105 EVALUATION ----
+eval mean loss: 19.747934
+eval segmentation accuracy: 0.717590
+eval segmentation avg class acc: 0.500000
+eval box IoU (ground/3D): 0.203995 / 0.164786
+eval box estimation accuracy (IoU=0.7): 0.000000
+**** EPOCH 106 ****
+2021-07-18 11:12:14.712015
+2021-07-18 11:12:29.291360
+---- EPOCH 106 EVALUATION ----
+eval mean loss: 18.886484
+eval segmentation accuracy: 0.719116
+eval segmentation avg class acc: 0.500000
+eval box IoU (ground/3D): 0.477929 / 0.358499
+eval box estimation accuracy (IoU=0.7): 0.000000
+**** EPOCH 107 ****
+2021-07-18 11:12:29.826558
+2021-07-18 11:12:46.102828
+---- EPOCH 107 EVALUATION ----
+eval mean loss: 14.324134
+eval segmentation accuracy: 0.714691
+eval segmentation avg class acc: 0.500000
+eval box IoU (ground/3D): 0.347451 / 0.271985
+eval box estimation accuracy (IoU=0.7): 0.000000
+**** EPOCH 108 ****
+2021-07-18 11:12:46.661058
+2021-07-18 11:13:00.929368
+---- EPOCH 108 EVALUATION ----
+eval mean loss: 20.711550
+eval segmentation accuracy: 0.715607
+eval segmentation avg class acc: 0.500000
+eval box IoU (ground/3D): 0.101156 / 0.082225
+eval box estimation accuracy (IoU=0.7): 0.000000
+**** EPOCH 109 ****
+2021-07-18 11:13:01.497440
+2021-07-18 11:13:15.854216
+---- EPOCH 109 EVALUATION ----
+eval mean loss: 19.699799
+eval segmentation accuracy: 0.719818
+eval segmentation avg class acc: 0.500000
+eval box IoU (ground/3D): 0.418725 / 0.332860
+eval box estimation accuracy (IoU=0.7): 0.000000
+**** EPOCH 110 ****
+2021-07-18 11:13:16.410349
+2021-07-18 11:13:32.656958
+---- EPOCH 110 EVALUATION ----
+eval mean loss: 29.734364
+eval segmentation accuracy: 0.716583
+eval segmentation avg class acc: 0.500000
+eval box IoU (ground/3D): 0.029774 / 0.024988
+eval box estimation accuracy (IoU=0.7): 0.000000
+Model saved in file: train/log_v1/model.ckpt
+**** EPOCH 111 ****
+2021-07-18 11:13:33.642915
+2021-07-18 11:13:47.727196
+---- EPOCH 111 EVALUATION ----
+eval mean loss: 17.894625
+eval segmentation accuracy: 0.714539
+eval segmentation avg class acc: 0.500000
+eval box IoU (ground/3D): 0.323248 / 0.247487
+eval box estimation accuracy (IoU=0.7): 0.000000
+**** EPOCH 112 ****
+2021-07-18 11:13:48.279689
+2021-07-18 11:14:02.458943
+---- EPOCH 112 EVALUATION ----
+eval mean loss: 39.616081
+eval segmentation accuracy: 0.717041
+eval segmentation avg class acc: 0.500000
+eval box IoU (ground/3D): 0.412386 / 0.284754
+eval box estimation accuracy (IoU=0.7): 0.000000
+**** EPOCH 113 ****
+2021-07-18 11:14:03.010745
+2021-07-18 11:14:17.122640
+---- EPOCH 113 EVALUATION ----
+eval mean loss: 44.210949
+eval segmentation accuracy: 0.714355
+eval segmentation avg class acc: 0.500000
+eval box IoU (ground/3D): 0.031565 / 0.028415
+eval box estimation accuracy (IoU=0.7): 0.000000
+**** EPOCH 114 ****
+2021-07-18 11:14:17.682335
+2021-07-18 11:14:31.843389
+---- EPOCH 114 EVALUATION ----
+eval mean loss: 18.820381
+eval segmentation accuracy: 0.715057
+eval segmentation avg class acc: 0.500000
+eval box IoU (ground/3D): 0.303188 / 0.249160
+eval box estimation accuracy (IoU=0.7): 0.000000
+**** EPOCH 115 ****
+2021-07-18 11:14:32.398914
+2021-07-18 11:14:46.475991
+---- EPOCH 115 EVALUATION ----
+eval mean loss: 11.447245
+eval segmentation accuracy: 0.718567
+eval segmentation avg class acc: 0.500000
+eval box IoU (ground/3D): 0.080877 / 0.063736
+eval box estimation accuracy (IoU=0.7): 0.000000
+**** EPOCH 116 ****
+2021-07-18 11:14:47.032647
+2021-07-18 11:15:01.214962
+---- EPOCH 116 EVALUATION ----
+eval mean loss: 16.859221
+eval segmentation accuracy: 0.714233
+eval segmentation avg class acc: 0.500000
+eval box IoU (ground/3D): 0.292178 / 0.249837
+eval box estimation accuracy (IoU=0.7): 0.000000
+**** EPOCH 117 ****
+2021-07-18 11:15:01.770833
+2021-07-18 11:15:15.826255
+---- EPOCH 117 EVALUATION ----
+eval mean loss: 54.657383
+eval segmentation accuracy: 0.715790
+eval segmentation avg class acc: 0.500000
+eval box IoU (ground/3D): 0.207606 / 0.152431
+eval box estimation accuracy (IoU=0.7): 0.000000
+**** EPOCH 118 ****
+2021-07-18 11:15:16.390075
+2021-07-18 11:15:32.617501
+---- EPOCH 118 EVALUATION ----
+eval mean loss: 35.530697
+eval segmentation accuracy: 0.716858
+eval segmentation avg class acc: 0.500000
+eval box IoU (ground/3D): 0.032398 / 0.030040
+eval box estimation accuracy (IoU=0.7): 0.000000
+**** EPOCH 119 ****
+2021-07-18 11:15:33.172209
+2021-07-18 11:15:47.246375
+---- EPOCH 119 EVALUATION ----
+eval mean loss: 15.466658
+eval segmentation accuracy: 0.715881
+eval segmentation avg class acc: 0.500000
+eval box IoU (ground/3D): 0.318066 / 0.264228
+eval box estimation accuracy (IoU=0.7): 0.000000
+**** EPOCH 120 ****
+2021-07-18 11:15:47.796075
+2021-07-18 11:16:01.962734
+---- EPOCH 120 EVALUATION ----
+eval mean loss: 25.652397
+eval segmentation accuracy: 0.714783
+eval segmentation avg class acc: 0.500000
+eval box IoU (ground/3D): 0.461860 / 0.372849
+eval box estimation accuracy (IoU=0.7): 0.000000
+Model saved in file: train/log_v1/model.ckpt
+**** EPOCH 121 ****
+2021-07-18 11:16:02.857594
